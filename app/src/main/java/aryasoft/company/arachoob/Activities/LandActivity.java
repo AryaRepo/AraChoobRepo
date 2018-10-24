@@ -1,13 +1,15 @@
-package aryasoft.company.arachoob;
+package aryasoft.company.arachoob.Activities;
 
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 
-public class MainActivity extends AppCompatActivity {
+import aryasoft.company.arachoob.R;
+
+public class LandActivity extends AppCompatActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_main);
+        setContentView(R.layout.activity_land);
     }
 }
