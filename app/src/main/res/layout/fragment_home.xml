@@ -1,0 +1,68 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ViewSwitcher xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:id="@+id/viewSwitcher1"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:layout_alignParentTop="true"
+    android:background="#EEEEEE">
+
+    <ScrollView
+        android:id="@+id/myscr"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+            <ImageView
+                android:id="@+id/imgHomeBg"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:scaleType="centerCrop"/>
+
+            <!--Slider-->
+            <RelativeLayout
+                android:id="@+id/vp_container"
+                android:layout_width="match_parent"
+                android:layout_height="200dp"
+                android:background="#fff">
+
+                <android.support.v4.view.ViewPager
+                    android:id="@+id/viewPagerSlider"
+                    android:layout_width="match_parent"
+                    android:layout_height="170dp" />
+
+                <me.relex.circleindicator.CircleIndicator
+                    android:id="@+id/sliderIndicatorLand"
+                    android:layout_width="match_parent"
+                    android:layout_height="30dp"
+                    android:layout_below="@+id/viewPagerSlider"
+                    app:ci_orientation="horizontal" />
+            </RelativeLayout>
+
+            <android.support.v7.widget.RecyclerView
+                android:id="@+id/recyclerProducts"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_below="@+id/vp_container"
+                android:nestedScrollingEnabled="false" />
+
+
+        </RelativeLayout>
+    </ScrollView>
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <ImageView
+            android:id="@+id/dialog_img_Loading_home"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerInParent="true"
+            android:scaleType="fitXY" />
+    </RelativeLayout>
+
+</ViewSwitcher>

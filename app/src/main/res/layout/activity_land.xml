@@ -23,15 +23,15 @@
             android:id="@+id/main_placeholder"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:layout_above="@+id/include_bottom_nav"
+            android:layout_above="@+id/bottomNavLand"
             android:layout_below="@id/include_land_toolbar"/>
 
 
-        <include
-            android:id="@+id/include_bottom_nav"
-            layout="@layout/bottom_nav"
+        <com.aurelhubert.ahbottomnavigation.AHBottomNavigation
+            android:id="@+id/bottomNavLand"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:layout_gravity="bottom"
             android:layout_alignParentBottom="true"/>
     </RelativeLayout>
 
@@ -44,7 +44,8 @@
         <ImageView
             android:id="@+id/img_drawer_bg"
             android:layout_width="match_parent"
-            android:layout_height="match_parent"/>
+            android:layout_height="match_parent"
+            android:scaleType="centerCrop"/>
 
         <include
             android:id="@+id/nav_header_include"

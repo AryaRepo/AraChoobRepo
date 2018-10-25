@@ -1,3 +1,19 @@
 <resources>
     <string name="app_name">آرا چوب</string>
+    <string name="tabTitleCategory">دسته بندی</string>
+    <string name="tabTitleHome">محصولات</string>
+    <string name="tabTitleSearch">جستجو</string>
+    <string name="nav_loginRegister">ثبت نام / ورود</string>
+    <string name="nav_profile">مدیریت پروفایل</string>
+    <string name="nav_share">اشتراک گذاری برنامه</string>
+    <string name="nav_myorders">سفارشات من</string>
+    <string name="nav_fav_basket">نشان شده ها </string>
+    <string name="nav_about_us">درباره ما</string>
+    <string name="privacy_policy">قوانین ومقررات</string>
+    <string name="drawer_open">open</string>
+    <string name="drawer_closed">closed</string>
+    <string name="support_and_messages">پشتیبانی و پیام ها</string>
+    <string name="contact_us">تماس با ما</string>
+    <string name="searchHintText">جستجو کنید...</string>
+    <string name="welcomeUserText">کاربر مهمان خوش آمدید</string>
 </resources>

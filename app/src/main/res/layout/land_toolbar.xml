@@ -35,7 +35,7 @@
                 android:gravity="right"
                 android:textColor="#FFEB3B"
                 android:textSize="14sp"
-                android:text="سلام"/>
+                android:text=""/>
 
             <ImageButton
                 android:id="@+id/btn_show_shopping_cart"
@@ -43,7 +43,7 @@
                 android:layout_width="55dp"
                 android:layout_height="55dp"
                 android:scaleType="centerCrop"
-                app:srcCompat="@drawable/ic_launcher"/>
+                app:srcCompat="@drawable/ic_order_list_2"/>
         </RelativeLayout>
 
         <TextView

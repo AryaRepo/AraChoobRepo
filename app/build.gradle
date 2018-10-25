@@ -54,6 +54,7 @@ dependencies {
     implementation 'co.ronash.android:pushe-base:1.4.0'
     implementation 'com.google.android.gms:play-services-gcm:16.0.0'
     implementation 'com.google.android.gms:play-services-location:16.0.0'
+    implementation 'com.aurelhubert:ahbottomnavigation:2.1.0'
     testImplementation 'junit:junit:4.12'
     androidTestImplementation 'com.android.support.test:runner:1.0.2'
     androidTestImplementation 'com.android.support.test.espresso:espresso-core:3.0.2'
