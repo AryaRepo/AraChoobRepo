@@ -13,10 +13,22 @@
         android:layout_height="match_parent"
         tools:context=".Activities.OrderBasketActivity">
 
+        <TextView
+            android:id="@+id/txtOrderBasketToolbar"
+            android:layout_width="match_parent"
+            android:layout_height="?android:actionBarSize"
+            android:background="@color/colorPrimary"
+            android:text="@string/youOrderBasketCaption"
+            android:textColor="#ffffff"
+            android:textSize="16sp"
+            android:gravity="center"/>
+
         <android.support.v7.widget.RecyclerView
             android:id="@+id/recyclerOrderBasket"
             android:layout_width="match_parent"
-            android:layout_height="match_parent"/>
+            android:layout_height="match_parent"
+            android:layout_below="@+id/txtOrderBasketToolbar"/>
+
     </RelativeLayout>
 
     <android.support.design.widget.FloatingActionButton

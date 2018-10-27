@@ -5,14 +5,14 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     app:cardElevation="3dp"
     app:cardCornerRadius="0dp"
-    android:layout_margin="5dp">
+    android:layout_margin="5dp"
+    android:clickable="true"
+    android:focusable="true"
+    android:background="?android:selectableItemBackground">
 
     <RelativeLayout
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:clickable="true"
-        android:focusable="true"
-        android:background="?android:selectableItemBackground">
+        android:layout_height="match_parent">
 
         <ImageView
             android:id="@+id/imgProductPhoto"

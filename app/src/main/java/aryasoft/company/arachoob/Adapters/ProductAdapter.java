@@ -1,7 +1,9 @@
 package aryasoft.company.arachoob.Adapters;
 
 import android.content.Context;
+import android.content.Intent;
 import android.media.Image;
+import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
@@ -15,6 +17,8 @@ import com.bumptech.glide.Glide;
 
 import java.util.ArrayList;
 
+import aryasoft.company.arachoob.Activities.AllCollectionProductActivity;
+import aryasoft.company.arachoob.Activities.DetailActivity;
 import aryasoft.company.arachoob.Models.Collection;
 import aryasoft.company.arachoob.Models.Product;
 import aryasoft.company.arachoob.R;
@@ -57,7 +61,8 @@ public class ProductAdapter extends RecyclerView.Adapter<ProductAdapter.ProductV
         holder.itemView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Toast.makeText(ContextInstance, position+"", Toast.LENGTH_SHORT).show();
+                Intent detailsIntent = new Intent(ContextInstance, DetailActivity.class);
+                ContextInstance.startActivity(detailsIntent);
             }
         });
     }

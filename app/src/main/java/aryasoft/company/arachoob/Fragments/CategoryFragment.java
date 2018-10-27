@@ -48,13 +48,11 @@ public class CategoryFragment extends Fragment {
 
     private ArrayList<Category> createFakeData() {
         ArrayList<Category> categories = new ArrayList<>();
-        categories.add(new Category(R.drawable.c1, "دسته اول"));
-        categories.add(new Category(R.drawable.c2, "دسته دوم"));
-        categories.add(new Category(R.drawable.c3, "دسته سوم"));
-        categories.add(new Category(R.drawable.c4, "دسته چهارم"));
-        categories.add(new Category(R.drawable.c5, "دسته پنجم"));
-        categories.add(new Category(R.drawable.c6, "دسته ششم"));
-        categories.add(new Category(R.drawable.c7, "دسته هفتم"));
+        categories.add(new Category(R.drawable.c1, "قاب پرده چرم و چوب"));
+        categories.add(new Category(R.drawable.c2, "قاب پرده پارچه کوب"));
+        categories.add(new Category(R.drawable.c3, "قاب پرده CNC"));
+        categories.add(new Category(R.drawable.c4, "قاب پرده های کلاسیک"));
+        categories.add(new Category(R.drawable.c6, "قاب پرده های مدرن"));
 
         return categories;
 

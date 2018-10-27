@@ -16,7 +16,7 @@ public class MyApplication extends Application {
     private void initializeCalligraphy()
     {
         CalligraphyConfig.initDefault(new CalligraphyConfig.Builder()
-                .setDefaultFontPath("fonts/iransans.ttf")
+                .setDefaultFontPath("fonts/iran_yekan_mobile_regular.ttf")
                 .setFontAttrId(R.attr.fontPath)
                 .build());
     }

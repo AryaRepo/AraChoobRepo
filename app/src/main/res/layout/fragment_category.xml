@@ -13,7 +13,8 @@
         android:padding="5dp"
         android:textColor="@color/colorAccent"
         android:background="#eeeeee"
-        android:layout_alignParentTop="true"/>
+        android:layout_alignParentTop="true"
+        android:visibility="gone"/>
 
     <android.support.v7.widget.RecyclerView
         android:id="@+id/recyclerCategories"

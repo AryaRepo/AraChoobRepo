@@ -41,6 +41,7 @@ public class LandActivity extends AppCompatActivity implements View.OnClickListe
     private ImageView ImgDrawerBG;
     private ImageView ImgProfilePhoto;
     private ImageButton BtnShowShoppingCart;
+    public static int CurrentPage = BottomBarTabSelectListener.TAB_HOME;
 
     @Override
     protected void attachBaseContext(Context newBase) {
@@ -121,7 +122,12 @@ public class LandActivity extends AppCompatActivity implements View.OnClickListe
     public void onBackPressed() {
         if (Drawer.isDrawerOpen(GravityCompat.END)) {
             Drawer.closeDrawer(GravityCompat.END);
-        } else {
+        }
+        else if (CurrentPage == BottomBarTabSelectListener.TAB_CATEGORY || CurrentPage == BottomBarTabSelectListener.TAB_SEARCH)
+        {
+            BottomNavigation.setCurrentItem(BottomBarTabSelectListener.TAB_HOME);
+        }
+        else {
             super.onBackPressed();
         }
     }
@@ -161,7 +167,7 @@ public class LandActivity extends AppCompatActivity implements View.OnClickListe
     }
 
     private void setupMainBottomBar() {
-        AHBottomNavigationItem categoryTabItem = new AHBottomNavigationItem(R.string.tabTitleCategory, R.drawable.menu, R.color.bottomBarIconColor);
+        AHBottomNavigationItem categoryTabItem = new AHBottomNavigationItem(R.string.tabTitleCategory, R.drawable.ic_big_and_small_dots, R.color.bottomBarIconColor);
         AHBottomNavigationItem homeTabItem = new AHBottomNavigationItem(R.string.tabTitleHome, R.drawable.home, R.color.bottomBarIconColor);
         AHBottomNavigationItem searchTabItem = new AHBottomNavigationItem(R.string.tabTitleSearch, R.drawable.magnifier, R.color.bottomBarIconColor);
         BottomNavigation.addItem(categoryTabItem);

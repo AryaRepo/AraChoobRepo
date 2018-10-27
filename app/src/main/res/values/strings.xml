@@ -23,4 +23,5 @@
     <string name="BaseUrl"/>
     <string name="ProductImageFolder">url://</string>
     <string name="thanks_you_note">باتشکر از شما - صنایع چوب آرا نوین مهر</string>
+    <string name="youOrderBasketCaption">سبد سفارش شما</string>
 </resources>

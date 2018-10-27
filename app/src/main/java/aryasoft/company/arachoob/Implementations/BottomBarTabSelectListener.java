@@ -16,8 +16,8 @@ public class BottomBarTabSelectListener implements AHBottomNavigation.OnTabSelec
 
     private LandActivity LandActivityInstance;
     public static final int TAB_CATEGORY = 0;
-    public static final int TAB_SEARCH = 2;
     public static final int TAB_HOME = 1;
+    public static final int TAB_SEARCH = 2;
 
     public BottomBarTabSelectListener(LandActivity landActivityInstance) {
         LandActivityInstance = landActivityInstance;
@@ -34,12 +34,17 @@ public class BottomBarTabSelectListener implements AHBottomNavigation.OnTabSelec
         if (tabId == TAB_CATEGORY) {
             replaceFragment(new CategoryFragment());
             showActionBar(true);
-        } else if (tabId == TAB_SEARCH) {
+            LandActivity.CurrentPage = TAB_CATEGORY;
+        }
+        else if (tabId == TAB_SEARCH) {
             replaceFragment(new SearchFragment());
             showActionBar(false);
-        } else if (tabId == TAB_HOME) {
+            LandActivity.CurrentPage = TAB_SEARCH;
+        }
+        else if (tabId == TAB_HOME) {
             replaceFragment(new HomeFragment());
             showActionBar(true);
+            LandActivity.CurrentPage = TAB_HOME;
         }
     }
 
