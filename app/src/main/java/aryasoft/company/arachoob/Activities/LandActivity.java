@@ -3,7 +3,6 @@ package aryasoft.company.arachoob.Activities;
 import android.content.Context;
 import android.content.Intent;
 import android.graphics.Color;
-import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.support.v4.view.GravityCompat;
 import android.support.v4.widget.DrawerLayout;
@@ -22,7 +21,7 @@ import com.aurelhubert.ahbottomnavigation.AHBottomNavigation;
 import com.aurelhubert.ahbottomnavigation.AHBottomNavigationItem;
 import com.bumptech.glide.Glide;
 
-import Implementations.BottomBarTabSelectListener;
+import aryasoft.company.arachoob.Implementations.BottomBarTabSelectListener;
 import aryasoft.company.arachoob.R;
 import uk.co.chrisjenx.calligraphy.CalligraphyContextWrapper;
 
@@ -129,7 +128,7 @@ public class LandActivity extends AppCompatActivity implements View.OnClickListe
         ImgDrawerBG =findViewById(R.id.img_drawer_bg);
         ImgProfilePhoto =findViewById(R.id.imgProfileNavHeader);
         Glide.with(this).load(R.drawable.simple_pattern).into(ImgDrawerBG);
-        Glide.with(this).load(R.drawable.user_profile).into(ImgProfilePhoto);
+        Glide.with(this).load(R.drawable.ic_man).into(ImgProfilePhoto);
     }
 
     private void setupMainBottomBar()

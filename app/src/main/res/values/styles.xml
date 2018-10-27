@@ -9,4 +9,10 @@
         <item name="android:navigationBarColor">@color/colorPrimary</item>
     </style>
 
+    <style name="rightSideToolbarText" parent="TextAppearance.Widget.AppCompat.Toolbar.Title">
+        <item name="android:gravity">right</item>
+        <item name="android:textDirection">rtl</item>
+        <item name="android:textColor">#ffffff</item>
+    </style>
+
 </resources>

@@ -1,6 +1,8 @@
 package aryasoft.company.arachoob.Models;
 
-public class Product {
+import java.io.Serializable;
+
+public class Product implements Serializable {
 
     private int ProductPhoto;
     private String ProductTitle;
