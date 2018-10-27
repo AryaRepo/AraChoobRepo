@@ -16,4 +16,11 @@
     <string name="contact_us">تماس با ما</string>
     <string name="searchHintText">جستجو کنید...</string>
     <string name="welcomeUserText">کاربر مهمان خوش آمدید</string>
+	<string name="lorem_desc">توضیحات :  لورم ایپسوم متن ساختگی با تولید سادگی نامفهوم از صنعت چاپ و با استفاده از طراحان گرافیک است. چاپگرها و متون بلکه روزنامه و مجله در ستون و سطرآنچنان که لازم است و برای شرایط فعلی تکنولوژی مورد نیاز و کاربردهای متنوع با هدف بهبود ابزارهای کاربردی می باشد</string>
+    <string name="order_help_text">راهنمایی : کاربر عزیز لطفا اطلاعات مربوط به متراژ و هرگونه جزئیات اضافی که لازم است را در کادر متن  وارد کنید.</string>
+    <string name="order_additional_text_hint">مثلا میزان متراژ 30 سانتی متر باشد و طرح به رنگ آبی باشد و ... عکس هم ضمیمه کردم</string>
+    <string name="DetailImageFolder">Imgurl//</string>
+    <string name="BaseUrl"/>
+    <string name="ProductImageFolder">url://</string>
+    <string name="thanks_you_note">باتشکر از شما - صنایع چوب آرا نوین مهر</string>
 </resources>

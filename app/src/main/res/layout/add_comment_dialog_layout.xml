@@ -1,0 +1,65 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.v7.widget.CardView
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_margin="8dp"
+    app:cardCornerRadius="4dp">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical">
+
+        <com.eugeneek.smilebar.SmileBar
+            android:id="@+id/commentRate"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_horizontal"
+            android:layout_marginTop="8dp"
+            app:enabled="true"
+            app:horizontalSpacing="8dp"
+            app:rating="0"
+            app:smileHeight="50dp"
+            app:smileWidth="50dp"/>
+
+        <EditText
+            android:id="@+id/edtCommentTitle"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:autofillHints="@string/lorem_desc"
+            android:layout_margin="10dp"
+            android:background="@drawable/simple_edit_text_border"
+            android:hint="عنوان نظر ... مثلا کیفیت کالا"
+            android:lines="1"
+            android:padding="10dp"
+            android:textColorHint="#757575"
+            android:textSize="13sp"/>
+
+        <EditText
+            android:id="@+id/edtCommentText"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_margin="10dp"
+            android:background="@drawable/simple_edit_text_border"
+            android:gravity="top|right"
+            android:hint="متن نظر...مثلا از کیفیت کارها خیلی لذت بردم و ..."
+            android:minHeight="100dp"
+            android:padding="10dp"
+            android:textColorHint="#757575"
+            android:textSize="13sp"/>
+
+        <Button
+            android:id="@+id/btnRegisterComment"
+            android:layout_width="120dp"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_horizontal"
+            android:layout_marginBottom="8dp"
+            android:background="@drawable/round_button_drawable"
+            android:text="ثبت نظرشما"
+            android:textColor="#fff"
+            android:textStyle="bold"
+            android:textSize="15sp"/>
+    </LinearLayout>
+</android.support.v7.widget.CardView>

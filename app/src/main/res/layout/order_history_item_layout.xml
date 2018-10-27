@@ -1,0 +1,164 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+                xmlns:app="http://schemas.android.com/apk/res-auto"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+
+    <android.support.v7.widget.CardView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_margin="8dp">
+
+        <ImageView
+            android:layout_width="24dp"
+            android:layout_height="24dp"
+            app:srcCompat="@drawable/ic_paperclip"/>
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:padding="8dp">
+
+            <ImageView
+                android:id="@+id/img_ic_invoice"
+                android:layout_width="24dp"
+                android:layout_height="24dp"
+                android:layout_alignParentRight="true"
+                android:layout_marginBottom="8dp"
+                app:srcCompat="@drawable/ic_invoice"
+                />
+
+            <TextView
+                android:id="@+id/txtPaymentType"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignTop="@id/img_ic_invoice"
+                android:layout_alignBottom="@id/img_ic_invoice"
+                android:layout_marginRight="8dp"
+                android:layout_toLeftOf="@id/img_ic_invoice"
+                android:gravity="center"
+                android:text="نحوه پرداخت"
+                android:textColor="#000"
+                android:textSize="13sp"/>
+
+            <ImageView
+                android:id="@+id/img_ic_date"
+                android:layout_width="24dp"
+                android:layout_height="24dp"
+                android:layout_below="@id/img_ic_invoice"
+                android:layout_alignParentRight="true"
+                android:layout_marginBottom="8dp"
+                app:srcCompat="@drawable/ic_calendar"
+                />
+
+            <TextView
+                android:id="@+id/txt_invoice_date_lbl"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignTop="@id/img_ic_date"
+                android:layout_alignBottom="@id/img_ic_date"
+                android:layout_marginRight="8dp"
+                android:layout_toLeftOf="@id/img_ic_date"
+                android:gravity="center"
+                android:text="تاریخ ثبت سفارش : "
+                android:textColor="#000"/>
+
+            <TextView
+                android:id="@+id/txtInvoiceDate"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignTop="@id/img_ic_date"
+                android:layout_alignBottom="@id/img_ic_date"
+                android:layout_marginRight="3dp"
+                android:layout_toLeftOf="@id/txt_invoice_date_lbl"
+                android:gravity="center"
+                android:textColor="#000"/>
+
+            <ImageView
+                android:id="@+id/img_ic_delivery_date"
+                android:layout_width="24dp"
+                android:layout_height="24dp"
+                android:layout_below="@id/img_ic_date"
+                android:layout_alignParentRight="true"
+                android:layout_marginBottom="8dp"
+                app:srcCompat="@drawable/ic_calendar"
+                />
+
+            <TextView
+                android:id="@+id/txt_invoice_delivery_date_lbl"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignTop="@id/img_ic_delivery_date"
+                android:layout_alignBottom="@id/img_ic_delivery_date"
+                android:layout_marginRight="8dp"
+                android:layout_toLeftOf="@id/img_ic_delivery_date"
+                android:gravity="center|right"
+                android:text="تاریخ ارسال : "
+                android:textColor="#000"/>
+
+            <TextView
+                android:id="@+id/txtInvoiceDeliveryDate"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignTop="@id/img_ic_delivery_date"
+                android:layout_alignBottom="@id/img_ic_delivery_date"
+                android:layout_marginRight="3dp"
+                android:layout_toLeftOf="@id/txt_invoice_delivery_date_lbl"
+                android:gravity="center"
+                android:textColor="#000"/>
+
+            <ImageView
+                android:id="@+id/imgPaymentStatus"
+                android:layout_width="24dp"
+                android:layout_height="24dp"
+                android:layout_below="@id/img_ic_delivery_date"
+                android:layout_alignParentRight="true"
+                app:srcCompat="@drawable/ic_circle_light"
+                />
+
+            <TextView
+                android:id="@+id/txtPaymentStatus"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignTop="@id/imgPaymentStatus"
+                android:layout_alignBottom="@id/imgPaymentStatus"
+                android:layout_marginRight="8dp"
+                android:layout_toLeftOf="@id/imgPaymentStatus"
+                android:gravity="center"
+                android:text=""
+                android:textColor="#000"/>
+
+            <Button
+                android:id="@+id/btnShowOrderCart"
+                style="@style/Base.Widget.AppCompat.Button.Borderless.Colored"
+                android:layout_width="110dp"
+                android:layout_height="40dp"
+                android:layout_below="@id/txtPaymentStatus"
+                android:background="@drawable/round_button_drawable"
+                android:text="مشاهده سبد"
+                android:textColor="#fff"
+                android:textSize="14sp"/>
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/txtPaymentStatus"
+                android:layout_alignTop="@id/btnShowOrderCart"
+                android:layout_alignBottom="@id/btnShowOrderCart"
+                android:layout_alignParentRight="true"
+                android:layout_toRightOf="@id/btnShowOrderCart"
+                android:gravity="center_vertical|right"
+                android:padding="5dp"
+                android:text="@string/thanks_you_note"
+                android:textColor="#757575"/>
+
+            <ImageView
+                android:layout_width="100dp"
+                android:layout_height="100dp"
+                android:layout_alignParentLeft="true"
+                app:srcCompat="@drawable/order_symbol"/>
+        </RelativeLayout>
+
+    </android.support.v7.widget.CardView>
+
+</RelativeLayout>

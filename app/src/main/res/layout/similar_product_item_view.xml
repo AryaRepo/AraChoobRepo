@@ -1,0 +1,55 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.v7.widget.CardView
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="170dp"
+    android:layout_height="wrap_content"
+    android:layout_margin="4dp"
+    android:paddingBottom="8dp"
+    android:orientation="vertical"
+    app:cardCornerRadius="4dp">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical">
+
+        <ImageView
+            android:id="@+id/imgSimilarImageName"
+            android:layout_width="match_parent"
+            android:layout_height="150dp"
+            android:scaleType="centerCrop"
+            app:srcCompat="@drawable/photo_simi"/>
+        <TextView
+            android:id="@+id/txtProductTitle"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:gravity="center"
+            android:textColor="#000"
+            android:padding="3dp"
+            android:text="طرح تست شماره الف"
+            android:textSize="13sp"/>
+        <TextView
+            android:id="@+id/txtPrimaryPrice"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:gravity="center"
+            android:lineSpacingExtra="5dp"
+            android:textColor="#000"
+            android:padding="3dp"
+            android:text="قیمت 1500000 تومان"
+            android:textSize="12sp"/>
+
+        <TextView
+            android:id="@+id/txtDiscountedPrice"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:gravity="center"
+            android:textColor="#000"
+            android:padding="3dp"
+            android:text="قیمت 5000 تومان"
+            android:textSize="12sp"/>
+    </LinearLayout>
+
+
+</android.support.v7.widget.CardView>

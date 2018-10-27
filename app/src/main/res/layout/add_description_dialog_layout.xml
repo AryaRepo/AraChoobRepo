@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+              xmlns:tools="http://schemas.android.com/tools"
+              android:layout_width="match_parent"
+              android:layout_height="wrap_content"
+              android:orientation="vertical">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@color/colorPrimaryDark"
+        android:orientation="vertical">
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_margin="8dp"
+            android:gravity="center"
+            android:padding="5dp"
+            android:text="درج توضیحات برای کالا"
+            android:textColor="#FFF"
+            android:textSize="17sp"/>
+    </LinearLayout>
+
+    <EditText
+        android:id="@+id/edtDescriptionDialog"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_margin="8dp"
+        android:background="@drawable/simple_edit_text_border"
+        android:gravity="top|right"
+        android:hint="@string/order_help_text"
+        android:minHeight="130dp"
+        android:padding="5dp"
+        android:textColorHint="#616161"
+        android:textSize="14sp"/>
+
+    <Button
+        android:id="@+id/btnAddDescriptionDialog"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@drawable/simple_button_drawable"
+        android:text="ثبت توضیحات"
+        android:textColor="#FFF"
+        android:textSize="16sp"/>
+</LinearLayout>

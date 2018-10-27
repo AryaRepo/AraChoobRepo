@@ -23,6 +23,14 @@
         </activity>
         <activity android:name=".Activities.ProfileActivity"></activity>
         <activity android:name=".Activities.EditProfileActivity"></activity>
+  	<activity android:name=".Activities.SignUpSignInActivity"/>
+        <activity android:name=".Activities.DetailActivity"/>
+        <activity android:name=".Activities.OrderBasketActivity"/>
+        <activity android:name=".Activities.TicketsActivity"/>
+        <activity android:name=".Activities.TicketChatActivity"/>
+        <activity android:name=".Activities.OrderHistoryActivity"/>
+        <activity android:name=".Activities.OrderDetailActivity"/>
+
     </application>
 
 </manifest>

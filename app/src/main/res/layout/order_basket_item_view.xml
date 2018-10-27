@@ -1,0 +1,127 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.v7.widget.CardView
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_gravity="center_horizontal"
+    android:layout_margin="8dp"
+    app:cardCornerRadius="8dp"
+    app:cardElevation="2dp">
+
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical">
+
+        <ImageView
+            android:id="@+id/imgProductImageBasket"
+            android:layout_width="wrap_content"
+            android:layout_height="170dp"
+            android:layout_gravity="center_horizontal"
+            android:layout_marginTop="2dp"
+            android:adjustViewBounds="true"
+            android:minWidth="250dp"
+            android:scaleType="fitXY"
+            app:srcCompat="@drawable/img1"/>
+
+        <TextView
+            android:id="@+id/txtProductTitle"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="8dp"
+            android:gravity="center"
+            android:text="کد 254FM21X"
+            android:textColor="#000"
+            android:textSize="15sp"/>
+
+        <TextView
+            android:id="@+id/txtProductPrice"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="8dp"
+            android:gravity="center"
+            android:text="قیمت نهایی 150000 تومان"
+            android:textColor="#000"
+            android:textSize="14sp"
+            android:textStyle="bold"/>
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="8dp">
+
+            <Button
+                android:id="@+id/btnAttachImage"
+                style="@style/Base.Widget.AppCompat.Button.Borderless.Colored"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentStart="true"
+                android:layout_alignParentLeft="true"
+                android:clickable="true"
+                android:drawableTop="@drawable/ic_attach_file"
+                android:focusable="true"
+                android:text="ضمیمه کردن عکس"
+                android:textSize="12sp"
+                android:textStyle="bold"/>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_alignTop="@id/btnAddDescription"
+                android:layout_alignBottom="@id/btnAddDescription"
+                android:layout_toLeftOf="@id/btnAddDescription"
+                android:layout_toRightOf="@id/btnAttachImage"
+                android:gravity="center"
+                android:orientation="horizontal">
+
+                <ImageButton
+                    android:id="@+id/btnDecreaseProductBasket"
+                    style="@style/Base.Widget.AppCompat.Button.Borderless"
+                    android:layout_width="25dp"
+                    android:layout_height="25dp"
+                    android:clickable="true"
+                    android:focusable="true"
+                    android:layout_marginLeft="4dp"
+                    android:layout_marginRight="4dp"
+                    android:background="@null"
+                    app:srcCompat="@drawable/ic_mines"/>
+
+                <TextView
+                    android:id="@+id/txtProductCountBasket"
+                    android:layout_width="24dp"
+                    android:layout_height="24dp"
+                    android:layout_margin="8dp"
+                    android:gravity="center"
+                    android:textColor="#000"/>
+
+                <ImageButton
+                    android:id="@+id/btnIncreaseProductBasket"
+                    style="@style/Base.Widget.AppCompat.Button.Borderless"
+                    android:layout_width="25dp"
+                    android:layout_height="25dp"
+                    android:clickable="true"
+                    android:focusable="true"
+                    android:layout_marginLeft="4dp"
+                    android:layout_marginRight="4dp"
+                    android:background="@null"
+                    app:srcCompat="@drawable/ic_plus"/>
+            </LinearLayout>
+
+            <Button
+                android:id="@+id/btnAddDescription"
+                style="@style/Base.Widget.AppCompat.Button.Borderless.Colored"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentEnd="true"
+                android:layout_alignParentRight="true"
+                android:clickable="true"
+                android:drawableTop="@drawable/ic_description"
+                android:focusable="true"
+                android:text="افزودن توضیحات"
+                android:textSize="12sp"
+                android:textStyle="bold"/>
+        </RelativeLayout>
+    </LinearLayout>
+</android.support.v7.widget.CardView>
