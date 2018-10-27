@@ -66,7 +66,7 @@ public class ProfileActivity extends AppCompatActivity implements View.OnClickLi
         txtUserProfileAddress = findViewById(R.id.txt_UserProfile_address);
         btnEditProfile.setOnClickListener(this);
         btnEditPassword.setOnClickListener(this);
-        Glide.with(this).load(R.drawable.user_profile).into(profilePhoto);
+        Glide.with(this).load(R.drawable.ic_man).into(profilePhoto);
         Glide.with(this).load(R.drawable.pic1)
                 .apply(bitmapTransform(new BlurTransformation(15, 3))).into(ImgProfileBG);
     }

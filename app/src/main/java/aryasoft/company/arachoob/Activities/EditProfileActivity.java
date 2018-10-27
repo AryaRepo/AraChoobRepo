@@ -83,7 +83,7 @@ public class EditProfileActivity extends AppCompatActivity implements View.OnCli
         ImgEditProfile.requestFocus();
         BtnChooseBirthday.setOnClickListener(this);
         BtnSaveChanges.setOnClickListener(this);
-        Glide.with(this).load(R.drawable.user_profile).into(ImgEditProfile);
+        Glide.with(this).load(R.drawable.ic_man).into(ImgEditProfile);
     }
 
     private void chooseBirthDate() {

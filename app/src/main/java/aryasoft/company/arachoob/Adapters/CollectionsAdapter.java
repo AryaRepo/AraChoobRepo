@@ -1,6 +1,8 @@
 package aryasoft.company.arachoob.Adapters;
 
 import android.content.Context;
+import android.content.Intent;
+import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
@@ -11,6 +13,7 @@ import android.widget.TextView;
 
 import java.util.ArrayList;
 
+import aryasoft.company.arachoob.Activities.AllCollectionProductActivity;
 import aryasoft.company.arachoob.Models.Collection;
 import aryasoft.company.arachoob.R;
 
@@ -44,12 +47,17 @@ public class CollectionsAdapter extends RecyclerView.Adapter<CollectionsAdapter.
 
     private void bindViews(CollectionViewHolder holder, int position)
     {
-        Collection currentCollection = Collections.get(position);
+        final Collection currentCollection = Collections.get(position);
         holder.TxtCollectionName.setText(Collections.get(position).getTitle());
         holder.TxtShowMore.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-
+                Intent showMoreIntent = new Intent(ContextInstance, AllCollectionProductActivity.class);
+                Bundle bundle = new Bundle();
+                bundle.putSerializable("productsList", currentCollection.getProductsList());
+                bundle.putString("collectionTitle", currentCollection.getTitle());
+                showMoreIntent.putExtras(bundle);
+                ContextInstance.startActivity(showMoreIntent);
             }
         });
         ProductAdapter productAdapter = new ProductAdapter(currentCollection.getProductsList(), ContextInstance);
