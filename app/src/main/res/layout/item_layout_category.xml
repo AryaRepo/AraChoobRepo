@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="110dp">
+
+    <RelativeLayout
+        android:id="@+id/relCategoryIconContainer"
+        android:layout_width="80dp"
+        android:layout_height="80dp"
+        android:background="@drawable/circle_layout_style"
+        android:layout_centerVertical="true"
+        android:layout_alignParentRight="true"
+        android:layout_alignParentEnd="true"
+        android:layout_marginEnd="10dp"
+        android:layout_marginRight="10dp">
+
+        <ImageView
+            android:id="@+id/imgCategoryIcon"
+            android:layout_width="50dp"
+            android:layout_height="50dp"
+            android:layout_centerInParent="true"
+            android:scaleType="fitXY"/>
+
+    </RelativeLayout>
+
+    <TextView
+        android:id="@+id/txtCategoryTitle"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_toLeftOf="@+id/relCategoryIconContainer"
+        android:layout_toStartOf="@+id/relCategoryIconContainer"
+        android:layout_centerVertical="true"
+        android:textSize="16sp"
+        android:textColor="#000000"
+        android:text="عنوان دسته"
+        android:padding="10dp"/>
+
+</RelativeLayout>
