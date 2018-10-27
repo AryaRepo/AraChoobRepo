@@ -16,8 +16,8 @@
 
         <ImageView
             android:id="@+id/imgCategoryIcon"
-            android:layout_width="50dp"
-            android:layout_height="50dp"
+            android:layout_width="40dp"
+            android:layout_height="40dp"
             android:layout_centerInParent="true"
             android:scaleType="fitXY"/>
 
@@ -34,5 +34,13 @@
         android:textColor="#000000"
         android:text="عنوان دسته"
         android:padding="10dp"/>
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:background="#E0E0E0"
+        android:layout_alignParentBottom="true"
+        android:layout_toLeftOf="@+id/relCategoryIconContainer"
+        android:layout_toStartOf="@+id/relCategoryIconContainer"/>
 
 </RelativeLayout>
