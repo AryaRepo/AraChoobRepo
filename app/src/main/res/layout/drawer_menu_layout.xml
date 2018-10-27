@@ -87,7 +87,7 @@
                 app:srcCompat="@drawable/ic_order_list"/>
         </TableRow>
 
-        <TableRow
+       <!-- <TableRow
             android:id="@+id/row_fav_cart"
             android:layout_width="wrap_content"
             android:background="?attr/selectableItemBackground"
@@ -110,7 +110,7 @@
                 android:layout_height="25dp"
                 android:clickable="false"
                 app:srcCompat="@drawable/ic_favorite_border"/>
-        </TableRow>
+        </TableRow>-->
 
         <TableRow
             android:id="@+id/row_messages"

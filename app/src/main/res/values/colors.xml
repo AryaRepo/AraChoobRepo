@@ -6,4 +6,5 @@
     <color name="icons">#FFFFFF</color>
     <color name="bottomBarIconColor">#8D6D63</color>
     <color name="secondaryTextColor">#757575</color>
+    <color name="divider">#BDBDBD</color>
 </resources>

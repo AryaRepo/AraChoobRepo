@@ -65,8 +65,9 @@ public class HomeFragment extends Fragment {
     private void setupSlider()
     {
         ArrayList<Slide> slides = new ArrayList<>();
-        slides.add(new Slide(R.drawable.h2));
-        slides.add(new Slide(R.drawable.h3));
+        slides.add(new Slide(R.drawable.img1));
+        slides.add(new Slide(R.drawable.img2));
+        slides.add(new Slide(R.drawable.img3));
 
         SliderPagerAdapter sliderPagerAdapter = new SliderPagerAdapter(getChildFragmentManager(), slides);
 
@@ -113,33 +114,33 @@ public class HomeFragment extends Fragment {
 
     private ArrayList<Collection> createFakeData() {
         ArrayList<Product> products1 = new ArrayList<>();
-        products1.add(new Product(R.drawable.h2, "A10a", "1000000 تومان", "با تخفیف 950000 تومان",""));
-        products1.add(new Product(R.drawable.h3, "A10b", "2000000 تومان", "با تخفیف 1950000 تومان",""));
-        products1.add(new Product(R.drawable.h2, "A10c", "1500000 تومان", "با تخفیف 9590000 تومان",""));
-        products1.add(new Product(R.drawable.h3, "A10d", "1100000 تومان", "با تخفیف 800000 تومان",""));
-        products1.add(new Product(R.drawable.h2, "A10e", "1050000 تومان", "با تخفیف 750000 تومان",""));
+        products1.add(new Product(R.drawable.img1, "A10a", "1000000 تومان", "با تخفیف 950000 تومان",""));
+        products1.add(new Product(R.drawable.img2, "A10b", "2000000 تومان", "با تخفیف 1950000 تومان",""));
+        products1.add(new Product(R.drawable.img3, "A10c", "1500000 تومان", "با تخفیف 9590000 تومان",""));
+        products1.add(new Product(R.drawable.img1, "A10d", "1100000 تومان", "با تخفیف 800000 تومان",""));
+        products1.add(new Product(R.drawable.img2, "A10e", "1050000 تومان", "با تخفیف 750000 تومان",""));
 
         ArrayList<Product> products2 = new ArrayList<>();
-        products2.add(new Product(R.drawable.h3, "B10a", "1000000 تومان", "با تخفیف 950000 تومان",""));
-        products2.add(new Product(R.drawable.h2, "B10b", "2000000 تومان", "با تخفیف 1950000 تومان",""));
-        products2.add(new Product(R.drawable.h3, "B10c", "1500000 تومان", "با تخفیف 9590000 تومان",""));
+        products2.add(new Product(R.drawable.img3, "B10a", "1000000 تومان", "با تخفیف 950000 تومان",""));
+        products2.add(new Product(R.drawable.img1, "B10b", "2000000 تومان", "با تخفیف 1950000 تومان",""));
+        products2.add(new Product(R.drawable.img2, "B10c", "1500000 تومان", "با تخفیف 9590000 تومان",""));
 
         ArrayList<Product> products3 = new ArrayList<>();
-        products3.add(new Product(R.drawable.h2, "C10a", "1000000 تومان", "با تخفیف 950000 تومان",""));
-        products3.add(new Product(R.drawable.h3, "C10b", "2000000 تومان", "با تخفیف 1950000 تومان",""));
-        products3.add(new Product(R.drawable.h2, "C10c", "1500000 تومان", "با تخفیف 9590000 تومان",""));
-        products3.add(new Product(R.drawable.h3, "C10d", "1100000 تومان", "با تخفیف 800000 تومان",""));
-        products3.add(new Product(R.drawable.h2, "C10e", "1050000 تومان", "با تخفیف 750000 تومان",""));
-        products3.add(new Product(R.drawable.h3, "C10f", "1000000 تومان", "با تخفیف 950000 تومان",""));
-        products3.add(new Product(R.drawable.h2, "C10g", "2000000 تومان", "با تخفیف 1950000 تومان",""));
-        products3.add(new Product(R.drawable.h3, "C10h", "1500000 تومان", "با تخفیف 9590000 تومان",""));
+        products3.add(new Product(R.drawable.img1, "C10a", "1000000 تومان", "با تخفیف 950000 تومان",""));
+        products3.add(new Product(R.drawable.img2, "C10b", "2000000 تومان", "با تخفیف 1950000 تومان",""));
+        products3.add(new Product(R.drawable.img3, "C10c", "1500000 تومان", "با تخفیف 9590000 تومان",""));
+        products3.add(new Product(R.drawable.img1, "C10d", "1100000 تومان", "با تخفیف 800000 تومان",""));
+        products3.add(new Product(R.drawable.img2, "C10e", "1050000 تومان", "با تخفیف 750000 تومان",""));
+        products3.add(new Product(R.drawable.img3, "C10f", "1000000 تومان", "با تخفیف 950000 تومان",""));
+        products3.add(new Product(R.drawable.img2, "C10g", "2000000 تومان", "با تخفیف 1950000 تومان",""));
+        products3.add(new Product(R.drawable.img1, "C10h", "1500000 تومان", "با تخفیف 9590000 تومان",""));
 
         ArrayList<Product> products4 = new ArrayList<>();
-        products4.add(new Product(R.drawable.h3, "D10a", "1080000 تومان", "با تخفیف 950000 تومان",""));
-        products4.add(new Product(R.drawable.h2, "D10b", "1600000 تومان", "با تخفیف 1590000 تومان",""));
+        products4.add(new Product(R.drawable.img3, "D10a", "1080000 تومان", "با تخفیف 950000 تومان",""));
+        products4.add(new Product(R.drawable.img2, "D10b", "1600000 تومان", "با تخفیف 1590000 تومان",""));
 
         ArrayList<Product> products5 = new ArrayList<>();
-        products5.add(new Product(R.drawable.h2, "E10a", "2600000 تومان", "با تخفیف 2390000 تومان",""));
+        products5.add(new Product(R.drawable.img2, "E10a", "2600000 تومان", "با تخفیف 2390000 تومان",""));
 
         ArrayList<Collection> collections = new ArrayList<>();
         collections.add(new Collection("پر فروش ترین ها", products1));

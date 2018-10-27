@@ -1,6 +1,7 @@
 package aryasoft.company.arachoob.Activities;
 
 import android.content.Context;
+import android.content.Intent;
 import android.graphics.Color;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
@@ -33,7 +34,6 @@ public class LandActivity extends AppCompatActivity implements View.OnClickListe
     private TableRow RowManageProfile;
     private TableRow RowShareApp;
     private TableRow RowOrders;
-    private TableRow RowFavCart;
     private TableRow RowContactUs;
     private TableRow RowMessages;
     private TableRow RowAboutUs;
@@ -48,7 +48,14 @@ public class LandActivity extends AppCompatActivity implements View.OnClickListe
     }
 
     @Override
-    public void onClick(View v) {
+    public void onClick(View view) {
+        switch (view.getId() )
+        {
+            case R.id.row_manage_profile:
+                Intent profileManagementIntent = new Intent(LandActivity.this, ProfileActivity.class);
+                startActivity(profileManagementIntent);
+                break;
+        }
         Drawer.closeDrawer(Gravity.END);
     }
 
@@ -105,7 +112,6 @@ public class LandActivity extends AppCompatActivity implements View.OnClickListe
         RowManageProfile = findViewById(R.id.row_manage_profile);
         RowShareApp = findViewById(R.id.row_share_app);
         RowOrders = findViewById(R.id.row_orders);
-        RowFavCart = findViewById(R.id.row_fav_cart);
         RowMessages= findViewById(R.id.row_messages);
         RowContactUs = findViewById(R.id.row_contact_us);
         RowAboutUs = findViewById(R.id.row_about_us);
@@ -114,7 +120,6 @@ public class LandActivity extends AppCompatActivity implements View.OnClickListe
         RowManageProfile.setOnClickListener(this);
         RowShareApp .setOnClickListener(this);
         RowOrders .setOnClickListener(this);
-        RowFavCart.setOnClickListener(this);
         RowMessages.setOnClickListener(this);
         RowContactUs.setOnClickListener(this);
         RowAboutUs.setOnClickListener(this);
