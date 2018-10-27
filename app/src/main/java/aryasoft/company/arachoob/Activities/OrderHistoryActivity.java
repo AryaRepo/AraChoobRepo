@@ -35,7 +35,6 @@ public class OrderHistoryActivity extends AppCompatActivity
     private void initViews()
     {
         recyclerOrderHistory = findViewById(R.id.recyclerOrderHistory);
-        //--
         recyclerOrderHistoryAdapter = new OrderHistoryAdapter(this);
         recyclerOrderLayoutManager = new LinearLayoutManager(this, LinearLayoutManager.VERTICAL, false);
         recyclerOrderHistory.setLayoutManager(recyclerOrderLayoutManager);

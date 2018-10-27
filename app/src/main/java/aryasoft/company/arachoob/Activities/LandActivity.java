@@ -13,6 +13,7 @@ import android.view.Gravity;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.TableRow;
 import android.widget.TextView;
@@ -27,7 +28,7 @@ import uk.co.chrisjenx.calligraphy.CalligraphyContextWrapper;
 
 public class LandActivity extends AppCompatActivity implements View.OnClickListener {
 
-    private AHBottomNavigation  BottomNavigation;
+    private AHBottomNavigation BottomNavigation;
     private DrawerLayout Drawer;
     private TableRow RowLoginRegister;
     private TableRow RowManageProfile;
@@ -39,23 +40,58 @@ public class LandActivity extends AppCompatActivity implements View.OnClickListe
     private TextView txtNavMenuTitle;
     private ImageView ImgDrawerBG;
     private ImageView ImgProfilePhoto;
+    private ImageButton BtnShowShoppingCart;
 
     @Override
-    protected void attachBaseContext(Context newBase)
-    {
+    protected void attachBaseContext(Context newBase) {
         super.attachBaseContext(CalligraphyContextWrapper.wrap(newBase));
     }
 
     @Override
     public void onClick(View view) {
-        switch (view.getId() )
-        {
+        switch (view.getId()) {
             case R.id.row_manage_profile:
-                Intent profileManagementIntent = new Intent(LandActivity.this, ProfileActivity.class);
-                startActivity(profileManagementIntent);
+                showProfileManagement();
+                break;
+            case R.id.row_loginRegister:
+                showSignInOrUp();
+                break;
+            case R.id.row_orders:
+                showOrdersHistory();
+                break;
+            case R.id.row_messages:
+                showTickets();
+                break;
+            case R.id.btn_show_shopping_cart:
+                showOrders();
                 break;
         }
         Drawer.closeDrawer(Gravity.END);
+    }
+
+    private void showProfileManagement() {
+        Intent profileManagementIntent = new Intent(LandActivity.this, ProfileActivity.class);
+        startActivity(profileManagementIntent);
+    }
+
+    private void showSignInOrUp() {
+        Intent signInOrUPIntent = new Intent(LandActivity.this, SignUpSignInActivity.class);
+        startActivity(signInOrUPIntent);
+    }
+
+    private void showOrdersHistory() {
+        Intent signInOrUPIntent = new Intent(LandActivity.this, OrderHistoryActivity.class);
+        startActivity(signInOrUPIntent);
+    }
+
+    private void showTickets() {
+        Intent ticketsIntent = new Intent(LandActivity.this, TicketsActivity.class);
+        startActivity(ticketsIntent);
+    }
+
+    private void showOrders() {
+        Intent orderBasketIntent = new Intent(LandActivity.this, OrderBasketActivity.class);
+        startActivity(orderBasketIntent);
     }
 
     @Override
@@ -68,71 +104,63 @@ public class LandActivity extends AppCompatActivity implements View.OnClickListe
     }
 
     @Override
-    public boolean onCreateOptionsMenu(Menu menu)
-    {
+    public boolean onCreateOptionsMenu(Menu menu) {
         getMenuInflater().inflate(R.menu.main_menu, menu);
         return super.onCreateOptionsMenu(menu);
     }
 
     @Override
-    public boolean onOptionsItemSelected(MenuItem item)
-    {
-        if (item.getItemId() == R.id.action_nav_menu)
-        {
+    public boolean onOptionsItemSelected(MenuItem item) {
+        if (item.getItemId() == R.id.action_nav_menu) {
             Drawer.openDrawer(GravityCompat.END);
         }
         return super.onOptionsItemSelected(item);
     }
 
     @Override
-    public void onBackPressed()
-    {
-        if (Drawer.isDrawerOpen(GravityCompat.END))
-        {
+    public void onBackPressed() {
+        if (Drawer.isDrawerOpen(GravityCompat.END)) {
             Drawer.closeDrawer(GravityCompat.END);
-        }
-        else
-        {
+        } else {
             super.onBackPressed();
         }
     }
 
-    private void setupToolbar()
-    {
+    private void setupToolbar() {
         Toolbar toolbar = findViewById(R.id.include_land_toolbar);
         toolbar.setTitle("");
         setSupportActionBar(toolbar);
     }
 
-    private void initializeViews()
-    {
+    private void initializeViews() {
         BottomNavigation = findViewById(R.id.bottomNavLand);
         RowLoginRegister = findViewById(R.id.row_loginRegister);
         RowManageProfile = findViewById(R.id.row_manage_profile);
         RowShareApp = findViewById(R.id.row_share_app);
         RowOrders = findViewById(R.id.row_orders);
-        RowMessages= findViewById(R.id.row_messages);
+        RowMessages = findViewById(R.id.row_messages);
         RowContactUs = findViewById(R.id.row_contact_us);
         RowAboutUs = findViewById(R.id.row_about_us);
+        BtnShowShoppingCart = findViewById(R.id.btn_show_shopping_cart);
 
         RowLoginRegister.setOnClickListener(this);
         RowManageProfile.setOnClickListener(this);
-        RowShareApp .setOnClickListener(this);
-        RowOrders .setOnClickListener(this);
+        RowShareApp.setOnClickListener(this);
+        RowOrders.setOnClickListener(this);
         RowMessages.setOnClickListener(this);
         RowContactUs.setOnClickListener(this);
         RowAboutUs.setOnClickListener(this);
+        BtnShowShoppingCart.setOnClickListener(this);
 
         txtNavMenuTitle = findViewById(R.id.nav_menu_title_loginRegister);
         Drawer = findViewById(R.id.drawer_layout_land);
-        ImgDrawerBG =findViewById(R.id.img_drawer_bg);
-        ImgProfilePhoto =findViewById(R.id.imgProfileNavHeader);
+        ImgDrawerBG = findViewById(R.id.img_drawer_bg);
+        ImgProfilePhoto = findViewById(R.id.imgProfileNavHeader);
         Glide.with(this).load(R.drawable.simple_pattern).into(ImgDrawerBG);
         Glide.with(this).load(R.drawable.ic_man).into(ImgProfilePhoto);
     }
 
-    private void setupMainBottomBar()
-    {
+    private void setupMainBottomBar() {
         AHBottomNavigationItem categoryTabItem = new AHBottomNavigationItem(R.string.tabTitleCategory, R.drawable.menu, R.color.bottomBarIconColor);
         AHBottomNavigationItem homeTabItem = new AHBottomNavigationItem(R.string.tabTitleHome, R.drawable.home, R.color.bottomBarIconColor);
         AHBottomNavigationItem searchTabItem = new AHBottomNavigationItem(R.string.tabTitleSearch, R.drawable.magnifier, R.color.bottomBarIconColor);

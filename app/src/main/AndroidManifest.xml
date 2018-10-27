@@ -21,22 +21,16 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-<<<<<<< HEAD
         <activity android:name=".Activities.ProfileActivity"></activity>
         <activity android:name=".Activities.EditProfileActivity"></activity>
-  	<activity android:name=".Activities.SignUpSignInActivity"/>
-        <activity android:name=".Activities.DetailActivity"/>
-        <activity android:name=".Activities.OrderBasketActivity"/>
-        <activity android:name=".Activities.TicketsActivity"/>
-        <activity android:name=".Activities.TicketChatActivity"/>
-        <activity android:name=".Activities.OrderHistoryActivity"/>
-        <activity android:name=".Activities.OrderDetailActivity"/>
-
-=======
-        <activity android:name=".Activities.ProfileActivity" />
-        <activity android:name=".Activities.EditProfileActivity" />
+        <activity android:name=".Activities.SignUpSignInActivity" />
+        <activity android:name=".Activities.DetailActivity" />
+        <activity android:name=".Activities.OrderBasketActivity" />
+        <activity android:name=".Activities.TicketsActivity" />
+        <activity android:name=".Activities.TicketChatActivity" />
+        <activity android:name=".Activities.OrderHistoryActivity" />
+        <activity android:name=".Activities.OrderDetailActivity" />
         <activity android:name=".Activities.AllCollectionProductActivity"></activity>
->>>>>>> 878952cc396ec1139eee507afe197deec42d38ba
     </application>
 
 </manifest>

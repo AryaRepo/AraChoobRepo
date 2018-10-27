@@ -13,7 +13,6 @@
         <item name="android:textSize">15sp</item>
     </style>
 
-<<<<<<< HEAD
     <style name="defaultTabLayout" parent="Widget.Design.TabLayout">
         <item name="android:gravity">center</item>
         <item name="tabTextAppearance">@style/tabLayoutTitles</item>
@@ -31,12 +30,10 @@
         <item name="android:textStyle">bold</item>
         <item name="android:textSize">14sp</item>
     </style>
-=======
+
     <style name="rightSideToolbarText" parent="TextAppearance.Widget.AppCompat.Toolbar.Title">
         <item name="android:gravity">right</item>
-        <item name="android:textDirection">rtl</item>
         <item name="android:textColor">#ffffff</item>
     </style>
 
->>>>>>> 878952cc396ec1139eee507afe197deec42d38ba
 </resources>

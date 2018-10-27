@@ -17,6 +17,7 @@ import android.widget.ImageView;
 import android.widget.TextView;
 import java.util.ArrayList;
 
+import aryasoft.company.arachoob.Activities.OrderDetailActivity;
 import aryasoft.company.arachoob.Models.OrderHistoryModel;
 import aryasoft.company.arachoob.R;
 
@@ -63,9 +64,9 @@ public class OrderHistoryAdapter extends RecyclerView.Adapter<OrderHistoryAdapte
             if (orderHistoryList.get(position).PaymentStatus)
             {
                 String myStr = "نحوه پرداخت : " + " آنلاین" + " - پرداخت شد";
-                SpannableStringBuilder myspan = new SpannableStringBuilder(myStr);
-                myspan.setSpan(new ForegroundColorSpan(Color.parseColor("#4CAF50")), 23, myStr.length(), Spannable.SPAN_EXCLUSIVE_EXCLUSIVE);
-                holder.txtPaymentType.setText(myspan);
+                SpannableStringBuilder mySpan = new SpannableStringBuilder(myStr);
+                mySpan.setSpan(new ForegroundColorSpan(Color.parseColor("#4CAF50")), 23, myStr.length(), Spannable.SPAN_EXCLUSIVE_EXCLUSIVE);
+                holder.txtPaymentType.setText(mySpan);
             }
             else if (!orderHistoryList.get(position).PaymentStatus)
             {
@@ -129,7 +130,8 @@ public class OrderHistoryAdapter extends RecyclerView.Adapter<OrderHistoryAdapte
             public void onClick(View v)
             {
                 int OrderId = orderHistoryList.get(holder.getAdapterPosition()).OrderID;
-                //context.startActivity(new Intent(context, OrderDetailActivity.class).putExtra("OrderId", OrderId));
+                Intent intent = new Intent(context, OrderDetailActivity.class);
+                context.startActivity(intent);
             }
         });
         //--------------------------------------------------------
