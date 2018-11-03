@@ -12,8 +12,8 @@ import java.util.TimerTask;
 import aryasoft.company.arachoob.Adapters.DetailSliderAdapter;
 import aryasoft.company.arachoob.Adapters.DetailTabViewPagerAdapter;
 import aryasoft.company.arachoob.R;
-import aryasoft.company.arachoob.utils.VectorDrawablePreLollipopHelper;
-import aryasoft.company.arachoob.utils.VectorView;
+import aryasoft.company.arachoob.Utils.VectorDrawablePreLollipopHelper;
+import aryasoft.company.arachoob.Utils.VectorView;
 import uk.co.chrisjenx.calligraphy.CalligraphyContextWrapper;
 
 public class DetailActivity extends AppCompatActivity

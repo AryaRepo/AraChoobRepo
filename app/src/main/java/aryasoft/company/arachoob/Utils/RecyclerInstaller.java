@@ -1,10 +1,6 @@
-package aryasoft.company.arachoob.utils;
+package aryasoft.company.arachoob.Utils;
 
-import android.app.AlertDialog;
-import android.content.Context;
 import android.support.v7.widget.RecyclerView;
-
-import com.bumptech.glide.load.resource.bitmap.RecyclableBufferedInputStream;
 
 public class RecyclerInstaller {
 

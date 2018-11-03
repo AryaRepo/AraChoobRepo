@@ -13,10 +13,18 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.Toast;
 
+import aryasoft.company.arachoob.ApiConnection.ApiServiceGenerator;
+import aryasoft.company.arachoob.ApiConnection.AraApi;
+import aryasoft.company.arachoob.Implementations.RegistrationUserImpl;
+import aryasoft.company.arachoob.Models.UserRegistration;
 import aryasoft.company.arachoob.R;
+import aryasoft.company.arachoob.Utils.CuteToast;
+import retrofit2.Call;
+import retrofit2.Response;
 
-public class SignUpFragment extends Fragment
+public class SignUpFragment extends Fragment implements RegistrationUserImpl.OnRegistrationStatusListener
 {
     private Context  fragmentContext;
     private EditText edtUsernameSignUp;
@@ -24,6 +32,8 @@ public class SignUpFragment extends Fragment
     private EditText edtRepeatPasswordSignUp;
     private Button   btnSignUp;
     private Button btnLoginAccountSignUp;
+    private final int ALREADY_REGISTERED_AND_ACTIVE = 0;
+    private final int ALREADY_REGISTERED_AND_NOT_ACTIVE = 1;
 
     public SignUpFragment()
     {
@@ -31,8 +41,7 @@ public class SignUpFragment extends Fragment
 
 
     @Override
-    public View onCreateView(@NonNull LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState)
-    {
+    public View onCreateView(@NonNull LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         return inflater.inflate(R.layout.fragment_sign_up, container, false);
     }
 
@@ -43,7 +52,27 @@ public class SignUpFragment extends Fragment
         fragmentContext = view.getContext();
         initViews(view);
         initEvents();
+        signUp();
     }
+
+    @Override
+    public void onRegistrationStatusReceived(Response<Integer> response) {
+
+       Integer status = response.body();
+       if (status == ALREADY_REGISTERED_AND_NOT_ACTIVE)
+       {
+           new CuteToast.Builder(getActivity()).setText(getString(R.string.alreadyRegisteredAndNotActiveText)).setDuration(Toast.LENGTH_LONG).show();
+       }
+        else if (status == ALREADY_REGISTERED_AND_ACTIVE)
+        {
+            new CuteToast.Builder(getActivity()).setText(getString(R.string.alreadyRegisteredAndActiveText)).setDuration(Toast.LENGTH_LONG).show();
+        }
+        else if (status > 1)
+       {
+           new CuteToast.Builder(getActivity()).setText(getString(R.string.successfullyRegistered)).setDuration(Toast.LENGTH_LONG).show();
+       }
+    }
+
 
 
     private void initViews(View view)
@@ -69,4 +98,22 @@ public class SignUpFragment extends Fragment
             }
         });
     }
+
+    private void signUp()
+    {
+        AraApi araApi = ApiServiceGenerator.getApiService();
+        Call<Integer> registerCall = araApi.registerUser(getUserRegistrationModel());
+        registerCall.enqueue(new RegistrationUserImpl(this));
+    }
+
+    private UserRegistration getUserRegistrationModel()
+    {
+        UserRegistration userRegistration = new UserRegistration();
+        userRegistration.setMobileNumber(edtUsernameSignUp.getText().toString());
+        userRegistration.setPassword(edtPasswordSignUp.getText().toString());
+        userRegistration.setRePassword(edtRepeatPasswordSignUp.getText().toString());
+
+        return userRegistration;
+    }
+
 }

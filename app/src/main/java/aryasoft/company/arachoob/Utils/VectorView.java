@@ -1,4 +1,4 @@
-package aryasoft.company.arachoob.utils;
+package aryasoft.company.arachoob.Utils;
 
 import android.view.View;
 

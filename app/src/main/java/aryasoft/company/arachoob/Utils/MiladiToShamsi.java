@@ -1,4 +1,4 @@
-package aryasoft.company.arachoob.utils;
+package aryasoft.company.arachoob.Utils;
 
 import java.io.Serializable;
 import android.annotation.SuppressLint;

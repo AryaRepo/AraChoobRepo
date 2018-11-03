@@ -12,7 +12,7 @@ import java.util.ArrayList;
 import aryasoft.company.arachoob.Adapters.ProductAdapter;
 import aryasoft.company.arachoob.Models.Product;
 import aryasoft.company.arachoob.R;
-import aryasoft.company.arachoob.utils.RecyclerInstaller;
+import aryasoft.company.arachoob.Utils.RecyclerInstaller;
 import uk.co.chrisjenx.calligraphy.CalligraphyContextWrapper;
 
 public class AllCollectionProductActivity extends AppCompatActivity {

@@ -24,4 +24,7 @@
     <string name="ProductImageFolder">url://</string>
     <string name="thanks_you_note">باتشکر از شما - صنایع چوب آرا نوین مهر</string>
     <string name="youOrderBasketCaption">سبد سفارش شما</string>
+    <string name="alreadyRegisteredAndActiveText">کاربر گرامی شما قبلا ثبت نام کرده اید و حساب کاربری شما فعال است.</string>
+    <string name="alreadyRegisteredAndNotActiveText">کاربر گرامی شما قبلا ثبت نام کرده اید ولی حساب کاربری شما فعال نیست. حساب کاربری خود را فعال کنید.</string>
+    <string name="successfullyRegistered">ثبت نام با موفقیت انجام شد. در انتظار کد تایید باشید.</string>
 </resources>

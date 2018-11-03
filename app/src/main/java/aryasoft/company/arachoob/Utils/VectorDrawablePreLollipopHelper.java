@@ -1,4 +1,4 @@
-package aryasoft.company.arachoob.utils;
+package aryasoft.company.arachoob.Utils;
 
 import android.support.graphics.drawable.VectorDrawableCompat;
 import android.widget.Button;
