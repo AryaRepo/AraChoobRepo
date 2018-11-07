@@ -53,9 +53,6 @@ public class AllCollectionProductActivity extends AppCompatActivity {
         ArrayList<Product> products = (ArrayList<Product>) ProductBundle.getSerializable("productsList");
         ProductAdapter productAdapter = new ProductAdapter(products, this);
         GridLayoutManager gridLayoutManager = new GridLayoutManager(this, 2);
-        //RecyclerMore.setLayoutManager(gridLayoutManager);
-        //RecyclerMore.setAdapter(productAdapter);
-
         RecyclerInstaller recyclerInstaller = RecyclerInstaller.build();
         recyclerInstaller
                 .setAdapter(productAdapter)

@@ -17,6 +17,7 @@ import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.TableRow;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.aurelhubert.ahbottomnavigation.AHBottomNavigation;
 import com.aurelhubert.ahbottomnavigation.AHBottomNavigationItem;
@@ -24,10 +25,13 @@ import com.bumptech.glide.Glide;
 
 import aryasoft.company.arachoob.Implementations.BottomBarTabSelectListener;
 import aryasoft.company.arachoob.R;
+import aryasoft.company.arachoob.Utils.CuteToast;
+import aryasoft.company.arachoob.Utils.UserPreference;
 import uk.co.chrisjenx.calligraphy.CalligraphyContextWrapper;
 
 public class LandActivity extends AppCompatActivity implements View.OnClickListener {
 
+    public static int CurrentPage = BottomBarTabSelectListener.TAB_HOME;
     private AHBottomNavigation BottomNavigation;
     private DrawerLayout Drawer;
     private TableRow RowLoginRegister;
@@ -37,11 +41,11 @@ public class LandActivity extends AppCompatActivity implements View.OnClickListe
     private TableRow RowContactUs;
     private TableRow RowMessages;
     private TableRow RowAboutUs;
-    private TextView txtNavMenuTitle;
+    private TextView TxtWellcomeUser;
+    private TextView TxtSignInOut;
     private ImageView ImgDrawerBG;
     private ImageView ImgProfilePhoto;
     private ImageButton BtnShowShoppingCart;
-    public static int CurrentPage = BottomBarTabSelectListener.TAB_HOME;
 
     @Override
     protected void attachBaseContext(Context newBase) {
@@ -76,8 +80,15 @@ public class LandActivity extends AppCompatActivity implements View.OnClickListe
     }
 
     private void showSignInOrUp() {
-        Intent signInOrUPIntent = new Intent(LandActivity.this, SignUpSignInActivity.class);
-        startActivity(signInOrUPIntent);
+        if (UserPreference.isUserLogin()) {
+            UserPreference.isUserLogin(false);
+            UserPreference.setUserFullName("مهمان");
+            checkUserLoginStatus();
+            new CuteToast.Builder(this).setText(getString(R.string.signoutText)).setDuration(Toast.LENGTH_LONG).show();
+        } else {
+            Intent signInOrUPIntent = new Intent(LandActivity.this, SignUpSignInActivity.class);
+            startActivity(signInOrUPIntent);
+        }
     }
 
     private void showOrdersHistory() {
@@ -102,6 +113,7 @@ public class LandActivity extends AppCompatActivity implements View.OnClickListe
         setupToolbar();
         initializeViews();
         setupMainBottomBar();
+        checkUserLoginStatus();
     }
 
     @Override
@@ -122,12 +134,9 @@ public class LandActivity extends AppCompatActivity implements View.OnClickListe
     public void onBackPressed() {
         if (Drawer.isDrawerOpen(GravityCompat.END)) {
             Drawer.closeDrawer(GravityCompat.END);
-        }
-        else if (CurrentPage == BottomBarTabSelectListener.TAB_CATEGORY || CurrentPage == BottomBarTabSelectListener.TAB_SEARCH)
-        {
+        } else if (CurrentPage == BottomBarTabSelectListener.TAB_CATEGORY || CurrentPage == BottomBarTabSelectListener.TAB_SEARCH) {
             BottomNavigation.setCurrentItem(BottomBarTabSelectListener.TAB_HOME);
-        }
-        else {
+        } else {
             super.onBackPressed();
         }
     }
@@ -158,7 +167,8 @@ public class LandActivity extends AppCompatActivity implements View.OnClickListe
         RowAboutUs.setOnClickListener(this);
         BtnShowShoppingCart.setOnClickListener(this);
 
-        txtNavMenuTitle = findViewById(R.id.nav_menu_title_loginRegister);
+        TxtWellcomeUser = findViewById(R.id.txt_greetings_land);
+        TxtSignInOut = findViewById(R.id.nav_menu_title_loginRegister);
         Drawer = findViewById(R.id.drawer_layout_land);
         ImgDrawerBG = findViewById(R.id.img_drawer_bg);
         ImgProfilePhoto = findViewById(R.id.imgProfileNavHeader);
@@ -183,6 +193,16 @@ public class LandActivity extends AppCompatActivity implements View.OnClickListe
         BottomNavigation.setTitleState(AHBottomNavigation.TitleState.ALWAYS_SHOW);
         BottomNavigation.setOnTabSelectedListener(new BottomBarTabSelectListener(this));
         BottomNavigation.setCurrentItem(BottomBarTabSelectListener.TAB_HOME);
+    }
+
+    private void checkUserLoginStatus() {
+        String fullName = UserPreference.getUserFullName() + " ";
+        TxtWellcomeUser.setText(String.format("کاربر %s%s", fullName, getString(R.string.welcomeUserText)));
+
+        if (UserPreference.isUserLogin())
+            TxtSignInOut.setText(getString(R.string.logoutUser));
+        else if (!UserPreference.isUserLogin())
+            TxtSignInOut.setText(getString(R.string.nav_loginRegister));
     }
 
 }

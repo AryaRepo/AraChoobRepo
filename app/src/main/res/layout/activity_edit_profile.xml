@@ -25,8 +25,8 @@
         android:layout_height="match_parent"
         android:paddingBottom="20dp"
         android:paddingTop="20dp"
-        android:layout_below="@+id/txt_toolbar_edit_profile">
-        android:layout_above="@+id/btn_save_changes"
+        android:layout_below="@+id/txt_toolbar_edit_profile"
+        android:layout_above="@+id/btn_save_changes">
 
         <RelativeLayout
             android:layout_width="match_parent"
@@ -167,8 +167,8 @@
                 android:textColorHint="@color/secondaryTextColor"
                 android:textSize="@dimen/Edit_text_text_size"/>
 
-            <ir.hamsaa.RtlMaterialSpinner
-                android:id="@+id/sp_zone_lists"
+            <android.support.v7.widget.AppCompatSpinner
+                android:id="@+id/sp_state_lists"
                 android:layout_width="match_parent"
                 android:background="@drawable/edit_text_border"
                 android:layout_height="wrap_content"
@@ -177,16 +177,19 @@
                 android:layout_marginLeft="20dp"
                 android:layout_marginRight="20dp"
                 android:layout_marginTop="5dp"
-                app:ms_baseColor="@color/divider"
-                android:gravity="right|center_horizontal|center_vertical"
-                app:ms_alignLabels="false"
-                app:ms_hint="لیست منطقه های ملایر"
-                app:ms_arrowColor="@color/colorPrimary"
-                app:ms_enableErrorLabel="false"
-                app:ms_thickness="1dp"
-                app:ms_enableFloatingLabel="false"
-                app:ms_hintColor="@color/colorPrimary"
-                app:ms_isRtl="true"/>
+                android:gravity="right|center_horizontal|center_vertical" />
+
+            <android.support.v7.widget.AppCompatSpinner
+                android:id="@+id/sp_city_lists"
+                android:layout_width="match_parent"
+                android:background="@drawable/edit_text_border"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/sp_state_lists"
+                android:layout_marginBottom="30dp"
+                android:layout_marginLeft="20dp"
+                android:layout_marginRight="20dp"
+                android:layout_marginTop="5dp"
+                android:gravity="right|center_horizontal|center_vertical"/>
 
         </RelativeLayout>
 

@@ -4,11 +4,11 @@ import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
 
-public class RegistrationUserImpl implements Callback<Integer> {
+public class UserRegistrationImpl implements Callback<Integer> {
 
     private OnRegistrationStatusListener RegistrationListener;
 
-    public RegistrationUserImpl(OnRegistrationStatusListener registrationListener) {
+    public UserRegistrationImpl(OnRegistrationStatusListener registrationListener) {
         RegistrationListener = registrationListener;
     }
 

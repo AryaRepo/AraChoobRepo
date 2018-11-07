@@ -1,0 +1,82 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <TextView
+    android:id="@+id/txtActivationTitle"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:text="@string/waitingForActivationCodeTex"
+    android:textSize="22sp"
+    android:layout_centerHorizontal="true"
+    android:layout_marginTop="20dp"/>
+
+    <TextView
+        android:id="@+id/txtActivationSubTitle"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/waitingForActivationCodeDescription"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="5dp"
+        android:layout_below="@+id/txtActivationTitle"
+        android:lineSpacingExtra="4dp"
+        android:padding="10dp"
+        android:gravity="center"
+        android:textColor="#aa757575"/>
+
+    <EditText
+        android:id="@+id/edtActivationCode"
+        android:layout_width="match_parent"
+        android:layout_height="40dp"
+        android:layout_marginLeft="30dp"
+        android:layout_marginTop="30dp"
+        android:layout_marginRight="30dp"
+        android:background="@drawable/round_edit_text_border"
+        android:layout_centerHorizontal="true"
+        android:inputType="number"
+        android:maxLength="11"
+        android:padding="5dp"
+        android:textSize="14sp"
+        android:layout_below="@+id/txtActivationSubTitle"
+        android:gravity="center"/>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:weightSum="2"
+        android:orientation="horizontal"
+        android:layout_below="@+id/edtActivationCode"
+        android:layout_marginLeft="30dp"
+        android:layout_marginTop="30dp"
+        android:layout_marginRight="30dp">
+
+        <Button
+            android:id="@+id/btnResendCode"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:background="@drawable/round_button_drawable"
+            android:gravity="center"
+            android:text="@string/sendAgainCaption"
+            android:textColor="#ffffff"
+            android:textSize="17sp"
+            android:layout_marginRight="5dp"
+            android:layout_marginEnd="5dp"/>
+
+        <Button
+            android:id="@+id/btnSubmitCode"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:background="@drawable/round_button_drawable"
+            android:gravity="center"
+            android:text="@string/submitCaption"
+            android:textColor="#ffffff"
+            android:textSize="17sp"
+            android:layout_marginLeft="5dp"
+            android:layout_marginStart="5dp"/>
+
+    </LinearLayout>
+
+</RelativeLayout>
