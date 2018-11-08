@@ -48,4 +48,7 @@
     <string name="logoutUser">خروج از حساب کاربری</string>
     <string name="signoutText">شما از حساب کاربریتان خارج شدید.</string>
     <string name="successRecoveryPasswordText">رمز عبور جدید از طریق پیامک برای شما ارسال میشود.</string>
+    <string name="ticketCreated">تیکت(پیام) شما با موفقیت ایجاد شد</string>
+    <string name="MessageSentText">پیام ارسال شد.</string>
+    <string name="MessageDidNotSendText">پیام ارسال نشد.</string>
 </resources>

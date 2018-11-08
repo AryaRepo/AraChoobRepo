@@ -1,7 +1,13 @@
 package aryasoft.company.arachoob.ApiConnection;
 
+import java.util.ArrayList;
+
 import aryasoft.company.arachoob.Models.ActivationAccount;
+import aryasoft.company.arachoob.Models.Message;
 import aryasoft.company.arachoob.Models.RecoveryPasswordModel;
+import aryasoft.company.arachoob.Models.Ticket;
+import aryasoft.company.arachoob.Models.TicketChatsModel;
+import aryasoft.company.arachoob.Models.TicketsModel;
 import aryasoft.company.arachoob.Models.UserInfoModel;
 import aryasoft.company.arachoob.Models.UserRegistration;
 import retrofit2.Call;
@@ -44,5 +50,25 @@ public interface AraApi {
     @Headers("User-Agent: <AraChoob>")
     @POST("api/AccountApi/Newpassword")
     Call<Boolean> changeUserPassword(@Query("mobileNumber") String mobileNumber, @Query("oldPassword") String oldPassword, @Query("newPassword") String newPassword);/*done*/
+
+    @Headers("User-Agent: <AraChoob>")
+    @POST("api/MessageApi/CreateNewTicket")
+    Call<Boolean> newTicket(@Body Ticket ticket);
+
+    @Headers("User-Agent: <AraChoob>")
+    @GET("api/MessageApi/GetTickets")
+    Call<ArrayList<TicketsModel>> getAllTickets(@Query("userId")int userId, @Query("offsetNumber")int offsetNumber , @Query("takeNumber")int takeNumber);
+
+    @Headers("User-Agent: <AraChoob>")
+    @POST("api/MessageApi/CloseTicket")
+    Call<Boolean> closeTicket(@Query("messageId")int messageId);
+
+    @Headers("User-Agent: <AraChoob>")
+    @GET("api/MessageApi/GetTicketChats")
+    Call<ArrayList<TicketChatsModel>> showChats(@Query("messageId")int messageId, @Query("offsetNumber")int offsetNumber, @Query("takeNumber")int takeNumber);
+
+    @Headers("User-Agent: <AraChoob>")
+    @POST("api/MessageApi/SendChatToTicket")
+    Call<Boolean> sendMessage(@Body Message message);
 
 }

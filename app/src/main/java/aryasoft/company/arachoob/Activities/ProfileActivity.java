@@ -127,7 +127,7 @@ public class ProfileActivity extends AppCompatActivity implements View.OnClickLi
 
     private void getUserInfo()
     {
-        Loading.show();
+        Loading.setContentText(getString(R.string.waitingText)).show();
         AraApi araApi = ApiServiceGenerator.getApiService();
         int userId = UserPreference.getUserId();
         Call<UserInfoModel> userInfoCall = araApi.getUserInfo(userId);

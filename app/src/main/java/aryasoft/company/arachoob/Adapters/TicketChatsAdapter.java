@@ -12,6 +12,7 @@ import android.widget.TextView;
 import java.util.ArrayList;
 
 import aryasoft.company.arachoob.Models.ChatModel;
+import aryasoft.company.arachoob.Models.TicketChatsModel;
 import aryasoft.company.arachoob.R;
 
 
@@ -19,7 +20,7 @@ public class TicketChatsAdapter extends RecyclerView.Adapter<TicketChatsAdapter.
 {
     private int UserId = -1;
     private Context context;
-    private ArrayList<ChatModel> ticketChatList;
+    private ArrayList<TicketChatsModel> ticketChatList;
 
     public TicketChatsAdapter(Context context)
     {
@@ -41,7 +42,7 @@ public class TicketChatsAdapter extends RecyclerView.Adapter<TicketChatsAdapter.
         if(ticketChatList.size()==0)
             return;
         //incoming message
-        if (ticketChatList.get(position).UserIDSender != UserId)
+        if (ticketChatList.get(position).UserIdSender != UserId)
         {
             holder.txtMessageText.setBackgroundResource(R.drawable.incoming_bubble);
             RelativeLayout.LayoutParams layoutParams = new RelativeLayout.LayoutParams(android.widget.RelativeLayout.LayoutParams.WRAP_CONTENT, android.widget.RelativeLayout.LayoutParams.WRAP_CONTENT);
@@ -52,7 +53,7 @@ public class TicketChatsAdapter extends RecyclerView.Adapter<TicketChatsAdapter.
             holder.txtMessageDate.setText( ticketChatList.get(position).SendDate);
         }
         //outgoing message
-        else if (ticketChatList.get(position).UserIDSender == UserId)
+        else if (ticketChatList.get(position).UserIdSender == UserId)
         {
             holder.txtMessageText.setBackgroundResource(R.drawable.outgoing_bubble);
             //change view gravity
@@ -71,10 +72,10 @@ public class TicketChatsAdapter extends RecyclerView.Adapter<TicketChatsAdapter.
     public int getItemCount()
     {
         //return  ticketChatList.size();
-        return 10;
+        return ticketChatList.size();
     }
 
-    public void addToTicketChatList(ArrayList<ChatModel> ticketChatList)
+    public void addToTicketChatList(ArrayList<TicketChatsModel> ticketChatList)
     {
         this.ticketChatList.addAll(ticketChatList);
         this.notifyDataSetChanged();

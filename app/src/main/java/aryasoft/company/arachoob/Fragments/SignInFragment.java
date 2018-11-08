@@ -130,7 +130,7 @@ public class SignInFragment extends Fragment implements UserLoginImpl.OnLoginLis
 
     private void signIn()
     {
-        Loading.show();
+        Loading.setContentText(getString(R.string.waitingText)).show();
         String mobileNumber = edtUsernameSignIn.getText().toString();
         String password = edtPasswordSignIn.getText().toString();
         AraApi araApi = ApiServiceGenerator.getApiService();
