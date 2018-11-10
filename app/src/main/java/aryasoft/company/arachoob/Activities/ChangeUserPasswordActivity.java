@@ -105,6 +105,10 @@ public class ChangeUserPasswordActivity extends AppCompatActivity implements Cha
         {
             MessageDialog.setContentText(getString(R.string.incorrectPasswordText)).show();
         }
+        else if ( EdtNewPassWord.getText().toString().length() < 6)
+        {
+            MessageDialog.setContentText(getString(R.string.passwordValidLengthText)).show();
+        }
         else
         {
             Loading.show();

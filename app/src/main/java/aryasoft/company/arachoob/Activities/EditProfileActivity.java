@@ -1,6 +1,7 @@
 package aryasoft.company.arachoob.Activities;
 
 import android.content.Context;
+import android.content.Intent;
 import android.graphics.Color;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
@@ -46,8 +47,6 @@ public class EditProfileActivity extends AppCompatActivity implements View.OnCli
     private EditText EdtUserEmail;
     private EditText EdtPhoneEdit;
     private EditText EdtAddressEdit;
-    private Button BtnSaveChanges;
-    private Button BtnChooseBirthday;
     private AppCompatSpinner SpStatesList;
     private AppCompatSpinner SpCitiesList;
     private String BirthDay = "";
@@ -82,6 +81,8 @@ public class EditProfileActivity extends AppCompatActivity implements View.OnCli
         {
             if (response.body())
             {
+                String userFullName = EdtUserNameEdit.getText() + " " + EdtUserLastNameEdit.getText();
+                UserPreference.setUserFullName(userFullName);
                 new CuteToast.Builder(this).setText(getString(R.string.successProfileUpdateText)).setDuration(Toast.LENGTH_LONG).show();
                 finish();
             }
@@ -108,7 +109,7 @@ public class EditProfileActivity extends AppCompatActivity implements View.OnCli
         EdtUserNameEdit.setText(userInfo.FirstName);
         EdtUserLastNameEdit.setText(userInfo.LastName);
         EdtPhoneEdit.setText(userInfo.PhoneNumber);
-        EdtUserEmail.setText(userInfo.UserEmail);
+        EdtUserEmail.setText(userInfo.Mail);
         TxtBirthday.setText(userInfo.BirthDate);
         EdtAddressEdit.setText(userInfo.UserAddress);
     }
@@ -116,18 +117,18 @@ public class EditProfileActivity extends AppCompatActivity implements View.OnCli
     private void initViews() {
         ImgEditProfile = findViewById(R.id.img_edit_profile);
         EdtUserEmail = findViewById(R.id.edt_user_email);
-        BtnChooseBirthday = findViewById(R.id.btn_choose_birthday);
+        Button btnChooseBirthday = findViewById(R.id.btn_choose_birthday);
         EdtUserNameEdit = findViewById(R.id.edt_user_name_edit);
         TxtBirthday = findViewById(R.id.txt_birthday);
         EdtUserLastNameEdit = findViewById(R.id.edt_user_last_name_edit);
         EdtPhoneEdit = findViewById(R.id.edt_phone_edit);
         EdtAddressEdit = findViewById(R.id.edt_address_edit);
-        BtnSaveChanges = findViewById(R.id.btn_save_changes);
+        Button btnSaveChanges = findViewById(R.id.btn_save_changes);
         SpStatesList = findViewById(R.id.sp_state_lists);
         SpCitiesList = findViewById(R.id.sp_city_lists);
         ImgEditProfile.requestFocus();
-        BtnChooseBirthday.setOnClickListener(this);
-        BtnSaveChanges.setOnClickListener(this);
+        btnChooseBirthday.setOnClickListener(this);
+        btnSaveChanges.setOnClickListener(this);
         Glide.with(this).load(R.drawable.ic_man).into(ImgEditProfile);
 
         Loading = new SweetDialog.Builder()
@@ -184,17 +185,31 @@ public class EditProfileActivity extends AppCompatActivity implements View.OnCli
     private UserInfoModel getUpdatedUserInfoModel()
     {
         UserInfoModel updatedUserInfo = new UserInfoModel();
-        updatedUserInfo.FirstName = EdtUserNameEdit.getText().toString();
-        updatedUserInfo.LastName = EdtUserLastNameEdit.getText().toString();
-        updatedUserInfo.PhoneNumber = EdtPhoneEdit.getText().toString();
-        updatedUserInfo.UserEmail = EdtUserEmail.getText().toString();
-        updatedUserInfo.BirthDate = TxtBirthday.getText().toString();
-        updatedUserInfo.MobileNumber = UserPreference.getUserMobileNumber();
-        updatedUserInfo.UserAddress = EdtAddressEdit.getText().toString();
-        updatedUserInfo.StateCode = 27;
-        updatedUserInfo.CityCode = 377;
+
+        if (EdtUserNameEdit.getText().toString().isEmpty() ||
+                EdtUserLastNameEdit.getText().toString().isEmpty() ||
+                EdtPhoneEdit.getText().toString().isEmpty() ||
+        EdtUserEmail.getText().toString().isEmpty() ||
+                TxtBirthday.getText().toString().isEmpty() ||
+                EdtAddressEdit.getText().toString().isEmpty())
+        {
+            MessageDialog.setContentText("لطفا تمام مشخصات خود را وارد نمایید.").show();
+        }
+        else
+        {
+            updatedUserInfo.FirstName = EdtUserNameEdit.getText().toString();
+            updatedUserInfo.LastName = EdtUserLastNameEdit.getText().toString();
+            updatedUserInfo.PhoneNumber = EdtPhoneEdit.getText().toString();
+            updatedUserInfo.Mail = EdtUserEmail.getText().toString();
+            updatedUserInfo.BirthDate = TxtBirthday.getText().toString();
+            updatedUserInfo.MobileNumber = UserPreference.getUserMobileNumber();
+            updatedUserInfo.UserAddress = EdtAddressEdit.getText().toString();
+            updatedUserInfo.StateCode = 27;
+            updatedUserInfo.CityCode = 377;
+        }
 
         return updatedUserInfo;
     }
+
 
 }

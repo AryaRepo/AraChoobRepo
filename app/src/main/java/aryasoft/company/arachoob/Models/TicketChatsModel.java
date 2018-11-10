@@ -4,7 +4,7 @@ public class TicketChatsModel {
 
     public int MessageResponseId ;
     public String MessageText;
-    public String SendDate ;
+    public String SentDate;
     public int UserIdSender ;
     public int MessageId ;
 }

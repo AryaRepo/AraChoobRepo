@@ -62,18 +62,26 @@ public class SignUpFragment extends Fragment implements UserRegistrationImpl.OnR
         int ALREADY_REGISTERED_AND_ACTIVE = 0;
         int ALREADY_REGISTERED_AND_NOT_ACTIVE = 1;
         int PROBLEM_HAPPENED = -1;
-        Integer status = response.body();
-        if (status == ALREADY_REGISTERED_AND_NOT_ACTIVE) {
-            MessageDialog.setContentText(getString(R.string.alreadyRegisteredAndNotActiveText)).show();
-        } else if (status == ALREADY_REGISTERED_AND_ACTIVE) {
-            MessageDialog.setContentText(getString(R.string.alreadyRegisteredAndActiveText)).show();
-        } else if (status == PROBLEM_HAPPENED) {
+        try
+        {
+            Integer status = response.body();
+            if (status == ALREADY_REGISTERED_AND_NOT_ACTIVE) {
+                MessageDialog.setContentText(getString(R.string.alreadyRegisteredAndNotActiveText)).show();
+                showUserActivationFragment(status);
+            } else if (status == ALREADY_REGISTERED_AND_ACTIVE) {
+                MessageDialog.setContentText(getString(R.string.alreadyRegisteredAndActiveText)).show();
+            } else if (status == PROBLEM_HAPPENED) {
+                MessageDialog.setContentText(getString(R.string.someProblemHappend)).show();
+            } else if (status > 1) {
+                MessageDialog.setContentText(getString(R.string.successfullyRegistered)).show();
+                saveUserInfo();
+                Toast.makeText(getContext(), status+"", Toast.LENGTH_LONG).show();
+                showUserActivationFragment(status);
+            }
+        }
+        catch (Exception ex)
+        {
             MessageDialog.setContentText(getString(R.string.someProblemHappend)).show();
-        } else if (status > 1) {
-            MessageDialog.setContentText(getString(R.string.successfullyRegistered)).show();
-            saveUserInfo();
-            Toast.makeText(getContext(), status+"", Toast.LENGTH_LONG).show();
-            showUserActivationFragment(status.toString());
         }
     }
 
@@ -125,13 +133,13 @@ public class SignUpFragment extends Fragment implements UserRegistrationImpl.OnR
         fragmentTransaction.commit();
     }
 
-    private void showUserActivationFragment(String activationCode) {
+    private void showUserActivationFragment(int status) {
         FragmentManager fragmentManager = getFragmentManager();
         FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
         UserActivationAccountFragment userActivationAccountFragment = new UserActivationAccountFragment();
         Bundle bundle = new Bundle();
         bundle.putString("mobileNumber", edtUsernameSignUp.getText().toString());
-        bundle.putString("activationCode", activationCode);
+        bundle.putInt("status", status);
         userActivationAccountFragment.setArguments(bundle);
         fragmentTransaction.setCustomAnimations(R.anim.slide_from_up, R.anim.slide_from_down).replace(R.id.registrationPlaceHolder, userActivationAccountFragment);
         fragmentTransaction.commit();
@@ -155,7 +163,6 @@ public class SignUpFragment extends Fragment implements UserRegistrationImpl.OnR
             errorMessage += getString(R.string.enterMobileNumber) + "\n";
          else if (mobileNumber.length() > 11 || mobileNumber.length() < 11)
             errorMessage += getString(R.string.mobileNumberLengthText) + "\n";
-
 
         String emailAddress = edtUserEmailSignUp.getText().toString();
         if (!emailAddress.isEmpty())

@@ -81,10 +81,7 @@ public class LandActivity extends AppCompatActivity implements View.OnClickListe
 
     private void showSignInOrUp() {
         if (UserPreference.isUserLogin()) {
-            UserPreference.isUserLogin(false);
-            UserPreference.setUserFullName("مهمان");
-            checkUserLoginStatus();
-            new CuteToast.Builder(this).setText(getString(R.string.signoutText)).setDuration(Toast.LENGTH_LONG).show();
+            signOut();
         } else {
             Intent signInOrUPIntent = new Intent(LandActivity.this, SignUpSignInActivity.class);
             startActivity(signInOrUPIntent);
@@ -92,8 +89,8 @@ public class LandActivity extends AppCompatActivity implements View.OnClickListe
     }
 
     private void showOrdersHistory() {
-        Intent signInOrUPIntent = new Intent(LandActivity.this, OrderHistoryActivity.class);
-        startActivity(signInOrUPIntent);
+        Intent ordersHistoryIntent = new Intent(LandActivity.this, OrderHistoryActivity.class);
+        startActivity(ordersHistoryIntent);
     }
 
     private void showTickets() {
@@ -104,6 +101,7 @@ public class LandActivity extends AppCompatActivity implements View.OnClickListe
     private void showOrders() {
         Intent orderBasketIntent = new Intent(LandActivity.this, OrderBasketActivity.class);
         startActivity(orderBasketIntent);
+        finish();
     }
 
     @Override
@@ -113,6 +111,12 @@ public class LandActivity extends AppCompatActivity implements View.OnClickListe
         setupToolbar();
         initializeViews();
         setupMainBottomBar();
+        checkUserLoginStatus();
+    }
+
+    @Override
+    protected void onResume() {
+        super.onResume();
         checkUserLoginStatus();
     }
 
@@ -197,12 +201,30 @@ public class LandActivity extends AppCompatActivity implements View.OnClickListe
 
     private void checkUserLoginStatus() {
         String fullName = UserPreference.getUserFullName() + " ";
-        TxtWellcomeUser.setText(String.format("کاربر %s%s", fullName, getString(R.string.welcomeUserText)));
+        TxtWellcomeUser.setText(String.format(" %s%s", fullName, getString(R.string.welcomeUserText)));
 
         if (UserPreference.isUserLogin())
+        {
             TxtSignInOut.setText(getString(R.string.logoutUser));
+            RowManageProfile.setVisibility(View.VISIBLE);
+            RowOrders.setVisibility(View.VISIBLE);
+            RowMessages.setVisibility(View.VISIBLE);
+        }
         else if (!UserPreference.isUserLogin())
+        {
             TxtSignInOut.setText(getString(R.string.nav_loginRegister));
+            RowManageProfile.setVisibility(View.GONE);
+            RowOrders.setVisibility(View.GONE);
+            RowMessages.setVisibility(View.GONE);
+        }
+    }
+
+    private void signOut()
+    {
+        UserPreference.isUserLogin(false);
+        UserPreference.setUserFullName("کاربر مهمان");
+        checkUserLoginStatus();
+        new CuteToast.Builder(this).setText(getString(R.string.signoutText)).setDuration(Toast.LENGTH_LONG).show();
     }
 
 }

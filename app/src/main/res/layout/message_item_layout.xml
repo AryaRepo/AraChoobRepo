@@ -8,7 +8,7 @@
         android:id="@+id/rel_message_container"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginTop="15dp"
+        android:layout_marginTop="5dp"
         android:layout_marginBottom="5dp"
         android:layout_marginLeft="15dp"
         android:layout_marginRight="15dp">
@@ -19,7 +19,7 @@
             android:layout_height="wrap_content"
             android:textSize="13sp"
             android:textColor="#212121"
-            android:paddingTop="15dp"
+            android:paddingTop="10dp"
             android:paddingRight="30dp"
             android:lineSpacingExtra="5dp"
             android:paddingBottom="10dp"
@@ -30,18 +30,20 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_below="@+id/txtMessageText"
-            android:paddingLeft="25dp"
-            android:paddingRight="25dp">
+            android:layout_alignStart="@+id/txtMessageText"
+            android:layout_alignLeft="@+id/txtMessageText"
+            android:layout_alignEnd="@+id/txtMessageText"
+            android:layout_alignRight="@+id/txtMessageText">
 
             <TextView
                 android:id="@+id/txtMessageDate"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:textSize="13dp"
-                android:textColor="@color/colorPrimaryDark"
-                android:paddingTop="10dp"
-                android:paddingBottom="10dp"
-                android:layout_alignParentLeft="true"/>
+                android:textSize="10sp"
+                android:textColor="#77757575"
+                android:padding="5dp"
+                android:layout_alignParentLeft="true"
+                android:layout_alignParentStart="true"/>
 
 
         </RelativeLayout>

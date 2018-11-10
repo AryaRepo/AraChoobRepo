@@ -17,7 +17,9 @@ import android.widget.Toast;
 import aryasoft.company.arachoob.Activities.LandActivity;
 import aryasoft.company.arachoob.ApiConnection.ApiServiceGenerator;
 import aryasoft.company.arachoob.ApiConnection.AraApi;
+import aryasoft.company.arachoob.Implementations.UserInfoImpl;
 import aryasoft.company.arachoob.Implementations.UserLoginImpl;
+import aryasoft.company.arachoob.Models.UserInfoModel;
 import aryasoft.company.arachoob.R;
 import aryasoft.company.arachoob.Utils.CuteToast;
 import aryasoft.company.arachoob.Utils.Networking;
@@ -28,7 +30,7 @@ import retrofit2.Call;
 import retrofit2.Response;
 
 public class SignInFragment extends Fragment implements UserLoginImpl.OnLoginListener,
-        View.OnClickListener, Networking.NetworkStatusListener
+        View.OnClickListener, Networking.NetworkStatusListener, UserInfoImpl.OnUserInfoReceivedListener
 {
     private Context fragmentContext;
     private EditText edtUsernameSignIn;
@@ -62,26 +64,39 @@ public class SignInFragment extends Fragment implements UserLoginImpl.OnLoginLis
 
     @Override
     public void onLoginStatusReceived(Response<Integer> response) {
-        Loading.hide();
         Integer status = response.body();
         int NOT_REGISTERED = -2;
         int REGISTERED_AND_NOT_ACTIVE = -1;
         int REGISTERED_AND_ACTIVE = 0;
         if (status == REGISTERED_AND_NOT_ACTIVE)
         {
+            Loading.hide();
             MessageDialog.setContentText(getString(R.string.alreadyRegisteredAndNotActiveText)).show();
+            showUserActivationFragment(status);
         }
         else if (status == NOT_REGISTERED)
         {
+            Loading.hide();
             MessageDialog.setContentText(getString(R.string.notRegisteredYetText)).show();
         }
         else if (status > REGISTERED_AND_ACTIVE) //this means that the user is registered and is active and the result will be the user identity code.
         {
             UserPreference.setUserId(status);
             UserPreference.isUserLogin(true);
-            UserPreference.setUserFullName("عزیز");
-            startActivity(new Intent(getActivity(), LandActivity.class));
+            getUserInfo();
         }
+    }
+
+    @Override
+    public void onUserInfoReceived(Response<UserInfoModel> response) {
+        Loading.hide();
+        assert response.body() != null;
+        String fullName = response.body().FirstName + " " + response.body().LastName;
+        if (fullName.isEmpty())
+            UserPreference.setUserFullName("کاربر عزیز");
+        else
+            UserPreference.setUserFullName(fullName);
+        getActivity().finish();
     }
 
     @Override
@@ -130,12 +145,20 @@ public class SignInFragment extends Fragment implements UserLoginImpl.OnLoginLis
 
     private void signIn()
     {
-        Loading.setContentText(getString(R.string.waitingText)).show();
+        Loading.show();
         String mobileNumber = edtUsernameSignIn.getText().toString();
         String password = edtPasswordSignIn.getText().toString();
         AraApi araApi = ApiServiceGenerator.getApiService();
         Call<Integer> loginCall = araApi.loginUser(mobileNumber, password);
         loginCall.enqueue(new UserLoginImpl(this));
+    }
+
+    private void getUserInfo()
+    {
+        AraApi araApi = ApiServiceGenerator.getApiService();
+        int userId = UserPreference.getUserId();
+        Call<UserInfoModel> userInfoCall = araApi.getUserInfo(userId);
+        userInfoCall.enqueue(new UserInfoImpl(this));
     }
 
     private void showSignUpFragment()
@@ -151,6 +174,17 @@ public class SignInFragment extends Fragment implements UserLoginImpl.OnLoginLis
         FragmentManager fragmentManager = getFragmentManager();
         FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
         fragmentTransaction.setCustomAnimations(R.anim.slide_from_up , R.anim.slide_from_down).replace(R.id.registrationPlaceHolder, new RecoveryPasswordFragment());
+        fragmentTransaction.commit();
+    }
+
+    private void showUserActivationFragment(int status) {
+        FragmentManager fragmentManager = getFragmentManager();
+        FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
+        UserActivationAccountFragment userActivationAccountFragment = new UserActivationAccountFragment();
+        Bundle bundle = new Bundle();
+        bundle.putInt("status", status);
+        userActivationAccountFragment.setArguments(bundle);
+        fragmentTransaction.setCustomAnimations(R.anim.slide_from_up, R.anim.slide_from_down).replace(R.id.registrationPlaceHolder, userActivationAccountFragment);
         fragmentTransaction.commit();
     }
 

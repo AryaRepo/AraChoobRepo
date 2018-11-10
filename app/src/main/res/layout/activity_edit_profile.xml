@@ -130,7 +130,8 @@
                 android:hint="ایمیل خود را وارد کنید"
                 android:textColor="@color/secondaryTextColor"
                 android:textColorHint="@color/secondaryTextColor"
-                android:textSize="@dimen/Edit_text_text_size"/>
+                android:textSize="@dimen/Edit_text_text_size"
+                android:inputType="textEmailAddress"/>
             <EditText
                 android:id="@+id/edt_phone_edit"
                 android:layout_width="match_parent"

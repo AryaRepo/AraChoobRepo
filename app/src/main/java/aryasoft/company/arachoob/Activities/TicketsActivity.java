@@ -2,6 +2,7 @@ package aryasoft.company.arachoob.Activities;
 
 import android.app.Dialog;
 import android.content.Context;
+import android.support.annotation.NonNull;
 import android.support.design.widget.FloatingActionButton;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
@@ -46,7 +47,9 @@ public class TicketsActivity extends AppCompatActivity implements NewTicketImpl.
     private EditText edtTicketTitle;
     private EditText edtTicketText;
     private int SkipNumber = 0;
-    private int TakeNumber = 10;
+    private int TakeNumber = 20;
+    private boolean IsLoading = false;
+    private boolean DataEnded = false;
 
     @Override
     protected void attachBaseContext(Context newBase)
@@ -84,7 +87,13 @@ public class TicketsActivity extends AppCompatActivity implements NewTicketImpl.
     @Override
     public void onAllTicketReceived(Response<ArrayList<TicketsModel>> response) {
         Loading.hide();
-        updateTicketsList(response.body());
+        if (response.body() != null)
+        {
+            if (response.body().size() > 0)
+            {
+                updateTicketsList(response.body());
+            }
+        }
     }
 
     @Override
@@ -111,10 +120,7 @@ public class TicketsActivity extends AppCompatActivity implements NewTicketImpl.
         recyclerTickets=findViewById(R.id.recyclerTickets);
         fabAddNewTicket=findViewById(R.id.fabAddNewTicket);
         emptyMessagesBox=findViewById(R.id.emptyMessagesBox);
-        recyclerTicketsAdapter=new TicketsAdapter(this, this);
-        recyclerTicketsLayoutManager=new LinearLayoutManager(this,LinearLayoutManager.VERTICAL,false);
-        recyclerTickets.setLayoutManager(recyclerTicketsLayoutManager);
-        recyclerTickets.setAdapter(recyclerTicketsAdapter);
+        setupRecyclerTickets();
 
         Loading = new SweetDialog.Builder()
                 .setDialogType(SweetAlertDialog.PROGRESS_TYPE)
@@ -137,6 +143,37 @@ public class TicketsActivity extends AppCompatActivity implements NewTicketImpl.
             }
         });
     }
+
+    private void setupRecyclerTickets()
+    {
+        recyclerTicketsAdapter=new TicketsAdapter(this, this);
+        recyclerTicketsLayoutManager = new LinearLayoutManager(this,LinearLayoutManager.VERTICAL,false);
+        recyclerTickets.setLayoutManager(recyclerTicketsLayoutManager);
+        recyclerTickets.setAdapter(recyclerTicketsAdapter);
+
+        recyclerTickets.addOnScrollListener(new RecyclerView.OnScrollListener() {
+            @Override
+            public void onScrolled(@NonNull RecyclerView recyclerView, int dx, int dy) {
+                if (recyclerTicketsAdapter.getItemCount() >= TakeNumber) {
+                    if (!DataEnded) {
+                        int VisibleItemCount = recyclerTicketsLayoutManager.getChildCount();
+                        int TotalItemCount = recyclerTicketsLayoutManager.getItemCount();
+                        int PastVisibleItem = recyclerTicketsLayoutManager.findFirstVisibleItemPosition();
+                        if (IsLoading) {
+                            return;
+                        }
+                        if ((VisibleItemCount + PastVisibleItem) >= TotalItemCount) {
+                            SkipNumber += TakeNumber;
+                            IsLoading = true;
+                            getAllTickets();
+                        }
+                    }
+                }
+                super.onScrolled(recyclerView, dx, dy);
+            }
+        });
+    }
+
     private void createNewTicketMessageDialog()
     {
         android.support.v7.app.AlertDialog.Builder MessageDialogAlert = new android.support.v7.app.AlertDialog.Builder(TicketsActivity.this);

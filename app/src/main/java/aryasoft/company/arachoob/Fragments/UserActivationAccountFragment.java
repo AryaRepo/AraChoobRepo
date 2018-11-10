@@ -1,7 +1,7 @@
 package aryasoft.company.arachoob.Fragments;
 
-import android.content.Intent;
 import android.os.Bundle;
+import android.os.Handler;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
@@ -10,15 +10,17 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.TextView;
 import android.widget.Toast;
 
-import aryasoft.company.arachoob.Activities.LandActivity;
+import java.util.Timer;
+import java.util.TimerTask;
+
 import aryasoft.company.arachoob.ApiConnection.ApiServiceGenerator;
 import aryasoft.company.arachoob.ApiConnection.AraApi;
 import aryasoft.company.arachoob.Implementations.ReSendActivationCodeImpl;
 import aryasoft.company.arachoob.Implementations.UserActivationImpl;
 import aryasoft.company.arachoob.Implementations.UserLoginImpl;
-import aryasoft.company.arachoob.Implementations.UserRegistrationImpl;
 import aryasoft.company.arachoob.Models.ActivationAccount;
 import aryasoft.company.arachoob.R;
 import aryasoft.company.arachoob.Utils.CuteToast;
@@ -36,8 +38,13 @@ public class UserActivationAccountFragment extends Fragment
 
     private EditText EdtActivationCode;
     private String ActivationCode;
+    private Button BtnSubmitCode;
+    private Button BtnReSendCode;
+    private TextView TxtTimeReminder;
     private SweetDialog Loading;
     private SweetDialog MessageDialog;
+    private int Seconds = 0;
+    private Timer SchedulerTask;
 
     @Nullable
     @Override
@@ -48,7 +55,7 @@ public class UserActivationAccountFragment extends Fragment
     @Override
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
-        initializeView(view);
+        initializeViews(view);
     }
 
     @Override
@@ -71,7 +78,10 @@ public class UserActivationAccountFragment extends Fragment
     public void onReSentCode(Response<Integer> response) {
         Loading.hide();
         if (response.body() != null)
-        ActivationCode = response.body().toString();
+        {
+            ActivationCode = response.body().toString();
+            Toast.makeText(getContext(), ActivationCode + "", Toast.LENGTH_LONG).show();
+        }
     }
 
     @Override
@@ -95,8 +105,8 @@ public class UserActivationAccountFragment extends Fragment
             {
                 UserPreference.setUserId(status);
                 UserPreference.isUserLogin(true);
-                UserPreference.setUserFullName("عزیز");
-                startActivity(new Intent(getActivity(), LandActivity.class));
+                UserPreference.setUserFullName("کاربر عزیز");
+                getActivity().finish();
             }
         }
     }
@@ -114,7 +124,12 @@ public class UserActivationAccountFragment extends Fragment
         if (requestCode == 1)
             activeAccount(getActivationAccountModel());
         else if (requestCode == 2)
-            resendActivationCode();
+        {
+                    Seconds = 10;
+                    startCounting();
+                    resendActivationCode();
+        }
+
     }
 
     @Override
@@ -122,16 +137,19 @@ public class UserActivationAccountFragment extends Fragment
         MessageDialog.setContentText(getString(R.string.noInternetText)).show();
     }
 
-    private void initializeView(View view)
+    private void initializeViews(View view)
     {
-        Button btnSubmitCode = view.findViewById(R.id.btnSubmitCode);
-        Button btnReSendCode = view.findViewById(R.id.btnResendCode);
-        btnSubmitCode.setOnClickListener(this);
-        btnReSendCode.setOnClickListener(this);
+        BtnSubmitCode = view.findViewById(R.id.btnSubmitCode);
+        BtnReSendCode = view.findViewById(R.id.btnResendCode);
+        BtnSubmitCode.setOnClickListener(this);
+        BtnReSendCode.setOnClickListener(this);
         EdtActivationCode = view.findViewById(R.id.edtActivationCode);
-        Bundle bundle = getArguments();
-        assert bundle != null;
-        ActivationCode = bundle.getString("activationCode");
+        TxtTimeReminder = view.findViewById(R.id.txtTimeReminder);
+        setupDialogs();
+        checkRegistrationStatus();
+    }
+
+    private void setupDialogs() {
         Loading = new SweetDialog.Builder()
                 .setDialogType(SweetAlertDialog.PROGRESS_TYPE)
                 .setTitleText(getString(R.string.waitingText))
@@ -142,11 +160,27 @@ public class UserActivationAccountFragment extends Fragment
                 .build(getContext());
     }
 
+    private void checkRegistrationStatus() {
+        Bundle bundle = getArguments();
+        assert bundle != null;
+        int status = bundle.getInt("status");
+        if (status == 1 || status == -1)
+        {
+            resendActivationCode();
+        }
+        else if (status > 1)
+        {
+            ActivationCode = status + "";
+        }
+                Seconds = 10;
+                startCounting();
+    }
+
     private void activeAccount(ActivationAccount account)
     {
         if (account.getActiveCode().equals(EdtActivationCode.getText().toString()))
         {
-            Loading.setContentText(getString(R.string.waitingText)).show();
+            Loading.show();
             AraApi araApi = ApiServiceGenerator.getApiService();
             Call<Boolean> userActivationCall = araApi.activeUserAccount(getActivationAccountModel());
             userActivationCall.enqueue(new UserActivationImpl(this));
@@ -168,7 +202,7 @@ public class UserActivationAccountFragment extends Fragment
 
     private void resendActivationCode()
     {
-        Loading.setContentText(getString(R.string.waitingText)).show();
+        Loading.show();
         AraApi araApi = ApiServiceGenerator.getApiService();
         String mobileNumber = UserPreference.getUserMobileNumber();
         Call<Integer> resendCall = araApi.reSendActivationCode(mobileNumber);
@@ -183,6 +217,46 @@ public class UserActivationAccountFragment extends Fragment
         AraApi araApi = ApiServiceGenerator.getApiService();
         Call<Integer> loginCall = araApi.loginUser(mobileNumber, password);
         loginCall.enqueue(new UserLoginImpl(this));
+    }
+
+    private void startCounting()
+    {
+        BtnReSendCode.setEnabled(false);
+        TxtTimeReminder.setVisibility(View.VISIBLE);
+        if (SchedulerTask != null)
+        {
+            SchedulerTask.cancel();
+            SchedulerTask = null;
+        }
+        SchedulerTask = new Timer();
+        SchedulerTask.schedule(new TimerTask() {
+            @Override
+            public void run() {
+
+                if (Seconds > 0) {
+                    final int minuets = Seconds / 60;
+                    final int seconds = Seconds % 60;
+                    Seconds =  Seconds - 1;
+
+                    getActivity().runOnUiThread(new Runnable() {
+                        @Override
+                        public void run() {
+                            TxtTimeReminder.setText("شما میتوانید تا " + minuets + " دقیقه و " + seconds + " ثانیه دیگر، درخواست برای دریافت کد فعال سازی مجدد کنید.");
+                        }
+                    });
+                }
+                else {
+                    getActivity().runOnUiThread(new Runnable() {
+                        @Override
+                        public void run() {
+                            BtnReSendCode.setEnabled(true);
+                            TxtTimeReminder.setVisibility(View.INVISIBLE);
+                        }
+                    });
+                }
+            }
+        }, 0, 1000);
+
     }
 
 

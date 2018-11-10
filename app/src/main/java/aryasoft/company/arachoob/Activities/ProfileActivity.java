@@ -31,8 +31,6 @@ import static com.bumptech.glide.request.RequestOptions.bitmapTransform;
 public class ProfileActivity extends AppCompatActivity implements View.OnClickListener,
         UserInfoImpl.OnUserInfoReceivedListener, Networking.NetworkStatusListener {
 
-    private CircleImageView profilePhoto;
-    private ImageView ImgProfileBG;
     private TextView txtUserProfileName;
     private TextView txtUserProfileTxtEmail;
     private TextView txtUserProfileAddress;
@@ -71,13 +69,19 @@ public class ProfileActivity extends AppCompatActivity implements View.OnClickLi
     }
 
     @Override
+    protected void onResume() {
+        super.onResume();
+        getUserInfo();
+    }
+
+    @Override
     public void onUserInfoReceived(Response<UserInfoModel> response) {
         Loading.hide();
         if (response.body() != null)
         {
             UserInfo = response.body();
             txtUserProfileName.setText(String.format("%s %s", UserInfo.FirstName, UserInfo.LastName));
-            txtUserProfileTxtEmail.setText(UserInfo.UserEmail);
+            txtUserProfileTxtEmail.setText(UserInfo.Mail);
             txtUserProfileAddress.setText(UserInfo.UserAddress);
         }
     }
@@ -96,8 +100,8 @@ public class ProfileActivity extends AppCompatActivity implements View.OnClickLi
     {
         LinearLayout btnEditProfile = findViewById(R.id.btn_edit_profile);
         LinearLayout btnEditPassword = findViewById(R.id.btn_edit_password);
-        profilePhoto = findViewById(R.id.profile_person_image);
-        ImgProfileBG = findViewById(R.id.img_bg_pro);
+        CircleImageView profilePhoto = findViewById(R.id.profile_person_image);
+        ImageView imgProfileBG = findViewById(R.id.img_bg_pro);
         txtUserProfileName = findViewById(R.id.user_profile_name);
         txtUserProfileTxtEmail = findViewById(R.id.txt_UserProfile_txtEmail);
         txtUserProfileAddress = findViewById(R.id.txt_UserProfile_address);
@@ -105,7 +109,7 @@ public class ProfileActivity extends AppCompatActivity implements View.OnClickLi
         btnEditPassword.setOnClickListener(this);
         Glide.with(this).load(R.drawable.ic_man).into(profilePhoto);
         Glide.with(this).load(R.drawable.pic1)
-                .apply(bitmapTransform(new BlurTransformation(15, 3))).into(ImgProfileBG);
+                .apply(bitmapTransform(new BlurTransformation(15, 3))).into(imgProfileBG);
 
         Loading = new SweetDialog.Builder()
                 .setDialogType(SweetAlertDialog.PROGRESS_TYPE)

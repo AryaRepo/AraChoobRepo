@@ -7,7 +7,7 @@ public class UserInfoModel implements Serializable {
     public String FirstName;
     public String LastName;
     public String PhoneNumber;
-    public String UserEmail;
+    public String Mail;
     public String BirthDate;
     public String MobileNumber;
     public String UserAddress;

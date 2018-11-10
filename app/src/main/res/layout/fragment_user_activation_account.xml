@@ -42,6 +42,7 @@
         android:gravity="center"/>
 
     <LinearLayout
+        android:id="@+id/lineButtons"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:weightSum="2"
@@ -62,7 +63,8 @@
             android:textColor="#ffffff"
             android:textSize="17sp"
             android:layout_marginRight="5dp"
-            android:layout_marginEnd="5dp"/>
+            android:layout_marginEnd="5dp"
+            android:enabled="false"/>
 
         <Button
             android:id="@+id/btnSubmitCode"
@@ -78,5 +80,17 @@
             android:layout_marginStart="5dp"/>
 
     </LinearLayout>
+
+    <TextView
+        android:id="@+id/txtTimeReminder"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="5dp"
+        android:layout_below="@+id/lineButtons"
+        android:padding="10dp"
+        android:gravity="center"
+        android:textColor="#cc757575"/>
+
 
 </RelativeLayout>

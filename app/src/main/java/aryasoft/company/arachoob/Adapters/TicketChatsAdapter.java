@@ -11,9 +11,9 @@ import android.widget.RelativeLayout;
 import android.widget.TextView;
 import java.util.ArrayList;
 
-import aryasoft.company.arachoob.Models.ChatModel;
 import aryasoft.company.arachoob.Models.TicketChatsModel;
 import aryasoft.company.arachoob.R;
+import aryasoft.company.arachoob.Utils.UserPreference;
 
 
 public class TicketChatsAdapter extends RecyclerView.Adapter<TicketChatsAdapter.TicketChatsViewHolder>
@@ -26,7 +26,7 @@ public class TicketChatsAdapter extends RecyclerView.Adapter<TicketChatsAdapter.
     {
         this.context = context;
         this.ticketChatList = new ArrayList<>();
-        //UserId = SharedPreferencesHelper.ReadInt("UserId");
+        UserId = UserPreference.getUserId();
     }
 
     @NonNull
@@ -50,7 +50,7 @@ public class TicketChatsAdapter extends RecyclerView.Adapter<TicketChatsAdapter.
             holder.txtMessageText.setLayoutParams(layoutParams);
             holder.txtMessageText.setTextColor(Color.BLACK);
             holder.txtMessageText.setText(ticketChatList.get(position).MessageText);
-            holder.txtMessageDate.setText( ticketChatList.get(position).SendDate);
+            holder.txtMessageDate.setText( ticketChatList.get(position).SentDate);
         }
         //outgoing message
         else if (ticketChatList.get(position).UserIdSender == UserId)
@@ -62,21 +62,19 @@ public class TicketChatsAdapter extends RecyclerView.Adapter<TicketChatsAdapter.
             holder.txtMessageText.setLayoutParams(layoutParams);
             holder.txtMessageText.setTextColor(Color.BLACK);
             holder.txtMessageText.setText(ticketChatList.get(position).MessageText);
-            holder.txtMessageDate.setText( ticketChatList.get(position).SendDate);
+            holder.txtMessageDate.setText( ticketChatList.get(position).SentDate);
         }
-        //----
-
     }
 
     @Override
     public int getItemCount()
     {
-        //return  ticketChatList.size();
         return ticketChatList.size();
     }
 
     public void addToTicketChatList(ArrayList<TicketChatsModel> ticketChatList)
     {
+        //this.ticketChatList.clear();
         this.ticketChatList.addAll(ticketChatList);
         this.notifyDataSetChanged();
     }
@@ -89,7 +87,6 @@ public class TicketChatsAdapter extends RecyclerView.Adapter<TicketChatsAdapter.
         TicketChatsViewHolder(@NonNull View itemView)
         {
             super(itemView);
-            //-----
             txtMessageText = itemView.findViewById(R.id.txtMessageText);
             txtMessageDate = itemView.findViewById(R.id.txtMessageDate);
         }
