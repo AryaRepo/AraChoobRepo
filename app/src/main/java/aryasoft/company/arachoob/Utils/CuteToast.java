@@ -12,21 +12,24 @@ import com.bumptech.glide.Glide;
 
 import aryasoft.company.arachoob.R;
 
-public class CuteToast {
+public class CuteToast
+{
 
     private String ToastText = "";
     private int ToastDuration = Toast.LENGTH_SHORT;
     private Activity ActivityInstance;
     private View ContentView;
 
-    private CuteToast() {
+    private CuteToast()
+    {
     }
 
     public static class Builder
     {
         private CuteToast CuteToastInstance;
 
-        public Builder(Activity activity) {
+        public Builder(Activity activity)
+        {
             CuteToastInstance = new CuteToast();
             CuteToastInstance.ActivityInstance = activity;
         }
@@ -34,7 +37,7 @@ public class CuteToast {
         public Builder setText(String text)
         {
             CuteToastInstance.ToastText = text;
-            return  this;
+            return this;
         }
 
         public Builder setDuration(int duration)

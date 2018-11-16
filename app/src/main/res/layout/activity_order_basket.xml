@@ -18,27 +18,56 @@
             android:layout_width="match_parent"
             android:layout_height="?android:actionBarSize"
             android:background="@color/colorPrimary"
+            android:gravity="center"
             android:text="@string/youOrderBasketCaption"
             android:textColor="#ffffff"
-            android:textSize="16sp"
-            android:gravity="center"/>
+            android:textSize="16sp"/>
+
 
         <android.support.v7.widget.RecyclerView
             android:id="@+id/recyclerOrderBasket"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:layout_below="@+id/txtOrderBasketToolbar"/>
+            android:layout_above="@id/btnOpenInvoice"
+            android:layout_below="@+id/txtOrderBasketToolbar"
+            android:visibility="visible"/>
 
+        <RelativeLayout
+            android:id="@+id/relEmptyCart"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_above="@id/btnOpenInvoice"
+            android:layout_below="@+id/txtOrderBasketToolbar"
+            android:visibility="gone">
+
+            <ImageView
+                android:id="@+id/imgEmptyCart"
+                android:layout_width="80dp"
+                android:layout_height="80dp"
+                android:layout_centerInParent="true"
+                app:srcCompat="@drawable/ic_shopping_cart_empty"/>
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/imgEmptyCart"
+                android:layout_marginTop="10dp"
+                android:gravity="center_horizontal"
+                android:text="سبد سفارش خالی است"
+                android:textSize="18sp"/>
+        </RelativeLayout>
+
+        <Button
+            android:id="@+id/btnOpenInvoice"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_alignParentBottom="true"
+            android:layout_gravity="bottom"
+            android:background="@drawable/simple_button_drawable"
+            android:text="مشاهده صورتحساب"
+            android:textColor="#fff"/>
     </RelativeLayout>
 
-    <android.support.design.widget.FloatingActionButton
-        android:id="@+id/btnOpenInvoice"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_gravity="bottom|center_horizontal"
-        android:layout_margin="16sp"
-        app:layout_anchorGravity="top|end"
-        app:srcCompat="@drawable/ic_arrow_upward"/>
 
     <include layout="@layout/bottom_sheet_invoice_layout"/>
 

@@ -9,26 +9,49 @@ import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Toast;
 
 import java.util.ArrayList;
 
 import aryasoft.company.arachoob.Adapters.CategoryAdapter;
-import aryasoft.company.arachoob.Models.Category;
+import aryasoft.company.arachoob.ApiConnection.ApiInterfaceListeners.OnGetProductGroupsListener;
+import aryasoft.company.arachoob.ApiConnection.ApiModels.ProductGroupsApiModel;
+import aryasoft.company.arachoob.ApiConnection.ApiModules.ProductModule;
 import aryasoft.company.arachoob.R;
+import aryasoft.company.arachoob.Utils.CuteToast;
+import aryasoft.company.arachoob.Utils.Listeners.OnDataReceiveStateListener;
+import aryasoft.company.arachoob.Utils.SweetLoading;
 
-public class CategoryFragment extends Fragment {
+public class CategoryFragment extends Fragment implements OnDataReceiveStateListener
+{
 
+    private int productGroupId = -1;
     private RecyclerView RecyclerCategory;
+    private SweetLoading Loading;
+    private ProductModule productModule;
+    private CategoryAdapter categoryAdapter;
+
+    @Override
+    public void OnDataReceiveState(Throwable ex)
+    {
+        Loading.hide();
+        new CuteToast.Builder(getActivity()).setText(getString(R.string.noInternetText)).setDuration(Toast.LENGTH_LONG).show();
+    }
+
     @Nullable
     @Override
-    public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
-        View view = inflater.inflate(R.layout.fragment_category, container, false);
-        return view;
+    public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState)
+    {
+        return inflater.inflate(R.layout.fragment_category, container, false);
     }
 
     @Override
-    public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
+    public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState)
+    {
         super.onViewCreated(view, savedInstanceState);
+        Loading = new SweetLoading.Builder().build(view.getContext());
+        productModule = new ProductModule();
+        productModule.setOnDataReceiveStateListener(this);
         initializeViews(view);
         setupCategoriesRecycler();
     }
@@ -36,26 +59,33 @@ public class CategoryFragment extends Fragment {
     private void initializeViews(View view)
     {
         RecyclerCategory = view.findViewById(R.id.recyclerCategories);
+        setupCategoriesRecycler();
+        getCategories();
     }
+
 
     private void setupCategoriesRecycler()
     {
-        CategoryAdapter categoryAdapter  = new CategoryAdapter(getContext(), createFakeData());
+        categoryAdapter = new CategoryAdapter(getContext());
         LinearLayoutManager linearLayoutManager = new LinearLayoutManager(getContext(), LinearLayoutManager.VERTICAL, false);
         RecyclerCategory.setLayoutManager(linearLayoutManager);
         RecyclerCategory.setAdapter(categoryAdapter);
     }
 
-    private ArrayList<Category> createFakeData() {
-        ArrayList<Category> categories = new ArrayList<>();
-        categories.add(new Category(R.drawable.c1, "قاب پرده چرم و چوب"));
-        categories.add(new Category(R.drawable.c2, "قاب پرده پارچه کوب"));
-        categories.add(new Category(R.drawable.c3, "قاب پرده CNC"));
-        categories.add(new Category(R.drawable.c4, "قاب پرده های کلاسیک"));
-        categories.add(new Category(R.drawable.c6, "قاب پرده های مدرن"));
-
-        return categories;
-
+    private void getCategories()
+    {
+        Loading.show();
+        productModule.setOnGetProductGroupsListener(new OnGetProductGroupsListener()
+        {
+            @Override
+            public void OnGetProductGroups(ArrayList<ProductGroupsApiModel> productGroups)
+            {
+                Loading.hide();
+                categoryAdapter.addCategoriesList(productGroups);
+            }
+        });
+        productModule.getProductGroups(productGroupId);
     }
+
 
 }

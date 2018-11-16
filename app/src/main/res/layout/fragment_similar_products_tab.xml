@@ -1,7 +1,38 @@
 <?xml version="1.0" encoding="utf-8"?>
-<android.support.v7.widget.RecyclerView
+<RelativeLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
-    android:id="@+id/recyclerSimilarProduct"
     android:layout_width="match_parent"
-    android:layout_height="wrap_content"/>
+    android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_below="@+id/txtOrderBasketToolbar">
+
+    <android.support.v7.widget.RecyclerView
+        android:id="@+id/recyclerSimilarProduct"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"/>
+
+    <RelativeLayout
+        android:id="@+id/relEmptySimilarProduct"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:visibility="gone">
+
+        <ImageView
+            android:id="@+id/imgEmptySimilarProduct"
+            app:srcCompat="@drawable/confused_emoji"
+            android:layout_width="80dp"
+            android:layout_height="80dp"
+            android:layout_centerInParent="true"/>
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/imgEmptySimilarProduct"
+            android:layout_marginTop="10dp"
+            android:gravity="center_horizontal"
+            android:text="محصول مشابه ای یافت نشد"
+            android:textSize="18sp"/>
+    </RelativeLayout>
+
+</RelativeLayout>

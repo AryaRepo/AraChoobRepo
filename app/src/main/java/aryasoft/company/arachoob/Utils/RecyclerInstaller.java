@@ -2,13 +2,16 @@ package aryasoft.company.arachoob.Utils;
 
 import android.support.v7.widget.RecyclerView;
 
-public class RecyclerInstaller {
+public class RecyclerInstaller
+{
 
     private RecyclerView RecyclerInstance;
     private RecyclerView.Adapter AdapterInstance;
     private RecyclerView.LayoutManager LayoutManagerInstance;
 
-    private RecyclerInstaller(){}
+    private RecyclerInstaller()
+    {
+    }
 
     public static RecyclerInstaller build()
     {
@@ -33,7 +36,8 @@ public class RecyclerInstaller {
         return this;
     }
 
-    public void setup() {
+    public void setup()
+    {
         RecyclerInstance.setLayoutManager(LayoutManagerInstance);
         RecyclerInstance.setAdapter(AdapterInstance);
     }

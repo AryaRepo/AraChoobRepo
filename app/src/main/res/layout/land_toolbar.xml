@@ -6,10 +6,10 @@
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:background="?attr/colorPrimary"
-    android:contentInsetEnd="0dp"
-    android:contentInsetLeft="0dp"
-    android:contentInsetRight="0dp"
     android:contentInsetStart="0dp"
+    android:contentInsetLeft="0dp"
+    android:contentInsetEnd="0dp"
+    android:contentInsetRight="0dp"
     android:minHeight="?attr/actionBarSize"
     app:contentInsetEnd="0dp"
     app:contentInsetLeft="0dp"
@@ -33,9 +33,9 @@
                 android:layout_marginTop="5dp"
                 android:layout_toRightOf="@+id/btn_show_shopping_cart"
                 android:gravity="right"
+                android:text=""
                 android:textColor="#FFEB3B"
-                android:textSize="14sp"
-                android:text=""/>
+                android:textSize="14sp"/>
 
             <ImageButton
                 android:id="@+id/btn_show_shopping_cart"
@@ -54,8 +54,8 @@
             android:layout_marginRight="5dp"
             android:gravity="center_vertical"
             android:text="@string/app_name"
-            android:textAppearance="?android:textAppearanceLarge"
-            android:textColor="#FFF"/>
+            android:textColor="#FFF"
+            android:textSize="15sp"/>
     </RelativeLayout>
 
 </android.support.v7.widget.Toolbar>

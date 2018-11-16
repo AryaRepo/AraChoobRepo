@@ -12,7 +12,6 @@ import android.view.ViewGroup;
 
 import java.util.ArrayList;
 
-import aryasoft.company.arachoob.Adapters.ProductAdapter;
 import aryasoft.company.arachoob.Models.Product;
 import aryasoft.company.arachoob.R;
 
@@ -39,10 +38,10 @@ public class SearchFragment extends Fragment {
 
     private void setupSearchResultRecyclerView()
     {
-        ArrayList<Product> products = new ArrayList<>();
+      /*  ArrayList<Product> products = new ArrayList<>();
         GridLayoutManager gridLayoutManager = new GridLayoutManager(getContext(), 2);
         RecyclerSearchResult.setLayoutManager(gridLayoutManager);
         ProductAdapter productAdapter = new ProductAdapter(products, getContext());
-        RecyclerSearchResult.setAdapter(productAdapter);
+        RecyclerSearchResult.setAdapter(productAdapter);*/
     }
 }

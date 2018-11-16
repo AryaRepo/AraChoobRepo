@@ -4,10 +4,13 @@ import android.app.Application;
 import android.content.Context;
 
 import aryasoft.company.arachoob.R;
+import aryasoft.company.arachoob.Utils.SharedPreferencesHelper;
 import aryasoft.company.arachoob.Utils.UserPreference;
 import uk.co.chrisjenx.calligraphy.CalligraphyConfig;
 
-public class MyApplication extends Application {
+
+public class MyApplication extends Application
+{
 
     private static Context ContextInstance;
 
@@ -17,11 +20,13 @@ public class MyApplication extends Application {
     }
 
     @Override
-    public void onCreate() {
+    public void onCreate()
+    {
         super.onCreate();
         ContextInstance = this;
         initializeCalligraphy();
         UserPreference.initialize(this);
+        SharedPreferencesHelper.initPreferences(this);
     }
 
     private void initializeCalligraphy()
@@ -30,5 +35,11 @@ public class MyApplication extends Application {
                 .setDefaultFontPath("fonts/iran_yekan_mobile_regular.ttf")
                 .setFontAttrId(R.attr.fontPath)
                 .build());
+    }
+
+    @Override
+    protected void attachBaseContext(Context base)
+    {
+        super.attachBaseContext(base);
     }
 }

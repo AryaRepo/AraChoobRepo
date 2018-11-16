@@ -23,8 +23,7 @@
             android:layout_marginTop="2dp"
             android:adjustViewBounds="true"
             android:minWidth="250dp"
-            android:scaleType="fitXY"
-            app:srcCompat="@drawable/img1"/>
+            android:scaleType="fitXY"/>
 
         <TextView
             android:id="@+id/txtProductTitle"
@@ -53,16 +52,15 @@
             android:layout_marginTop="8dp">
 
             <Button
-                android:id="@+id/btnAttachImage"
+                android:id="@+id/btnDeleteProduct"
                 style="@style/Base.Widget.AppCompat.Button.Borderless.Colored"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_alignParentStart="true"
                 android:layout_alignParentLeft="true"
                 android:clickable="true"
-                android:drawableTop="@drawable/ic_attach_file"
                 android:focusable="true"
-                android:text="ضمیمه کردن عکس"
+                android:text="حذف از سبد"
                 android:textSize="12sp"
                 android:textStyle="bold"/>
 
@@ -72,7 +70,7 @@
                 android:layout_alignTop="@id/btnAddDescription"
                 android:layout_alignBottom="@id/btnAddDescription"
                 android:layout_toLeftOf="@id/btnAddDescription"
-                android:layout_toRightOf="@id/btnAttachImage"
+                android:layout_toRightOf="@id/btnDeleteProduct"
                 android:gravity="center"
                 android:orientation="horizontal">
 
@@ -90,8 +88,8 @@
 
                 <TextView
                     android:id="@+id/txtProductCountBasket"
-                    android:layout_width="24dp"
-                    android:layout_height="24dp"
+                    android:layout_width="30dp"
+                    android:layout_height="30dp"
                     android:layout_margin="8dp"
                     android:gravity="center"
                     android:textColor="#000"/>
@@ -117,7 +115,6 @@
                 android:layout_alignParentEnd="true"
                 android:layout_alignParentRight="true"
                 android:clickable="true"
-                android:drawableTop="@drawable/ic_description"
                 android:focusable="true"
                 android:text="افزودن توضیحات"
                 android:textSize="12sp"

@@ -1,4 +1,5 @@
 package aryasoft.company.arachoob.Fragments;
+
 import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
@@ -46,7 +47,6 @@ public class SignInFragment extends Fragment implements UserLoginImpl.OnLoginLis
 
     }
 
-
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState)
     {
@@ -63,7 +63,8 @@ public class SignInFragment extends Fragment implements UserLoginImpl.OnLoginLis
     }
 
     @Override
-    public void onLoginStatusReceived(Response<Integer> response) {
+    public void onLoginStatusReceived(Response<Integer> response)
+    {
         Integer status = response.body();
         int NOT_REGISTERED = -2;
         int REGISTERED_AND_NOT_ACTIVE = -1;
@@ -72,6 +73,8 @@ public class SignInFragment extends Fragment implements UserLoginImpl.OnLoginLis
         {
             Loading.hide();
             MessageDialog.setContentText(getString(R.string.alreadyRegisteredAndNotActiveText)).show();
+            UserPreference.setUserMobileNumber(edtUsernameSignIn.getText().toString());
+            UserPreference.setUserPassword(edtPasswordSignIn.getText().toString());
             showUserActivationFragment(status);
         }
         else if (status == NOT_REGISTERED)
@@ -88,34 +91,48 @@ public class SignInFragment extends Fragment implements UserLoginImpl.OnLoginLis
     }
 
     @Override
-    public void onUserInfoReceived(Response<UserInfoModel> response) {
+    public void onUserInfoReceived(Response<UserInfoModel> response)
+    {
         Loading.hide();
         assert response.body() != null;
         String fullName = response.body().FirstName + " " + response.body().LastName;
         if (fullName.isEmpty())
+        {
             UserPreference.setUserFullName("کاربر عزیز");
+        }
         else
+        {
             UserPreference.setUserFullName(fullName);
+        }
         getActivity().finish();
     }
 
     @Override
-    public void onClick(View view) {
+    public void onClick(View view)
+    {
         if (view.getId() == R.id.btnLoginSignIn)
+        {
             Networking.checkNetwork(getContext(), this, 4);
+        }
         else if (view.getId() == R.id.btnCreateAccountSignIn)
+        {
             showSignUpFragment();
+        }
         else if (view.getId() == R.id.btnForgetPassword)
+        {
             showRecoveryPasswordFragment();
+        }
     }
 
     @Override
-    public void onNetworkConnected(int requestCode) {
+    public void onNetworkConnected(int requestCode)
+    {
         signIn();
     }
 
     @Override
-    public void onNetworkDisconnected() {
+    public void onNetworkDisconnected()
+    {
         MessageDialog.setContentText(getString(R.string.noInternetText)).show();
     }
 
@@ -165,7 +182,7 @@ public class SignInFragment extends Fragment implements UserLoginImpl.OnLoginLis
     {
         FragmentManager fragmentManager = getFragmentManager();
         FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
-        fragmentTransaction.setCustomAnimations(R.anim.slide_from_up , R.anim.slide_from_down).replace(R.id.registrationPlaceHolder, new SignUpFragment());
+        fragmentTransaction.setCustomAnimations(R.anim.slide_from_up, R.anim.slide_from_down).replace(R.id.registrationPlaceHolder, new SignUpFragment());
         fragmentTransaction.commit();
     }
 
@@ -173,11 +190,12 @@ public class SignInFragment extends Fragment implements UserLoginImpl.OnLoginLis
     {
         FragmentManager fragmentManager = getFragmentManager();
         FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
-        fragmentTransaction.setCustomAnimations(R.anim.slide_from_up , R.anim.slide_from_down).replace(R.id.registrationPlaceHolder, new RecoveryPasswordFragment());
+        fragmentTransaction.setCustomAnimations(R.anim.slide_from_up, R.anim.slide_from_down).replace(R.id.registrationPlaceHolder, new RecoveryPasswordFragment());
         fragmentTransaction.commit();
     }
 
-    private void showUserActivationFragment(int status) {
+    private void showUserActivationFragment(int status)
+    {
         FragmentManager fragmentManager = getFragmentManager();
         FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
         UserActivationAccountFragment userActivationAccountFragment = new UserActivationAccountFragment();

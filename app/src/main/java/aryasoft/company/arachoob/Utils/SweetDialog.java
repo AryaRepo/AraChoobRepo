@@ -18,7 +18,7 @@ public class SweetDialog {
 
     public void hide()
     {
-        SweetDialog.hide();
+        SweetDialog.dismiss();
     }
 
     public SweetDialog setContentText(String contentText)

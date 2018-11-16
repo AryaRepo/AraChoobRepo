@@ -1,14 +1,16 @@
 <?xml version="1.0" encoding="utf-8"?>
-<android.support.v7.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
-    android:layout_width="160dp"
-    android:layout_height="240dp"
+<android.support.v7.widget.CardView
+    xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    app:cardElevation="3dp"
-    app:cardCornerRadius="0dp"
+    android:id="@+id/cardItemView"
+    android:layout_width="165dp"
+    android:layout_height="wrap_content"
     android:layout_margin="5dp"
     android:clickable="true"
     android:focusable="true"
-    android:background="?android:selectableItemBackground">
+    android:foreground="?android:selectableItemBackground"
+    app:cardCornerRadius="0dp"
+    app:cardElevation="3dp">
 
     <RelativeLayout
         android:layout_width="match_parent"
@@ -27,8 +29,18 @@
             android:layout_height="wrap_content"
             android:layout_below="@+id/imgProductPhoto"
             android:gravity="right"
+            android:padding="5dp"
             android:text="عنوان محصول"
-            android:padding="5dp"/>
+            android:textSize="13sp"
+            android:textStyle="bold"/>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="1dp"
+            android:layout_below="@id/txtProductTitle"
+            android:layout_marginLeft="10dp"
+            android:layout_marginRight="10dp"
+            android:background="@drawable/line_divider"/>
 
         <TextView
             android:id="@+id/txtProductPrimaryPrice"
@@ -36,22 +48,42 @@
             android:layout_height="wrap_content"
             android:layout_below="@+id/txtProductTitle"
             android:gravity="right"
-            android:text=" 1000000 تومان"
-            android:textSize="12sp"
             android:padding="5dp"
-            android:textColor="@color/colorAccent"/>
+            android:text=" 1000000 تومان"
+            android:textColor="@color/colorAccent"
+            android:textSize="12sp"/>
 
         <TextView
             android:id="@+id/txtProductDiscountedPrice"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_below="@+id/txtProductPrimaryPrice"
-            android:gravity="right"
-            android:textSize="12sp"
-            android:text="با تخفیف 970000 تومان "
+            android:gravity="center"
+            android:lineSpacingExtra="3dp"
             android:padding="5dp"
-            android:textColor="@color/colorAccent"/>
+            android:textColor="@color/colorAccent"
+            android:textSize="12sp"
+            android:textStyle="bold"/>
 
+        <LinearLayout
+            android:id="@+id/dividerAboveProductCount"
+            android:layout_width="match_parent"
+            android:layout_height="1dp"
+            android:layout_below="@id/txtProductDiscountedPrice"
+            android:layout_marginLeft="10dp"
+            android:layout_marginRight="10dp"
+            android:background="@drawable/line_divider"
+            android:orientation="vertical"/>
+
+        <TextView
+            android:id="@+id/txtProductCount"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/dividerAboveProductCount"
+            android:gravity="center"
+            android:padding="5dp"
+            android:textSize="13sp"
+            android:textStyle="bold"/>
     </RelativeLayout>
 
 </android.support.v7.widget.CardView>

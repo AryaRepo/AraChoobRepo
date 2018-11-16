@@ -2,10 +2,11 @@ package aryasoft.company.arachoob.Models;
 
 public class OrderBasketModel
 {
+    public int ProductId;
     public String ProductTitle;
     public String ProductImageName;
-    public String AttachedImageName;
     public String AdditionalDescription;
     public int ProductCount;
-    public String ProductPrice;
+    public int DiscountPercent;
+    public int ProductFinalPrice;
 }

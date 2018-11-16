@@ -4,12 +4,11 @@
               android:id="@+id/bottom_sheet2"
               android:layout_width="match_parent"
               android:layout_height="wrap_content"
+              android:animateLayoutChanges="true"
+              android:background="#fff"
               android:orientation="vertical"
               app:behavior_hideable="true"
-              android:animateLayoutChanges="true"
               app:behavior_peekHeight="0dp"
-              android:paddingBottom="5dp"
-              android:background="#fff"
               app:layout_behavior="android.support.design.widget.BottomSheetBehavior">
 
     <RelativeLayout
@@ -20,17 +19,18 @@
             android:layout_width="match_parent"
             android:layout_height="?android:attr/actionBarSize"
             android:background="@color/colorPrimary"
-            android:text="صورتحساب شما"
             android:gravity="center"
+            android:text="صورتحساب شما"
             android:textColor="#fff"
             android:textSize="18sp"/>
+
         <ImageButton
             android:id="@+id/btnCloseInvoicePanel"
             android:layout_width="?android:attr/actionBarSize"
             android:layout_height="?android:attr/actionBarSize"
             android:layout_alignParentRight="true"
-            app:srcCompat="@drawable/ic_close"
-            android:background="?android:attr/selectableItemBackground"/>
+            android:background="?android:attr/selectableItemBackground"
+            app:srcCompat="@drawable/ic_close"/>
 
     </RelativeLayout>
 
@@ -38,41 +38,43 @@
         android:id="@+id/txtProductCountInvoicePanel"
         android:layout_width="match_parent"
         android:layout_height="?android:attr/actionBarSize"
-        android:text="تعداد اقلام کالای 5 تا"
-        android:textStyle="bold"
         android:gravity="center"
         android:textColor="#424242"
-        android:textSize="14sp"/>
+        android:textSize="14sp"
+        android:textStyle="bold"/>
+
     <LinearLayout
         android:layout_width="match_parent"
-        android:background="@drawable/line_divider"
+        android:layout_height="1dp"
         android:layout_marginLeft="10dp"
         android:layout_marginRight="10dp"
-        android:layout_height="1dp"/>
+        android:background="@drawable/line_divider"/>
+
     <TextView
         android:id="@+id/txtProductPriceInvoicePanel"
         android:layout_width="match_parent"
         android:layout_height="?android:attr/actionBarSize"
-        android:text="مبلغ سفارش (براساس قیمت پایه) : 15000 تومان"
         android:gravity="center|right"
         android:paddingRight="8dp"
-        android:textStyle="bold"
         android:textColor="#424242"
-        android:textSize="14sp"/>
+        android:textSize="14sp"
+        android:textStyle="bold"/>
+
     <LinearLayout
         android:layout_width="match_parent"
-        android:background="@drawable/line_divider"
+        android:layout_height="2dp"
         android:layout_marginLeft="10dp"
         android:layout_marginRight="10dp"
-        android:layout_height="2dp"/>
-    <TextView
+        android:background="@drawable/line_divider"/>
+
+
+
+    <Button
+        android:id="@+id/btnSubmitOrder"
         android:layout_width="match_parent"
+        android:layout_gravity="bottom"
         android:layout_height="wrap_content"
-        android:text="کاربر عزیز میزان مبلغ پرداختی شما به مدیر متغیر است (متغیر بودن مبلغ شما میتواند براساس توضیحاتی است که برای کالای تان درج کردید، باشد)"
-        android:gravity="top|right"
-        android:lineSpacingExtra="8dp"
-        android:padding="8dp"
-        android:textColor="#000"
-        android:textStyle="bold"
-        android:textSize="13sp"/>
+        android:background="@drawable/simple_button_drawable"
+        android:text="نهایی کردن سفارش"
+        android:textColor="#fff"/>
 </LinearLayout>

@@ -1,54 +1,101 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-              android:id="@+id/order_line_titles_item_lay"
-              android:layout_width="match_parent"
-              android:layout_height="wrap_content"
-              android:background="#e1e1e1"
-              android:orientation="horizontal"
-              android:weightSum="3">
+<android.support.v7.widget.CardView
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_marginTop="8dp"
+    android:layout_marginBottom="8dp"
+    app:cardCornerRadius="2dp"
+    app:cardElevation="2dp">
 
-    <TextView
-        android:id="@+id/txtOrderProductPriceItem"
-        android:layout_width="0dp"
-        android:layout_height="?android:attr/actionBarSize"
-        android:layout_weight="1.25"
-        android:gravity="center"
-        android:text="2500 تومان"
-        android:textColor="#212121"
-        android:textSize="12sp"/>
+    <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+                  android:id="@+id/order_line_titles_item_lay"
+                  android:layout_width="match_parent"
+                  android:layout_height="wrap_content"
+                  android:orientation="vertical">
 
-    <LinearLayout
-        android:layout_width="1dp"
-        android:layout_height="match_parent"
-        android:background="#88757575"/>
+        <TextView
+            android:id="@+id/txtOrderProductNameItem"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:ellipsize="end"
+            android:gravity="center"
+            android:maxEms="15"
+            android:maxLines="1"
+            android:padding="10dp"
+            android:text="چوب پرده ی سلطنتی"
+            android:textStyle="bold"
+            android:textColor="#212121"
+            android:textSize="14sp"/>
 
-    <TextView
-        android:id="@+id/txtOrderProductCountItem"
-        android:layout_width="0dp"
-        android:layout_height="?android:attr/actionBarSize"
-        android:layout_weight="0.5"
-        android:gravity="center"
-        android:text="5 تا "
-        android:textColor="#212121"
-        android:textSize="12sp"/>
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="1dp"
+            android:layout_marginLeft="20dp"
+            android:layout_marginRight="20dp"
+            android:background="@drawable/line_divider"/>
 
-    <LinearLayout
-        android:layout_width="1dp"
-        android:layout_height="match_parent"
-        android:background="#88757575"/>
+        <TextView
+            android:id="@+id/txtOrderProductPriceItem"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:gravity="center"
+            android:textStyle="bold"
+            android:padding="10dp"
+            android:text="2500 تومان"
+            android:textColor="#212121"
+            android:textSize="14sp"/>
+        <TextView
+            android:id="@+id/txtOrderProductDiscountPercent"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:gravity="center"
+            android:textStyle="bold"
+            android:padding="10dp"
+            android:visibility="gone"
+            android:textColor="#212121"
+            android:textSize="14sp"/>
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="1dp"
+            android:layout_marginLeft="20dp"
+            android:layout_marginRight="20dp"
+            android:background="@drawable/line_divider"/>
 
-    <TextView
-        android:id="@+id/txtOrderProductNameItem"
-        android:layout_width="0dp"
-        android:layout_height="?android:attr/actionBarSize"
-        android:layout_weight="1.25"
-        android:ellipsize="end"
-        android:gravity="center|right"
-        android:maxEms="15"
-        android:maxLines="1"
-        android:paddingRight="5dp"
-        android:text="چوب پرده ی سلطنتی"
-        android:textColor="#212121"
-        android:textSize="12sp"/>
+        <TextView
+            android:id="@+id/txtOrderProductCountItem"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:gravity="center"
+            android:padding="10dp"
+            android:textStyle="bold"
+            android:textColor="#212121"
+            android:textSize="14sp"/>
 
-</LinearLayout>
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="1dp"
+            android:layout_marginLeft="20dp"
+            android:layout_marginRight="20dp"
+            android:background="@drawable/line_divider"/>
+
+        <TextView
+            android:id="@+id/txtOrderProductDescription"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:gravity="center|right"
+            android:lineSpacingExtra="5dp"
+            android:padding="10dp"
+            android:text="این یک متن توضیح است"
+            android:textColor="#212121"
+            android:textSize="14sp"/>
+
+        <LinearLayout
+            android:layout_width="1dp"
+            android:layout_height="match_parent"
+            android:background="#88757575"/>
+
+
+    </LinearLayout>
+</android.support.v7.widget.CardView>

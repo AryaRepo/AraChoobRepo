@@ -3,11 +3,6 @@
   <component name="WizardSettings">
     <option name="children">
       <map>
-        <entry key="imageWizard">
-          <value>
-            <PersistentState />
-          </value>
-        </entry>
         <entry key="vectorWizard">
           <value>
             <PersistentState>
@@ -19,8 +14,8 @@
                         <option name="values">
                           <map>
                             <entry key="assetSourceType" value="FILE" />
-                            <entry key="outputName" value="ic_big_and_small_dots" />
-                            <entry key="sourceFile" value="C:\Users\MohamadAmin\Desktop\big_and_small_dots.svg" />
+                            <entry key="outputName" value="ic_no_chat" />
+                            <entry key="sourceFile" value="C:\Users\Mrbinary-Pc\Desktop\no_chat.svg" />
                           </map>
                         </option>
                       </PersistentState>

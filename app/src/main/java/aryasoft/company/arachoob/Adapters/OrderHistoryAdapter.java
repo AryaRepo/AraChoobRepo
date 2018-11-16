@@ -15,9 +15,11 @@ import android.view.animation.AnimationUtils;
 import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
+
 import java.util.ArrayList;
 
 import aryasoft.company.arachoob.Activities.OrderDetailActivity;
+import aryasoft.company.arachoob.ApiConnection.ApiModels.GetUserOrderApiModel;
 import aryasoft.company.arachoob.Models.OrderHistoryModel;
 import aryasoft.company.arachoob.R;
 
@@ -25,7 +27,7 @@ public class OrderHistoryAdapter extends RecyclerView.Adapter<OrderHistoryAdapte
 {
 
     private Context context;
-    private ArrayList<OrderHistoryModel> orderHistoryList;
+    private ArrayList<GetUserOrderApiModel> orderHistoryList;
 
     public OrderHistoryAdapter(Context context)
     {
@@ -48,53 +50,22 @@ public class OrderHistoryAdapter extends RecyclerView.Adapter<OrderHistoryAdapte
         {
             return;
         }
-        //-------------------------------
-        if (orderHistoryList.get(position).PaymentStatus)
+        GetUserOrderApiModel order = orderHistoryList.get(position);
+        //------------------------------------------------------------------
+        if (order.PaymentStatus)
         {
-            holder.txtPaymentType.setText(holder.txtPaymentType.getText() + " - " + "پرداخت شده");
+            holder.txtPaymentType.setText("وضعیت پرداخت : پرداخت شده");
+            holder.txtPaymentType.setTextColor(Color.parseColor("#4CAF50"));
         }
         else
         {
-            holder.txtPaymentType.setText(holder.txtPaymentType.getText() + " - " + "هنوز پرداخت نکردید");
+            holder.txtPaymentType.setText("وضعیت پرداخت : هنوز پرداخت نکردید");
+            holder.txtPaymentType.setTextColor(Color.RED);
         }
-        //-----------------------------------------
 
-        if (orderHistoryList.get(position).PaymentTypeId == 1)
-        {
-            if (orderHistoryList.get(position).PaymentStatus)
-            {
-                String myStr = "نحوه پرداخت : " + " آنلاین" + " - پرداخت شد";
-                SpannableStringBuilder mySpan = new SpannableStringBuilder(myStr);
-                mySpan.setSpan(new ForegroundColorSpan(Color.parseColor("#4CAF50")), 23, myStr.length(), Spannable.SPAN_EXCLUSIVE_EXCLUSIVE);
-                holder.txtPaymentType.setText(mySpan);
-            }
-            else if (!orderHistoryList.get(position).PaymentStatus)
-            {
-                String myStr = "نحوه پرداخت : " + " آنلاین" + " - پرداخت نشده";
-                SpannableStringBuilder myspan = new SpannableStringBuilder(myStr);
-                myspan.setSpan(new ForegroundColorSpan(Color.parseColor("#FE1743")), 23, myStr.length(), Spannable.SPAN_EXCLUSIVE_EXCLUSIVE);
-                holder.txtPaymentType.setText(myspan);
-            }
-        }
-        else if (orderHistoryList.get(position).PaymentTypeId == 2)
-        {
-            if (orderHistoryList.get(position).PaymentStatus)
-            {
-                String myStr = "نحوه پرداخت : " + " درب منزل" + " - پرداخت شد";
-                SpannableStringBuilder myspan = new SpannableStringBuilder(myStr);
-                myspan.setSpan(new ForegroundColorSpan(Color.parseColor("#4CAF50")), 23, myStr.length(), Spannable.SPAN_EXCLUSIVE_EXCLUSIVE);
-                holder.txtPaymentType.setText(myspan);
-            }
-            else if (!orderHistoryList.get(position).PaymentStatus)
-            {
-                String myStr = "نحوه پرداخت : " + " درب منزل" + " - پرداخت نشده";
-                SpannableStringBuilder myspan = new SpannableStringBuilder(myStr);
-                myspan.setSpan(new ForegroundColorSpan(Color.parseColor("#FE1743")), 23, myStr.length(), Spannable.SPAN_EXCLUSIVE_EXCLUSIVE);
-                holder.txtPaymentType.setText(myspan);
-            }
-        }
         //-----------------------------------------
-        switch (orderHistoryList.get(position).OrderStateID)
+        switch (orderHistoryList.get(position).OrderStateId)
+
         {
             case 1:
                 holder.txtPaymentStatus.setText("ثبت اولیه توسط مشتری");
@@ -123,14 +94,17 @@ public class OrderHistoryAdapter extends RecyclerView.Adapter<OrderHistoryAdapte
         }
         //-----------------------
         holder.txtInvoiceDate.setText(orderHistoryList.get(position).OrderDate);
-        holder.txtInvoiceDeliveryDate.setText(orderHistoryList.get(position).CustomerDeliveryTime);
+        holder.txtInvoiceDeliveryDate.setText(orderHistoryList.get(position).DeliveryTime);
         holder.btnShowOrderCart.setOnClickListener(new View.OnClickListener()
+
         {
             @Override
             public void onClick(View v)
             {
-                int OrderId = orderHistoryList.get(holder.getAdapterPosition()).OrderID;
+                int orderId = orderHistoryList.get(holder.getAdapterPosition()).OrderId;
                 Intent intent = new Intent(context, OrderDetailActivity.class);
+                intent.putExtra("orderId",orderId);
+                intent.putExtra("totalPrice", orderHistoryList.get(holder.getAdapterPosition()).TotalPrice);
                 context.startActivity(intent);
             }
         });
@@ -141,11 +115,10 @@ public class OrderHistoryAdapter extends RecyclerView.Adapter<OrderHistoryAdapte
     @Override
     public int getItemCount()
     {
-        //return  orderHistoryList.size();
-        return 10;
+        return  orderHistoryList.size();
     }
 
-    public void addToOrderHistoryList(ArrayList<OrderHistoryModel> orderHistoryList)
+    public void addToOrderHistoryList(ArrayList<GetUserOrderApiModel> orderHistoryList)
     {
         this.orderHistoryList.addAll(orderHistoryList);
         this.notifyDataSetChanged();

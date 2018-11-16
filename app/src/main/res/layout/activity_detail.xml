@@ -1,82 +1,135 @@
 <?xml version="1.0" encoding="utf-8"?>
-<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
-            xmlns:app="http://schemas.android.com/apk/res-auto"
-            xmlns:tools="http://schemas.android.com/tools"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent">
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+                xmlns:app="http://schemas.android.com/apk/res-auto"
+                xmlns:tools="http://schemas.android.com/tools"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent">
 
-    <LinearLayout
+    <TextView
+        android:id="@+id/detailActivityHeader"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:orientation="vertical">
+        android:layout_height="?actionBarSize"
+        android:background="@color/colorPrimary"
+        android:gravity="center"
+        android:text="جزئیات محصول"
+        android:textColor="#fff"
+        android:textSize="17sp"/>
 
-        <android.support.v4.view.ViewPager
-            android:id="@+id/detailGallerySlider"
-            android:layout_width="match_parent"
-            android:layout_height="220dp"
-            android:layout_marginBottom="8dp"/>
-
-        <android.support.v7.widget.CardView
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginLeft="8dp"
-            android:layout_marginRight="8dp"
-            android:layout_marginBottom="10dp"
-            app:cardElevation="2dp">
-
-            <LinearLayout
+    <ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+                xmlns:app="http://schemas.android.com/apk/res-auto"
+                xmlns:tools="http://schemas.android.com/tools"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                android:orientation="vertical">
+                android:layout_below="@id/detailActivityHeader">
 
-                <TextView
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_margin="8dp"
-                    android:gravity="center"
-                    android:text="چوب پرده سلطنتی رویال کد AM25-F56"
-                    android:textSize="16sp"/>
-
-                <TextView
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_margin="8dp"
-                    android:gravity="center"
-                    android:text="قیمت پایه 150.000 تومان"
-                    android:textSize="16sp"/>
-
-                <Button
-                    android:id="@+id/btnAddToOrderBasket"
-                    android:layout_width="wrap_content"
-                    android:layout_height="40dp"
-                    android:layout_gravity="center_horizontal"
-                    android:layout_marginTop="10dp"
-                    android:layout_marginBottom="15dp"
-                    android:background="@drawable/round_button_drawable"
-                    android:drawablePadding="8dp"
-                    android:gravity="center"
-                    android:paddingLeft="10dp"
-                    android:paddingRight="10dp"
-                    android:text="افزودن به سبد سفارش"
-                    android:textColor="#ffffff"
-                    android:textSize="17sp"/>
-
-
-            </LinearLayout>
-        </android.support.v7.widget.CardView>
-
-
-        <android.support.design.widget.TabLayout
-            android:id="@+id/detailTabLayout"
-            style="@style/defaultTabLayout"
+        <LinearLayout
+            android:background="#F3F3F3"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            app:tabMode="fixed"/>
+            android:orientation="vertical">
 
-        <android.support.v4.view.ViewPager
-            android:id="@+id/detailTabViewPager"
-            android:layout_width="match_parent"
-            android:layout_height="270dp"/>
+            <android.support.v4.view.ViewPager
+                android:id="@+id/detailGallerySlider"
+                android:layout_width="match_parent"
+                android:layout_height="220dp"
+                android:layout_marginLeft="8dp"
+                android:layout_marginRight="8dp"
+                android:layout_marginBottom="8dp"/>
 
-    </LinearLayout>
-</ScrollView>
+            <android.support.v7.widget.CardView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="8dp"
+                android:layout_marginRight="8dp"
+                android:layout_marginBottom="10dp"
+                app:cardElevation="2dp">
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:orientation="vertical">
+
+                    <TextView
+                        android:id="@+id/txtProductTitle"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_margin="8dp"
+                        android:gravity="center"
+                        android:textSize="16sp"
+                        android:textStyle="bold"/>
+
+                    <TextView
+                        android:id="@+id/txtPrimaryPrice"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_margin="8dp"
+                        android:gravity="center"
+
+                        android:textSize="16sp"/>
+
+                    <TextView
+                        android:id="@+id/txtSecondaryPrice"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_margin="8dp"
+                        android:gravity="center"
+                        android:textColor="#000"
+
+                        android:textSize="16sp"/>
+
+                    <TextView
+                        android:id="@+id/txtUnitTitle"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_margin="8dp"
+                        android:gravity="center"
+                        android:textColor="#000"
+                        android:textSize="16sp"
+                        android:textStyle="bold"/>
+
+                    <Button
+                        android:id="@+id/btnAddToOrderBasket"
+                        android:layout_width="wrap_content"
+                        android:layout_height="40dp"
+                        android:layout_gravity="center_horizontal"
+                        android:layout_marginTop="10dp"
+                        android:layout_marginBottom="15dp"
+                        android:background="@drawable/round_button_drawable"
+                        android:drawablePadding="8dp"
+                        android:gravity="center"
+                        android:paddingLeft="10dp"
+                        android:paddingRight="10dp"
+                        android:text="افزودن به سبد سفارش"
+                        android:textColor="#ffffff"
+                        android:textSize="17sp"/>
+                    <TextView
+                        android:id="@+id/txtProductDetailDiscount"
+                        android:layout_width="55dp"
+                        android:visibility="invisible"
+                        android:layout_height="50dp"
+                        android:background="@drawable/semi_circle"
+                        android:gravity="center"
+                        android:padding="5dp"
+                        android:text="90 %"
+                        android:textColor="#fff"
+                        android:textSize="12sp"/>
+
+                </LinearLayout>
+            </android.support.v7.widget.CardView>
+
+
+            <android.support.design.widget.TabLayout
+                android:id="@+id/detailTabLayout"
+                style="@style/defaultTabLayout"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                app:tabMode="fixed"/>
+
+            <android.support.v4.view.ViewPager
+                android:id="@+id/detailTabViewPager"
+                android:layout_width="match_parent"
+                android:layout_height="300dp"/>
+
+        </LinearLayout>
+    </ScrollView>
+</RelativeLayout>

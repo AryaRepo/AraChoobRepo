@@ -1,9 +1,5 @@
 package aryasoft.company.arachoob.Implementations;
-
-import com.zarinpal.ewallets.purchase.OnCallbackVerificationPaymentListener;
-
 import java.util.ArrayList;
-
 import aryasoft.company.arachoob.Models.TicketsModel;
 import retrofit2.Call;
 import retrofit2.Callback;

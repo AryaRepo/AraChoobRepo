@@ -86,32 +86,6 @@
                 android:clickable="false"
                 app:srcCompat="@drawable/task__1_"/>
         </TableRow>
-
-       <!-- <TableRow
-            android:id="@+id/row_fav_cart"
-            android:layout_width="wrap_content"
-            android:background="?attr/selectableItemBackground"
-            android:clickable="true"
-            android:gravity="center|right">
-
-            <TextView
-                android:id="@+id/nav_menu_title_favorite_cart"
-                android:layout_width="match_parent"
-                android:layout_height="45dp"
-                android:clickable="false"
-                android:gravity="center|right"
-                android:paddingRight="25dp"
-                android:text="@string/nav_fav_basket"
-                android:textSize="14sp"/>
-
-            <ImageView
-                android:id="@+id/nav_menu_icon_favorite_cart"
-                android:layout_width="25dp"
-                android:layout_height="25dp"
-                android:clickable="false"
-                app:srcCompat="@drawable/ic_favorite_border"/>
-        </TableRow>-->
-
         <TableRow
             android:id="@+id/row_messages"
             android:layout_width="wrap_content"

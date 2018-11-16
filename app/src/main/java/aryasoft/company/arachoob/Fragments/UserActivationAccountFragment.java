@@ -33,8 +33,9 @@ import retrofit2.Response;
 
 public class UserActivationAccountFragment extends Fragment
         implements UserActivationImpl.OnUserActivationResultReceived, View.OnClickListener,
-                   ReSendActivationCodeImpl.OnReSendListener, UserLoginImpl.OnLoginListener,
-        Networking.NetworkStatusListener {
+        ReSendActivationCodeImpl.OnReSendListener, UserLoginImpl.OnLoginListener,
+        Networking.NetworkStatusListener
+{
 
     private EditText EdtActivationCode;
     private String ActivationCode;
@@ -46,14 +47,27 @@ public class UserActivationAccountFragment extends Fragment
     private int Seconds = 0;
     private Timer SchedulerTask;
 
+    @Override
+    public void onDestroy()
+    {
+        super.onDestroy();
+        if (SchedulerTask != null)
+        {
+            SchedulerTask.cancel();
+            SchedulerTask = null;
+        }
+    }
+
     @Nullable
     @Override
-    public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
+    public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState)
+    {
         return inflater.inflate(R.layout.fragment_user_activation_account, container, false);
     }
 
     @Override
-    public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
+    public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState)
+    {
         super.onViewCreated(view, savedInstanceState);
         initializeViews(view);
     }
@@ -63,29 +77,34 @@ public class UserActivationAccountFragment extends Fragment
     {
         Loading.hide();
         if (response.body() != null)
-        if (response.body())
         {
-            new CuteToast.Builder(getActivity()).setText(getString(R.string.validCodeText)).setDuration(Toast.LENGTH_LONG).show();
-            signIn();
-        }
-        else if (!response.body())
-        {
-            new CuteToast.Builder(getActivity()).setText(getString(R.string.someProblemHappend)).setDuration(Toast.LENGTH_LONG).show();
+            if (response.body())
+            {
+                new CuteToast.Builder(getActivity()).setText(getString(R.string.validCodeText)).setDuration(Toast.LENGTH_LONG).show();
+                signIn();
+            }
+            else if (!response.body())
+            {
+                new CuteToast.Builder(getActivity()).setText(getString(R.string.someProblemHappend)).setDuration(Toast.LENGTH_LONG).show();
+            }
         }
     }
 
     @Override
-    public void onReSentCode(Response<Integer> response) {
+    public void onReSentCode(Response<Integer> response)
+    {
         Loading.hide();
         if (response.body() != null)
         {
             ActivationCode = response.body().toString();
-            Toast.makeText(getContext(), ActivationCode + "", Toast.LENGTH_LONG).show();
+            new CuteToast.Builder(getActivity()).setText(ActivationCode + "کدفعال سازی : ").setDuration(Toast.LENGTH_LONG).show();
+           // Toast.makeText(getContext(), ActivationCode + "", Toast.LENGTH_LONG).show();
         }
     }
 
     @Override
-    public void onLoginStatusReceived(Response<Integer> response) {
+    public void onLoginStatusReceived(Response<Integer> response)
+    {
         Loading.hide();
         if (response.body() != null)
         {
@@ -106,34 +125,45 @@ public class UserActivationAccountFragment extends Fragment
                 UserPreference.setUserId(status);
                 UserPreference.isUserLogin(true);
                 UserPreference.setUserFullName("کاربر عزیز");
+                SchedulerTask.cancel();
+                SchedulerTask = null;
                 getActivity().finish();
             }
         }
     }
 
     @Override
-    public void onClick(View view) {
+    public void onClick(View view)
+    {
         if (view.getId() == R.id.btnSubmitCode)
+        {
             Networking.checkNetwork(getContext(), this, 1);
+        }
         else if (view.getId() == R.id.btnResendCode)
+        {
             Networking.checkNetwork(getContext(), this, 2);
+        }
     }
 
     @Override
-    public void onNetworkConnected(int requestCode) {
+    public void onNetworkConnected(int requestCode)
+    {
         if (requestCode == 1)
+        {
             activeAccount(getActivationAccountModel());
+        }
         else if (requestCode == 2)
         {
-                    Seconds = 10;
-                    startCounting();
-                    resendActivationCode();
+            Seconds = 10;
+            startCounting();
+            resendActivationCode();
         }
 
     }
 
     @Override
-    public void onNetworkDisconnected() {
+    public void onNetworkDisconnected()
+    {
         MessageDialog.setContentText(getString(R.string.noInternetText)).show();
     }
 
@@ -149,7 +179,8 @@ public class UserActivationAccountFragment extends Fragment
         checkRegistrationStatus();
     }
 
-    private void setupDialogs() {
+    private void setupDialogs()
+    {
         Loading = new SweetDialog.Builder()
                 .setDialogType(SweetAlertDialog.PROGRESS_TYPE)
                 .setTitleText(getString(R.string.waitingText))
@@ -160,7 +191,8 @@ public class UserActivationAccountFragment extends Fragment
                 .build(getContext());
     }
 
-    private void checkRegistrationStatus() {
+    private void checkRegistrationStatus()
+    {
         Bundle bundle = getArguments();
         assert bundle != null;
         int status = bundle.getInt("status");
@@ -172,8 +204,8 @@ public class UserActivationAccountFragment extends Fragment
         {
             ActivationCode = status + "";
         }
-                Seconds = 10;
-                startCounting();
+        Seconds = 10;
+        startCounting();
     }
 
     private void activeAccount(ActivationAccount account)
@@ -192,7 +224,7 @@ public class UserActivationAccountFragment extends Fragment
     }
 
     private ActivationAccount getActivationAccountModel()
-     {
+    {
         ActivationAccount activationAccount = new ActivationAccount();
         String mobileNumber = UserPreference.getUserMobileNumber();
         activationAccount.setMobileNumber(mobileNumber);
@@ -229,26 +261,34 @@ public class UserActivationAccountFragment extends Fragment
             SchedulerTask = null;
         }
         SchedulerTask = new Timer();
-        SchedulerTask.schedule(new TimerTask() {
+        SchedulerTask.schedule(new TimerTask()
+        {
             @Override
-            public void run() {
+            public void run()
+            {
 
-                if (Seconds > 0) {
+                if (Seconds > 0)
+                {
                     final int minuets = Seconds / 60;
                     final int seconds = Seconds % 60;
-                    Seconds =  Seconds - 1;
+                    Seconds = Seconds - 1;
 
-                    getActivity().runOnUiThread(new Runnable() {
+                    getActivity().runOnUiThread(new Runnable()
+                    {
                         @Override
-                        public void run() {
+                        public void run()
+                        {
                             TxtTimeReminder.setText("شما میتوانید تا " + minuets + " دقیقه و " + seconds + " ثانیه دیگر، درخواست برای دریافت کد فعال سازی مجدد کنید.");
                         }
                     });
                 }
-                else {
-                    getActivity().runOnUiThread(new Runnable() {
+                else
+                {
+                    getActivity().runOnUiThread(new Runnable()
+                    {
                         @Override
-                        public void run() {
+                        public void run()
+                        {
                             BtnReSendCode.setEnabled(true);
                             TxtTimeReminder.setVisibility(View.INVISIBLE);
                         }

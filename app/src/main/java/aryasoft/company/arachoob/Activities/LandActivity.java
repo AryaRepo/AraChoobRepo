@@ -2,8 +2,10 @@ package aryasoft.company.arachoob.Activities;
 
 import android.content.Context;
 import android.content.Intent;
+import android.content.pm.ApplicationInfo;
 import android.graphics.Color;
 import android.support.annotation.Nullable;
+import android.support.v4.content.FileProvider;
 import android.support.v4.view.GravityCompat;
 import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.AppCompatActivity;
@@ -23,13 +25,23 @@ import com.aurelhubert.ahbottomnavigation.AHBottomNavigation;
 import com.aurelhubert.ahbottomnavigation.AHBottomNavigationItem;
 import com.bumptech.glide.Glide;
 
+import java.io.File;
+import java.io.FileInputStream;
+import java.io.FileOutputStream;
+import java.io.IOException;
+import java.io.InputStream;
+import java.io.OutputStream;
+
+import aryasoft.company.arachoob.BuildConfig;
 import aryasoft.company.arachoob.Implementations.BottomBarTabSelectListener;
 import aryasoft.company.arachoob.R;
 import aryasoft.company.arachoob.Utils.CuteToast;
+import aryasoft.company.arachoob.Utils.SharedPreferencesHelper;
 import aryasoft.company.arachoob.Utils.UserPreference;
 import uk.co.chrisjenx.calligraphy.CalligraphyContextWrapper;
 
-public class LandActivity extends AppCompatActivity implements View.OnClickListener {
+public class LandActivity extends AppCompatActivity implements View.OnClickListener
+{
 
     public static int CurrentPage = BottomBarTabSelectListener.TAB_HOME;
     private AHBottomNavigation BottomNavigation;
@@ -48,13 +60,16 @@ public class LandActivity extends AppCompatActivity implements View.OnClickListe
     private ImageButton BtnShowShoppingCart;
 
     @Override
-    protected void attachBaseContext(Context newBase) {
+    protected void attachBaseContext(Context newBase)
+    {
         super.attachBaseContext(CalligraphyContextWrapper.wrap(newBase));
     }
 
     @Override
-    public void onClick(View view) {
-        switch (view.getId()) {
+    public void onClick(View view)
+    {
+        switch (view.getId())
+        {
             case R.id.row_manage_profile:
                 showProfileManagement();
                 break;
@@ -70,42 +85,54 @@ public class LandActivity extends AppCompatActivity implements View.OnClickListe
             case R.id.btn_show_shopping_cart:
                 showOrders();
                 break;
+            case R.id.row_share_app:
+                ShareApplication(this);
+                break;
         }
         Drawer.closeDrawer(Gravity.END);
     }
 
-    private void showProfileManagement() {
+    private void showProfileManagement()
+    {
         Intent profileManagementIntent = new Intent(LandActivity.this, ProfileActivity.class);
         startActivity(profileManagementIntent);
     }
 
-    private void showSignInOrUp() {
-        if (UserPreference.isUserLogin()) {
+    private void showSignInOrUp()
+    {
+        if (UserPreference.isUserLogin())
+        {
             signOut();
-        } else {
+        }
+        else
+        {
             Intent signInOrUPIntent = new Intent(LandActivity.this, SignUpSignInActivity.class);
             startActivity(signInOrUPIntent);
         }
     }
 
-    private void showOrdersHistory() {
+    private void showOrdersHistory()
+    {
         Intent ordersHistoryIntent = new Intent(LandActivity.this, OrderHistoryActivity.class);
         startActivity(ordersHistoryIntent);
     }
 
-    private void showTickets() {
+    private void showTickets()
+    {
         Intent ticketsIntent = new Intent(LandActivity.this, TicketsActivity.class);
         startActivity(ticketsIntent);
     }
 
-    private void showOrders() {
+    private void showOrders()
+    {
         Intent orderBasketIntent = new Intent(LandActivity.this, OrderBasketActivity.class);
         startActivity(orderBasketIntent);
-        finish();
+        //finish();
     }
 
     @Override
-    protected void onCreate(@Nullable Bundle savedInstanceState) {
+    protected void onCreate(@Nullable Bundle savedInstanceState)
+    {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_land);
         setupToolbar();
@@ -115,43 +142,55 @@ public class LandActivity extends AppCompatActivity implements View.OnClickListe
     }
 
     @Override
-    protected void onResume() {
+    protected void onResume()
+    {
         super.onResume();
         checkUserLoginStatus();
     }
 
     @Override
-    public boolean onCreateOptionsMenu(Menu menu) {
+    public boolean onCreateOptionsMenu(Menu menu)
+    {
         getMenuInflater().inflate(R.menu.main_menu, menu);
         return super.onCreateOptionsMenu(menu);
     }
 
     @Override
-    public boolean onOptionsItemSelected(MenuItem item) {
-        if (item.getItemId() == R.id.action_nav_menu) {
+    public boolean onOptionsItemSelected(MenuItem item)
+    {
+        if (item.getItemId() == R.id.action_nav_menu)
+        {
             Drawer.openDrawer(GravityCompat.END);
         }
         return super.onOptionsItemSelected(item);
     }
 
     @Override
-    public void onBackPressed() {
-        if (Drawer.isDrawerOpen(GravityCompat.END)) {
+    public void onBackPressed()
+    {
+        if (Drawer.isDrawerOpen(GravityCompat.END))
+        {
             Drawer.closeDrawer(GravityCompat.END);
-        } else if (CurrentPage == BottomBarTabSelectListener.TAB_CATEGORY || CurrentPage == BottomBarTabSelectListener.TAB_SEARCH) {
+        }
+        else if (CurrentPage == BottomBarTabSelectListener.TAB_CATEGORY || CurrentPage == BottomBarTabSelectListener.TAB_SEARCH)
+        {
             BottomNavigation.setCurrentItem(BottomBarTabSelectListener.TAB_HOME);
-        } else {
+        }
+        else
+        {
             super.onBackPressed();
         }
     }
 
-    private void setupToolbar() {
+    private void setupToolbar()
+    {
         Toolbar toolbar = findViewById(R.id.include_land_toolbar);
         toolbar.setTitle("");
         setSupportActionBar(toolbar);
     }
 
-    private void initializeViews() {
+    private void initializeViews()
+    {
         BottomNavigation = findViewById(R.id.bottomNavLand);
         RowLoginRegister = findViewById(R.id.row_loginRegister);
         RowManageProfile = findViewById(R.id.row_manage_profile);
@@ -161,7 +200,6 @@ public class LandActivity extends AppCompatActivity implements View.OnClickListe
         RowContactUs = findViewById(R.id.row_contact_us);
         RowAboutUs = findViewById(R.id.row_about_us);
         BtnShowShoppingCart = findViewById(R.id.btn_show_shopping_cart);
-
         RowLoginRegister.setOnClickListener(this);
         RowManageProfile.setOnClickListener(this);
         RowShareApp.setOnClickListener(this);
@@ -180,13 +218,14 @@ public class LandActivity extends AppCompatActivity implements View.OnClickListe
         Glide.with(this).load(R.drawable.ic_man).into(ImgProfilePhoto);
     }
 
-    private void setupMainBottomBar() {
+    private void setupMainBottomBar()
+    {
         AHBottomNavigationItem categoryTabItem = new AHBottomNavigationItem(R.string.tabTitleCategory, R.drawable.ic_big_and_small_dots, R.color.bottomBarIconColor);
         AHBottomNavigationItem homeTabItem = new AHBottomNavigationItem(R.string.tabTitleHome, R.drawable.home, R.color.bottomBarIconColor);
-        AHBottomNavigationItem searchTabItem = new AHBottomNavigationItem(R.string.tabTitleSearch, R.drawable.magnifier, R.color.bottomBarIconColor);
+        //AHBottomNavigationItem searchTabItem = new AHBottomNavigationItem(R.string.tabTitleSearch, R.drawable.magnifier, R.color.bottomBarIconColor);
         BottomNavigation.addItem(categoryTabItem);
         BottomNavigation.addItem(homeTabItem);
-        BottomNavigation.addItem(searchTabItem);
+        //BottomNavigation.addItem(searchTabItem);
         BottomNavigation.setDefaultBackgroundColor(Color.parseColor("#ffffff"));
         BottomNavigation.setAccentColor(getResources().getColor(R.color.colorAccent));
         BottomNavigation.setInactiveColor(Color.parseColor("#BDBDBD"));
@@ -199,7 +238,8 @@ public class LandActivity extends AppCompatActivity implements View.OnClickListe
         BottomNavigation.setCurrentItem(BottomBarTabSelectListener.TAB_HOME);
     }
 
-    private void checkUserLoginStatus() {
+    private void checkUserLoginStatus()
+    {
         String fullName = UserPreference.getUserFullName() + " ";
         TxtWellcomeUser.setText(String.format(" %s%s", fullName, getString(R.string.welcomeUserText)));
 
@@ -227,4 +267,46 @@ public class LandActivity extends AppCompatActivity implements View.OnClickListe
         new CuteToast.Builder(this).setText(getString(R.string.signoutText)).setDuration(Toast.LENGTH_LONG).show();
     }
 
+    public static void ShareApplication(Context AppContext)
+    {
+        ApplicationInfo app = AppContext.getApplicationInfo();
+        String filePath = app.sourceDir;
+        Intent intent = new Intent(Intent.ACTION_SEND);
+        intent.setType("*/*");
+        File originalApk = new File(filePath);
+        try
+        {
+            File tempFile = new File(AppContext.getExternalCacheDir() + "/ExtractedApk");
+            if (!tempFile.isDirectory())
+            {
+                if (!tempFile.mkdirs())
+                {
+                    return;
+                }
+            }
+            tempFile = new File(tempFile.getPath() + "/" + AppContext.getString(app.labelRes).replace(" ", "").toLowerCase() + ".apk");
+            if (!tempFile.exists())
+            {
+                if (!tempFile.createNewFile())
+                {
+                    return;
+                }
+            }
+            InputStream in = new FileInputStream(originalApk);
+            OutputStream out = new FileOutputStream(tempFile);
+            byte[] buf = new byte[1024];
+            int len;
+            while ((len = in.read(buf)) > 0)
+            {
+                out.write(buf, 0, len);
+            }
+            in.close();
+            out.close();
+            intent.putExtra(Intent.EXTRA_STREAM, FileProvider.getUriForFile(AppContext, BuildConfig.APPLICATION_ID + ".provider", tempFile));
+            AppContext.startActivity(Intent.createChooser(intent, "اشتراک گذاری برنامه با"));
+        } catch (IOException e)
+        {
+            e.printStackTrace();
+        }
+    }
 }

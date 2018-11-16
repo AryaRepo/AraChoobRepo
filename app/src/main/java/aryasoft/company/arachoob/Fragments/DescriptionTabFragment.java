@@ -15,10 +15,16 @@ import aryasoft.company.arachoob.R;
 public class DescriptionTabFragment extends Fragment
 {
     private TextView txtDetailDescription;
+    private String description;
 
     public DescriptionTabFragment()
     {
 
+    }
+
+    public DescriptionTabFragment(String description)
+    {
+        this.description = description;
     }
 
 
@@ -32,7 +38,8 @@ public class DescriptionTabFragment extends Fragment
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState)
     {
         super.onViewCreated(view, savedInstanceState);
-        txtDetailDescription=view.findViewById(R.id.txtDetailDescription);
+        txtDetailDescription = view.findViewById(R.id.txtDetailDescription);
+        txtDetailDescription.setText(description);
 
     }
 }

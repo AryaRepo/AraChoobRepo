@@ -1,27 +1,35 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools"
-    android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    tools:context=".Activities.AllCollectionProductActivity">
+                xmlns:app="http://schemas.android.com/apk/res-auto"
+                xmlns:tools="http://schemas.android.com/tools"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                tools:context=".Activities.AllCollectionProductActivity">
 
     <android.support.v7.widget.Toolbar
         android:id="@+id/toolbarMore"
         android:layout_width="match_parent"
         android:layout_height="?android:actionBarSize"
         android:background="?attr/colorPrimary"
-        android:elevation="3dp"
-        app:titleTextAppearance="@style/rightSideToolbarText"
-        app:title="سلام"/>
+        android:elevation="3dp">
+
+        <TextView
+            android:id="@+id/txtToolbarTitleAllCollectionProduct"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="right"
+            android:drawablePadding="5dp"
+            android:padding="5dp"
+            android:textColor="#fff"
+            android:textSize="17sp"/>
+    </android.support.v7.widget.Toolbar>
 
     <android.support.v7.widget.RecyclerView
         android:id="@+id/recyclerMore"
-        android:layout_width="wrap_content"
+        android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:layout_below="@+id/toolbarMore"
         android:layout_centerHorizontal="true"
-        android:layout_marginTop="3dp"
-        tools:listitem="@layout/item_layout_product"/>
+        android:layout_marginTop="3dp"/>
 
 </RelativeLayout>

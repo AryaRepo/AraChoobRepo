@@ -9,16 +9,19 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
+
 import com.bumptech.glide.Glide;
+
 import java.util.ArrayList;
 
+import aryasoft.company.arachoob.ApiConnection.ApiModels.ProductCommentApiModel;
 import aryasoft.company.arachoob.Models.CommentModel;
 import aryasoft.company.arachoob.R;
 
 public class CommentsAdapter extends RecyclerView.Adapter<CommentsAdapter.SimilarProductAdapterViewHolder>
 {
     private Context context;
-    private ArrayList<CommentModel> commentList;
+    private ArrayList<ProductCommentApiModel> commentList;
 
     public CommentsAdapter(Context context)
     {
@@ -36,24 +39,24 @@ public class CommentsAdapter extends RecyclerView.Adapter<CommentsAdapter.Simila
     @Override
     public void onBindViewHolder(@NonNull SimilarProductAdapterViewHolder holder, int position)
     {
-
-        if(commentList.size()==0)
+        if (commentList.size() == 0)
+        {
             return;
+        }
         holder.txtUserProfileName.setText(commentList.get(position).UserNameFamily);
         holder.txtCommentTitle.setText(commentList.get(position).CommentTitle);
         holder.txtCommentText.setText(commentList.get(position).CommentText);
-        Glide.with(context).load(context.getString(R.string.BaseUrl)+context.getString(R.string.ProductImageFolder)).into(holder.imgUserProfileThumb);
 
     }
 
     @Override
     public int getItemCount()
     {
-        return 10;
-      //  return similarProductList.size();
+
+        return commentList.size();
     }
 
-    public void addSimilarProduct(ArrayList<CommentModel> commentList)
+    public void addCommentList(ArrayList<ProductCommentApiModel> commentList)
     {
         this.commentList.addAll(commentList);
         this.notifyDataSetChanged();
@@ -65,14 +68,15 @@ public class CommentsAdapter extends RecyclerView.Adapter<CommentsAdapter.Simila
         private TextView txtCommentTitle;
         private TextView txtCommentText;
         private TextView txtUserProfileName;
+
         SimilarProductAdapterViewHolder(@NonNull View itemView)
         {
             super(itemView);
             //------------------
-            imgUserProfileThumb=itemView.findViewById(R.id.imgUserProfileThumb);
-            txtCommentTitle=itemView.findViewById(R.id.txtCommentTitle);
-            txtCommentText=itemView.findViewById(R.id.txtCommentText);
-            txtUserProfileName=itemView.findViewById(R.id.txtUserProfileName);
+            imgUserProfileThumb = itemView.findViewById(R.id.imgUserProfileThumb);
+            txtCommentTitle = itemView.findViewById(R.id.txtCommentTitle);
+            txtCommentText = itemView.findViewById(R.id.txtCommentText);
+            txtUserProfileName = itemView.findViewById(R.id.txtUserProfileName);
         }
     }
 }

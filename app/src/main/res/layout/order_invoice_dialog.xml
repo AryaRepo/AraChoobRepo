@@ -1,0 +1,72 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+              xmlns:tools="http://schemas.android.com/tools"
+              android:layout_width="match_parent"
+              android:layout_height="wrap_content"
+              android:orientation="vertical">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@color/colorPrimaryDark"
+        android:orientation="vertical">
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_margin="8dp"
+            android:gravity="center"
+            android:padding="5dp"
+            android:text="نهایی کردن سفارش"
+            android:textColor="#FFF"
+            android:textSize="17sp"/>
+    </LinearLayout>
+
+    <ImageView
+        android:id="@+id/imgInvoiceImage"
+        android:layout_width="120dp"
+        android:layout_height="120dp"
+        android:visibility="gone"
+        android:layout_gravity="center_horizontal"
+        android:layout_marginTop="8dp"/>
+
+    <Button
+        android:id="@+id/btnAttachImageToOrder"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center_horizontal"
+        android:layout_marginTop="8dp"
+        android:layout_marginBottom="8dp"
+        android:background="@drawable/simple_button_drawable"
+        android:padding="5dp"
+        android:text="ضمیمه کردن عکس به سفارش"
+        android:textColor="#fff"/>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:layout_marginLeft="50dp"
+        android:layout_marginRight="5dp"
+        android:background="@drawable/line_divider"/>
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:gravity="top|right"
+        android:lineSpacingExtra="8dp"
+        android:padding="8dp"
+        android:text="کاربر عزیز اگر مایل به افزودن یک عکس به سبد خود هستید میتوانید از قسمت بالا عکس خود را ضمیمه کنید."
+        android:textColor="#000"
+        android:textDirection="rtl"
+        android:textSize="13sp"
+        android:textStyle="bold"/>
+
+    <Button
+        android:id="@+id/btnFinalizeOrder"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@drawable/simple_button_drawable"
+        android:text="ثبت فاکتور"
+        android:textColor="#FFF"
+        android:textSize="16sp"/>
+</LinearLayout>
