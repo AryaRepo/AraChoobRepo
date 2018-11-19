@@ -100,6 +100,7 @@ public class ProductCollectionAdapter extends RecyclerView.Adapter<ProductCollec
                 detailsIntent.putExtra("productTitle", clickedProduct.ProductTitle);
                 detailsIntent.putExtra("primaryPrice", clickedProduct.CoverPrice);
                 detailsIntent.putExtra("productImage", clickedProduct.ImageName);
+                detailsIntent.putExtra("productCount", clickedProduct.ProductCount);
                 ContextInstance.startActivity(detailsIntent);
             }
         });

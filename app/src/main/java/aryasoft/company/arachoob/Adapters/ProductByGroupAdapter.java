@@ -84,6 +84,7 @@ public class ProductByGroupAdapter extends RecyclerView.Adapter<ProductByGroupAd
                 detailsIntent.putExtra("productTitle", clickedProduct.ProductTitle);
                 detailsIntent.putExtra("primaryPrice", clickedProduct.CoverPrice);
                 detailsIntent.putExtra("productImage", clickedProduct.ImageName);
+                detailsIntent.putExtra("productCount", clickedProduct.ProductCount);
                 context.startActivity(detailsIntent);
             }
         });

@@ -86,6 +86,7 @@ public class SimilarProductAdapter extends RecyclerView.Adapter<SimilarProductAd
                 similarProduct.putExtra("productTitle", similarProductList.get(holder.getAdapterPosition()).ProductTitle);
                 similarProduct.putExtra("productImage", similarProductList.get(holder.getAdapterPosition()).ImageName);
                 similarProduct.putExtra("primaryPrice", similarProductList.get(holder.getAdapterPosition()).CoverPrice);
+                similarProduct.putExtra("productCount", similarProductList.get(holder.getAdapterPosition()).ProductCount);
                 context.startActivity(similarProduct);
                 ((DetailActivity) context).finish();
             }

@@ -34,14 +34,17 @@ import uk.co.chrisjenx.calligraphy.CalligraphyContextWrapper;
 public class DetailActivity extends AppCompatActivity implements OnDataReceiveStateListener
 {
     private static int currentPage = 0;
+    //------------
     private int productId;
     private String productTitle;
     private String productImage;
     private int primaryPrice;
     private int discountPercent;
+    private int productCount;
+    //-----------------
     private TextView txtProductTitle;
     private TextView txtPrimaryPrice;
-    private TextView txtProductDetailDiscount;
+    private TextView  txtProductGroupTitle;
     private TextView txtSecondaryPrice;
     private TextView txtUnitTitle;
     private Button btnAddToOrderBasket;
@@ -83,6 +86,7 @@ public class DetailActivity extends AppCompatActivity implements OnDataReceiveSt
         productTitle = getIntent().getStringExtra("productTitle");
         productImage = getIntent().getStringExtra("productImage");
         primaryPrice = getIntent().getIntExtra("primaryPrice", 0);
+        productCount = getIntent().getIntExtra("productCount", 0);
         Loading = new SweetLoading.Builder().build(this);
     }
 
@@ -91,7 +95,7 @@ public class DetailActivity extends AppCompatActivity implements OnDataReceiveSt
         txtProductTitle = findViewById(R.id.txtProductTitle);
         txtPrimaryPrice = findViewById(R.id.txtPrimaryPrice);
         txtSecondaryPrice = findViewById(R.id.txtSecondaryPrice);
-        txtProductDetailDiscount = findViewById(R.id.txtSecondaryPrice);
+        txtProductGroupTitle = findViewById(R.id.txtProductGroupTitle);
         txtUnitTitle = findViewById(R.id.txtUnitTitle);
         btnAddToOrderBasket = findViewById(R.id.btnAddToOrderBasket);
         VectorDrawablePreLollipopHelper.SetVectors(getResources(), new VectorView(R.drawable.ic_myshopping_basket, btnAddToOrderBasket, VectorDrawablePreLollipopHelper.MyDirType.end));
@@ -113,14 +117,18 @@ public class DetailActivity extends AppCompatActivity implements OnDataReceiveSt
             @Override
             public void onClick(View v)
             {
-                SharedPreferencesHelper.initPreferences(v.getContext());
+                if(productCount<=0)
+                {
+                    new CuteToast.Builder(DetailActivity.this).setText("کالا موجود نیست !").setDuration(Toast.LENGTH_LONG).show();
+                    return;
+                }
                 if (!ShoppingCartManger.AddProductToCart(productId))
                 {
-                    Toast.makeText(DetailActivity.this, "محصول به سبد سفارش اضافه گردید.", Toast.LENGTH_SHORT).show();
+                    new CuteToast.Builder(DetailActivity.this).setText("محصول به سبد سفارش اضافه گردید.").setDuration(Toast.LENGTH_LONG).show();
                 }
                 else
                 {
-                    Toast.makeText(DetailActivity.this, "این محصول قبلا به سبداضافه شده!", Toast.LENGTH_SHORT).show();
+                    new CuteToast.Builder(DetailActivity.this).setText("این محصول قبلا به سبداضافه شده!").setDuration(Toast.LENGTH_LONG).show();
                 }
             }
         });
@@ -152,24 +160,6 @@ public class DetailActivity extends AppCompatActivity implements OnDataReceiveSt
         }, 3000, 3000);
     }
 
-    private void changeTabsFont()
-    {
-        ViewGroup vg = (ViewGroup) detailTabLayout.getChildAt(0);
-        int tabsCount = vg.getChildCount();
-        for (int j = 0; j < tabsCount; j++)
-        {
-            ViewGroup vgTab = (ViewGroup) vg.getChildAt(j);
-            int tabChildesCount = vgTab.getChildCount();
-            for (int i = 0; i < tabChildesCount; i++)
-            {
-                View tabViewChild = vgTab.getChildAt(i);
-                if (tabViewChild instanceof TextView)
-                {
-                    ((TextView) tabViewChild).setTypeface(Typeface.createFromAsset(getAssets(), "fonts/iran_yekan_mobile_regular.ttf"), Typeface.NORMAL);
-                }
-            }
-        }
-    }
 
     private void getDetailInfo()
     {
@@ -178,6 +168,7 @@ public class DetailActivity extends AppCompatActivity implements OnDataReceiveSt
             @Override
             public void OnFetchProductDetailInfo(ProductDetailInfoApiModel detailInfo)
             {
+                txtProductGroupTitle.setText(" دسته بندی : "+detailInfo.ProductGroup);
                 discountPercent = detailInfo.DiscountPercent;
                 if (discountPercent == 0)
                 {
@@ -185,8 +176,6 @@ public class DetailActivity extends AppCompatActivity implements OnDataReceiveSt
                 }
                 else
                 {
-                    txtProductDetailDiscount.setVisibility(View.VISIBLE);
-                    txtProductDetailDiscount.setText(discountPercent + " % ");
                     txtSecondaryPrice.setText("قیمت با تخفیف" + calculateDiscount(primaryPrice, discountPercent) + " تومان ");
                 }
                 txtUnitTitle.setText("واحد کالا " + detailInfo.UnitTitle + " " + "می باشد");
@@ -210,5 +199,22 @@ public class DetailActivity extends AppCompatActivity implements OnDataReceiveSt
         return salesPrice - finalPrice;
     }
 
-
+    private void changeTabsFont()
+    {
+        ViewGroup vg = (ViewGroup) detailTabLayout.getChildAt(0);
+        int tabsCount = vg.getChildCount();
+        for (int j = 0; j < tabsCount; j++)
+        {
+            ViewGroup vgTab = (ViewGroup) vg.getChildAt(j);
+            int tabChildesCount = vgTab.getChildCount();
+            for (int i = 0; i < tabChildesCount; i++)
+            {
+                View tabViewChild = vgTab.getChildAt(i);
+                if (tabViewChild instanceof TextView)
+                {
+                    ((TextView) tabViewChild).setTypeface(Typeface.createFromAsset(getAssets(), "fonts/iran_yekan_mobile_regular.ttf"), Typeface.NORMAL);
+                }
+            }
+        }
+    }
 }
