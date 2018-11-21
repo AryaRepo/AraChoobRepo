@@ -20,7 +20,7 @@
 
         <ImageView
             android:id="@+id/imgEmptySimilarProduct"
-            app:srcCompat="@drawable/confused_emoji"
+            app:srcCompat="@drawable/ic_products"
             android:layout_width="80dp"
             android:layout_height="80dp"
             android:layout_centerInParent="true"/>

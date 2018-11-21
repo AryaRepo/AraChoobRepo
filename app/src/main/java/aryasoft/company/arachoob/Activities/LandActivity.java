@@ -222,10 +222,10 @@ public class LandActivity extends AppCompatActivity implements View.OnClickListe
     {
         AHBottomNavigationItem categoryTabItem = new AHBottomNavigationItem(R.string.tabTitleCategory, R.drawable.ic_big_and_small_dots, R.color.bottomBarIconColor);
         AHBottomNavigationItem homeTabItem = new AHBottomNavigationItem(R.string.tabTitleHome, R.drawable.home, R.color.bottomBarIconColor);
-        //AHBottomNavigationItem searchTabItem = new AHBottomNavigationItem(R.string.tabTitleSearch, R.drawable.magnifier, R.color.bottomBarIconColor);
+        AHBottomNavigationItem searchTabItem = new AHBottomNavigationItem(R.string.tabTitleSearch, R.drawable.magnifier, R.color.bottomBarIconColor);
         BottomNavigation.addItem(categoryTabItem);
         BottomNavigation.addItem(homeTabItem);
-        //BottomNavigation.addItem(searchTabItem);
+        BottomNavigation.addItem(searchTabItem);
         BottomNavigation.setDefaultBackgroundColor(Color.parseColor("#ffffff"));
         BottomNavigation.setAccentColor(getResources().getColor(R.color.colorAccent));
         BottomNavigation.setInactiveColor(Color.parseColor("#BDBDBD"));

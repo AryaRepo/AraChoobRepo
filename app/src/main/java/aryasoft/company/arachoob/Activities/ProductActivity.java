@@ -33,7 +33,7 @@ public class ProductActivity extends AppCompatActivity implements OnDataReceiveS
     private ProductModule productModule;
     private SweetLoading Loading;
     private boolean isLoading=false;
-
+    private boolean isLoadMoreEnd=false;
     @Override
     public void OnDataReceiveState(Throwable ex)
     {
@@ -81,6 +81,10 @@ public class ProductActivity extends AppCompatActivity implements OnDataReceiveS
             @Override
             public void onScrolled(@NonNull RecyclerView recyclerView, int dx, int dy)
             {
+                if (isLoadMoreEnd)
+                {
+                    return;
+                }
                 if (productByGroupAdapter.getItemCount() >= 10)
                 {
                     if (isLoading)
@@ -103,7 +107,7 @@ public class ProductActivity extends AppCompatActivity implements OnDataReceiveS
     }
 
 
-    private void getProductByGroupId(int productGroupId,int offsetNumber)
+    private void getProductByGroupId(final int productGroupId, int offsetNumber)
     {
         Loading.show();
         productModule.setOnGetProductByGroupIdListener(new OnGetProductByGroupIdListener()
@@ -111,9 +115,16 @@ public class ProductActivity extends AppCompatActivity implements OnDataReceiveS
             @Override
             public void OnGetProductByGroupId(ArrayList<ProductDataModel> productList)
             {
-                Loading.hide();
-                productByGroupAdapter.addToProductList(productList);
+                if (productList.size() == 0)
+                {
+                    isLoadMoreEnd=true;
+                }
+                else
+                {
+                    productByGroupAdapter.addToProductList(productList);
+                }
                 isLoading=false;
+                Loading.hide();
             }
         });
         productModule.getProductByGroupId(productGroupId, offsetNumber, 10);

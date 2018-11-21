@@ -33,7 +33,8 @@ import retrofit2.Response;
 import uk.co.chrisjenx.calligraphy.CalligraphyContextWrapper;
 
 public class TicketChatActivity extends AppCompatActivity implements ShowChatsImpl.OnChatsReceivedListener,
-        SendMessageImpl.OnMessageSentListener, Networking.NetworkStatusListener, LoadMoreChatsImpl.OnMoreChatsReceivedListener {
+        SendMessageImpl.OnMessageSentListener, Networking.NetworkStatusListener, LoadMoreChatsImpl.OnMoreChatsReceivedListener
+{
     private RecyclerView recyclerChatTicket;
     private EditText edtMessageText;
     private ImageButton btnSendMessage;
@@ -46,12 +47,14 @@ public class TicketChatActivity extends AppCompatActivity implements ShowChatsIm
     private boolean DataEnded = false;
 
     @Override
-    protected void attachBaseContext(Context newBase) {
+    protected void attachBaseContext(Context newBase)
+    {
         super.attachBaseContext(CalligraphyContextWrapper.wrap(newBase));
     }
 
     @Override
-    protected void onCreate(Bundle savedInstanceState) {
+    protected void onCreate(Bundle savedInstanceState)
+    {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_ticket_chat);
         initViews();
@@ -60,9 +63,11 @@ public class TicketChatActivity extends AppCompatActivity implements ShowChatsIm
     }
 
     @Override
-    public void onChatsReceived(Response<ArrayList<TicketChatsModel>> response) {
+    public void onChatsReceived(Response<ArrayList<TicketChatsModel>> response)
+    {
         Loading.hide();
-        if (response.body() != null) {
+        if (response.body() != null)
+        {
             ChatsAdapter.addToTicketChatList(response.body());
             moveToEndOfList();
         }
@@ -70,51 +75,72 @@ public class TicketChatActivity extends AppCompatActivity implements ShowChatsIm
     }
 
     @Override
-    public void onMoreChatsReceived(Response<ArrayList<TicketChatsModel>> response) {
+    public void onMoreChatsReceived(Response<ArrayList<TicketChatsModel>> response)
+    {
         Loading.hide();
         if (response.body() != null)
-            if (response.body().size() > 0) {
+        {
+            if (response.body().size() > 0)
+            {
                 ChatsAdapter.addToTicketChatList(response.body());
                 IsLoading = false;
-            } else {
+            }
+            else
+            {
                 DataEnded = true;
                 IsLoading = false;
             }
+        }
     }
 
     @Override
-    public void onMessageSent(Response<Boolean> response) {
+    public void onMessageSent(Response<Boolean> response)
+    {
         Loading.hide();
         if (response.body() != null)
-            if (response.body()) {
+        {
+            if (response.body())
+            {
                 new CuteToast.Builder(this).setText(getString(R.string.MessageSentText)).setDuration(Toast.LENGTH_LONG).show();
                 edtMessageText.setText("");
                 getChats(getIntent().getIntExtra("messageId", 0));
-            } else {
+            }
+            else
+            {
                 new CuteToast.Builder(this).setText(getString(R.string.MessageDidNotSendText)).setDuration(Toast.LENGTH_LONG).show();
             }
+        }
     }
 
     @Override
-    public void onNetworkConnected(int requestCode) {
+    public void onNetworkConnected(int requestCode)
+    {
         if (requestCode == 12)
+        {
             getChats(getIntent().getIntExtra("messageId", 0));
+        }
         else if (requestCode == 13)
+        {
             sendMessage(getMessageData());
+        }
     }
 
     @Override
-    public void onNetworkDisconnected() {
+    public void onNetworkDisconnected()
+    {
         MessageDialog.setContentText(getString(R.string.noInternetText)).show();
     }
 
-    private void initViews() {
+    private void initViews()
+    {
         recyclerChatTicket = findViewById(R.id.recyclerChatTicket);
         edtMessageText = findViewById(R.id.edtMessageText);
         btnSendMessage = findViewById(R.id.btnSendMessage);
-        btnSendMessage.setOnClickListener(new View.OnClickListener() {
+        btnSendMessage.setOnClickListener(new View.OnClickListener()
+        {
             @Override
-            public void onClick(View v) {
+            public void onClick(View v)
+            {
                 Networking.checkNetwork(TicketChatActivity.this, TicketChatActivity.this, 13);
             }
         });
@@ -129,7 +155,8 @@ public class TicketChatActivity extends AppCompatActivity implements ShowChatsIm
                 .build(this);
     }
 
-    private void setupRecyclerView() {
+    private void setupRecyclerView()
+    {
         ChatsAdapter = new TicketChatsAdapter(this);
         final LinearLayoutManager linearLayoutManager = new LinearLayoutManager(this);
         RecyclerInstaller recyclerInstaller = RecyclerInstaller.build();
@@ -139,18 +166,24 @@ public class TicketChatActivity extends AppCompatActivity implements ShowChatsIm
                 .setRecyclerView(recyclerChatTicket)
                 .setup();
 
-        recyclerChatTicket.addOnScrollListener(new RecyclerView.OnScrollListener() {
+        recyclerChatTicket.addOnScrollListener(new RecyclerView.OnScrollListener()
+        {
             @Override
-            public void onScrolled(@NonNull RecyclerView recyclerView, int dx, int dy) {
-                if (ChatsAdapter.getItemCount() >= TakeNumber) {
-                    if (!DataEnded) {
+            public void onScrolled(@NonNull RecyclerView recyclerView, int dx, int dy)
+            {
+                if (ChatsAdapter.getItemCount() >= TakeNumber)
+                {
+                    if (!DataEnded)
+                    {
                         int VisibleItemCount = linearLayoutManager.getChildCount();
                         int TotalItemCount = linearLayoutManager.getItemCount();
                         int PastVisibleItem = linearLayoutManager.findFirstVisibleItemPosition();
-                        if (IsLoading) {
+                        if (IsLoading)
+                        {
                             return;
                         }
-                        if ((VisibleItemCount + PastVisibleItem) >= TotalItemCount) {
+                        if ((VisibleItemCount + PastVisibleItem) >= TotalItemCount)
+                        {
                             SkipNumber += TakeNumber;
                             IsLoading = true;
                             getMoreChats(getIntent().getIntExtra("messageId", 0));
@@ -162,7 +195,8 @@ public class TicketChatActivity extends AppCompatActivity implements ShowChatsIm
         });
     }
 
-    private void getChats(int messageId) {
+    private void getChats(int messageId)
+    {
         Loading.show();
         AraApi araApi = ApiServiceGenerator.getApiService();
         SkipNumber = recyclerChatTicket.getAdapter().getItemCount();
@@ -170,20 +204,23 @@ public class TicketChatActivity extends AppCompatActivity implements ShowChatsIm
         showChatsCall.enqueue(new ShowChatsImpl(this));
     }
 
-    private void getMoreChats(int messageId) {
+    private void getMoreChats(int messageId)
+    {
         AraApi araApi = ApiServiceGenerator.getApiService();
         Call<ArrayList<TicketChatsModel>> showChatsCall = araApi.showChats(messageId, SkipNumber, TakeNumber);
         showChatsCall.enqueue(new ShowChatsImpl(this));
     }
 
-    private void sendMessage(Message message) {
+    private void sendMessage(Message message)
+    {
         Loading.show();
         AraApi araApi = ApiServiceGenerator.getApiService();
         Call<Boolean> sendMessageCall = araApi.sendMessage(message);
         sendMessageCall.enqueue(new SendMessageImpl(this));
     }
 
-    private Message getMessageData() {
+    private Message getMessageData()
+    {
         Message message = new Message();
         message.setMessageId(getIntent().getIntExtra("messageId", 0));
         message.setUserId(UserPreference.getUserId());

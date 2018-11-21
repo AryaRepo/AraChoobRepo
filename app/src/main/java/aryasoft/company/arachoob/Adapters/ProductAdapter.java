@@ -20,19 +20,19 @@ import aryasoft.company.arachoob.Activities.DetailActivity;
 import aryasoft.company.arachoob.ApiConnection.ApiModels.ProductDataModel;
 import aryasoft.company.arachoob.R;
 
-public class ProductCollectionAdapter extends RecyclerView.Adapter<ProductCollectionAdapter.ProductViewHolder>
+public class ProductAdapter extends RecyclerView.Adapter<ProductAdapter.ProductViewHolder>
 {
 
     private ArrayList<ProductDataModel> products;
     private Context ContextInstance;
 
-    public ProductCollectionAdapter(Context contextInstance)
+    public ProductAdapter(Context contextInstance)
     {
         products = new ArrayList<>();
         ContextInstance = contextInstance;
     }
 
-    public ProductCollectionAdapter(ArrayList<ProductDataModel> products, Context contextInstance)
+    public ProductAdapter(ArrayList<ProductDataModel> products, Context contextInstance)
     {
         this.products = products;
         ContextInstance = contextInstance;
@@ -112,6 +112,11 @@ public class ProductCollectionAdapter extends RecyclerView.Adapter<ProductCollec
         this.products.addAll(products);
         this.notifyDataSetChanged();
     }
+    public void clearProductsList()
+    {
+        this.products.clear();
+        this.notifyDataSetChanged();
+    }
 
     private int calculateDiscount(int salesPrice, int discountPercent)
     {
@@ -127,7 +132,6 @@ public class ProductCollectionAdapter extends RecyclerView.Adapter<ProductCollec
         private TextView TxtProductPrimaryPrice;
         private TextView TxtProductDiscountedPrice;
         private TextView txtProductCount;
-
 
         ProductViewHolder(@NonNull View itemView)
         {

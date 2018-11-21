@@ -43,7 +43,6 @@ public class CollectionModule
             @Override
             public void onResponse(@NonNull Call<ArrayList<ProductDataModel>> call, Response<ArrayList<ProductDataModel>> response)
             {
-                Log.i("mycount : ",response.body().size()+"");
                 onGetSectionedCollectionDataListener.OnGetSectionedCollectionData(response.body()!=null?response.body():new ArrayList<ProductDataModel>());
             }
 

@@ -29,6 +29,7 @@ public class OrderHistoryActivity extends AppCompatActivity
     private SweetLoading Loading;
     private OrderModule orderModule;
     private boolean IsLoading = false;
+    private boolean isLoadMoreEnd = false;
 
     @Override
     protected void attachBaseContext(Context newBase)
@@ -66,12 +67,11 @@ public class OrderHistoryActivity extends AppCompatActivity
             {
                 Loading.hide();
                 new CuteToast.Builder(OrderHistoryActivity.this).setText(getString(R.string.noInternetText)).setDuration(Toast.LENGTH_LONG).show();
-                IsLoading=false;
+                IsLoading = false;
             }
         });
         getUserOrders(recyclerOrderHistoryAdapter.getItemCount());
         loadMoreOrders();
-
 
 
     }
@@ -84,12 +84,20 @@ public class OrderHistoryActivity extends AppCompatActivity
             @Override
             public void OnGetUserOrder(ArrayList<GetUserOrderApiModel> userOrdersList)
             {
-                recyclerOrderHistoryAdapter.addToOrderHistoryList(userOrdersList);
+                if (userOrdersList.size() == 0)
+                {
+                    isLoadMoreEnd = true;
+                }
+                else
+                {
+                    recyclerOrderHistoryAdapter.addToOrderHistoryList(userOrdersList);
+                    IsLoading = false;
+                }
                 Loading.hide();
-                IsLoading=false;
+
             }
         });
-        orderModule.getUserOrder(UserPreference.getUserId(),offsetItem, 10);
+        orderModule.getUserOrder(UserPreference.getUserId(), offsetItem, 10);
     }
 
 
@@ -100,6 +108,10 @@ public class OrderHistoryActivity extends AppCompatActivity
             @Override
             public void onScrolled(@NonNull RecyclerView recyclerView, int dx, int dy)
             {
+                if (isLoadMoreEnd)
+                {
+                    return;
+                }
                 if (recyclerOrderHistoryAdapter.getItemCount() >= 10)
                 {
                     if (IsLoading)

@@ -84,7 +84,7 @@
                 android:layout_width="25dp"
                 android:layout_height="25dp"
                 android:clickable="false"
-                app:srcCompat="@drawable/task__1_"/>
+                app:srcCompat="@drawable/ic_products"/>
         </TableRow>
         <TableRow
             android:id="@+id/row_messages"

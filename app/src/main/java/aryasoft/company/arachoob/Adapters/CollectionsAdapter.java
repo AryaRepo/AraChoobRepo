@@ -77,10 +77,10 @@ public class CollectionsAdapter extends RecyclerView.Adapter<CollectionsAdapter.
                         );
             }
         });
-        ProductCollectionAdapter productCollectionAdapter = new ProductCollectionAdapter(currentCollection.Products, ContextInstance);
+        ProductAdapter productAdapter = new ProductAdapter(currentCollection.Products, ContextInstance);
         LinearLayoutManager horizontalLinearLayoutManager = new LinearLayoutManager(ContextInstance, LinearLayoutManager.HORIZONTAL, true);
         holder.RecyclerProducts.setLayoutManager(horizontalLinearLayoutManager);
-        holder.RecyclerProducts.setAdapter(productCollectionAdapter);
+        holder.RecyclerProducts.setAdapter(productAdapter);
     }
 
 

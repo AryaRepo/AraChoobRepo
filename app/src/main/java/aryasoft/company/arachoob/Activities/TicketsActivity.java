@@ -68,7 +68,8 @@ public class TicketsActivity extends AppCompatActivity implements NewTicketImpl.
     }
 
     @Override
-    public void onTicketCreated(Response<Boolean> response) {
+    public void onTicketCreated(Response<Boolean> response)
+    {
         Loading.hide();
         if (response.body() != null)
         {
@@ -85,7 +86,8 @@ public class TicketsActivity extends AppCompatActivity implements NewTicketImpl.
     }
 
     @Override
-    public void onAllTicketReceived(Response<ArrayList<TicketsModel>> response) {
+    public void onAllTicketReceived(Response<ArrayList<TicketsModel>> response)
+    {
         Loading.hide();
         if (response.body() != null)
         {
@@ -93,33 +95,45 @@ public class TicketsActivity extends AppCompatActivity implements NewTicketImpl.
             {
                 updateTicketsList(response.body());
             }
+            else
+            {
+                recyclerTickets.setVisibility(View.GONE);
+                emptyMessagesBox.setVisibility(View.VISIBLE);
+            }
         }
     }
 
     @Override
-    public void onNetworkConnected(int requestCode) {
+    public void onNetworkConnected(int requestCode)
+    {
 
         if (requestCode == 9)
+        {
             createNewTicket();
+        }
         else if (requestCode == 10)
+        {
             getAllTickets();
+        }
     }
 
     @Override
-    public void onNetworkDisconnected() {
+    public void onNetworkDisconnected()
+    {
         MessageDialog.setContentText(getString(R.string.noInternetText)).show();
     }
 
     @Override
-    public void onUserClosedTicket() {
+    public void onUserClosedTicket()
+    {
         getAllTickets();
     }
 
     private void initViews()
     {
-        recyclerTickets=findViewById(R.id.recyclerTickets);
-        fabAddNewTicket=findViewById(R.id.fabAddNewTicket);
-        emptyMessagesBox=findViewById(R.id.emptyMessagesBox);
+        recyclerTickets = findViewById(R.id.recyclerTickets);
+        fabAddNewTicket = findViewById(R.id.fabAddNewTicket);
+        emptyMessagesBox = findViewById(R.id.emptyMessagesBox);
         setupRecyclerTickets();
 
         Loading = new SweetDialog.Builder()
@@ -132,6 +146,7 @@ public class TicketsActivity extends AppCompatActivity implements NewTicketImpl.
                 .build(this);
 
     }
+
     private void initEvents()
     {
         fabAddNewTicket.setOnClickListener(new View.OnClickListener()
@@ -146,23 +161,29 @@ public class TicketsActivity extends AppCompatActivity implements NewTicketImpl.
 
     private void setupRecyclerTickets()
     {
-        recyclerTicketsAdapter=new TicketsAdapter(this, this);
-        recyclerTicketsLayoutManager = new LinearLayoutManager(this,LinearLayoutManager.VERTICAL,false);
+        recyclerTicketsAdapter = new TicketsAdapter(this, this);
+        recyclerTicketsLayoutManager = new LinearLayoutManager(this, LinearLayoutManager.VERTICAL, false);
         recyclerTickets.setLayoutManager(recyclerTicketsLayoutManager);
         recyclerTickets.setAdapter(recyclerTicketsAdapter);
 
-        recyclerTickets.addOnScrollListener(new RecyclerView.OnScrollListener() {
+        recyclerTickets.addOnScrollListener(new RecyclerView.OnScrollListener()
+        {
             @Override
-            public void onScrolled(@NonNull RecyclerView recyclerView, int dx, int dy) {
-                if (recyclerTicketsAdapter.getItemCount() >= TakeNumber) {
-                    if (!DataEnded) {
+            public void onScrolled(@NonNull RecyclerView recyclerView, int dx, int dy)
+            {
+                if (recyclerTicketsAdapter.getItemCount() >= TakeNumber)
+                {
+                    if (!DataEnded)
+                    {
                         int VisibleItemCount = recyclerTicketsLayoutManager.getChildCount();
                         int TotalItemCount = recyclerTicketsLayoutManager.getItemCount();
                         int PastVisibleItem = recyclerTicketsLayoutManager.findFirstVisibleItemPosition();
-                        if (IsLoading) {
+                        if (IsLoading)
+                        {
                             return;
                         }
-                        if ((VisibleItemCount + PastVisibleItem) >= TotalItemCount) {
+                        if ((VisibleItemCount + PastVisibleItem) >= TotalItemCount)
+                        {
                             SkipNumber += TakeNumber;
                             IsLoading = true;
                             getAllTickets();
@@ -178,8 +199,8 @@ public class TicketsActivity extends AppCompatActivity implements NewTicketImpl.
     {
         android.support.v7.app.AlertDialog.Builder MessageDialogAlert = new android.support.v7.app.AlertDialog.Builder(TicketsActivity.this);
         View AlertView = View.inflate(this, R.layout.create_message_dialog_layout, null);
-         edtTicketTitle = AlertView.findViewById(R.id.edtTicketTitle);
-         edtTicketText = AlertView.findViewById(R.id.edtTicketText);
+        edtTicketTitle = AlertView.findViewById(R.id.edtTicketTitle);
+        edtTicketText = AlertView.findViewById(R.id.edtTicketText);
         final Button btnSendTicket = AlertView.findViewById(R.id.btnSendTicket);
         btnSendTicket.setOnClickListener(new View.OnClickListener()
         {

@@ -307,7 +307,6 @@ public class OrderBasketActivity extends AppCompatActivity implements OnDataRece
 
         if (ShoppingCartManger.GetShoppingCart().size() != 0)
         {
-
             getOrderBasketInfo();
             return;
         }
@@ -510,7 +509,7 @@ public class OrderBasketActivity extends AppCompatActivity implements OnDataRece
             }
             return byteArrayOutputStream.toByteArray();
         }
-        return null;
+        return new byte[1];
     }
 
 

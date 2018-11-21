@@ -48,7 +48,9 @@ public class CommentsTabFragment extends Fragment
     private int UserId;
     private SweetLoading Loading;
     private boolean IsLoading;
+    private boolean isLoadMoreEnd = false;
     private CommentModule commentModule;
+
     public CommentsTabFragment()
     {
 
@@ -58,7 +60,7 @@ public class CommentsTabFragment extends Fragment
     {
         this.productComments = productComments;
         this.productId = productId;
-        this.commentModule=new CommentModule();
+        this.commentModule = new CommentModule();
     }
 
 
@@ -104,9 +106,11 @@ public class CommentsTabFragment extends Fragment
             @Override
             public void OnDataReceiveState(Throwable ex)
             {
-                IsLoading=false;
-                if(Loading.isShowing())
+                IsLoading = false;
+                if (Loading.isShowing())
+                {
                     Loading.hide();
+                }
                 new CuteToast.Builder(getActivity()).setText(getString(R.string.noInternetText)).setDuration(Toast.LENGTH_LONG).show();
             }
         });
@@ -129,6 +133,10 @@ public class CommentsTabFragment extends Fragment
             @Override
             public void onScrolled(@NonNull RecyclerView recyclerView, int dx, int dy)
             {
+                if (isLoadMoreEnd)
+                {
+                    return;
+                }
                 if (recyclerCommentAdapter.getItemCount() >= 10)
                 {
                     if (IsLoading)
@@ -141,7 +149,7 @@ public class CommentsTabFragment extends Fragment
                     if ((VisibleItemCount + PastVisibleItem) >= TotalItemCount)
                     {
                         IsLoading = true;
-                        getMoreComments(recyclerCommentAdapter.getItemCount()+10);
+                        getMoreComments(recyclerCommentAdapter.getItemCount() + 10);
                     }
                 }
                 super.onScrolled(recyclerView, dx, dy);
@@ -158,13 +166,21 @@ public class CommentsTabFragment extends Fragment
             @Override
             public void OnLoadMoreComments(ArrayList<ProductCommentApiModel> newCommentsList)
             {
-                productComments.addAll(newCommentsList);
-                recyclerCommentAdapter.addCommentList(productComments);
+                if(newCommentsList.size()==0)
+                {
+                    isLoadMoreEnd=true;
+                }
+                else
+                {
+                    productComments.addAll(newCommentsList);
+                    recyclerCommentAdapter.addCommentList(productComments);
+                    IsLoading = false;
+                }
                 Loading.hide();
-                IsLoading=false;
+
             }
         });
-        commentModule.getProductComments(productId,offsetItem,10);
+        commentModule.getProductComments(productId, offsetItem, 10);
 
     }
 

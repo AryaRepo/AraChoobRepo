@@ -48,7 +48,7 @@
         <ImageView
             android:layout_width="40dp"
             android:layout_height="40dp"
-            app:srcCompat="@drawable/confused_emoji"/>
+            app:srcCompat="@drawable/ic_no_chat"/>
     </LinearLayout>
 
     <android.support.design.widget.FloatingActionButton

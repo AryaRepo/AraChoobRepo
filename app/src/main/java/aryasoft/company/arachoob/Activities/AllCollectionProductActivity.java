@@ -10,11 +10,9 @@ import android.support.v7.widget.Toolbar;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import org.w3c.dom.Text;
-
 import java.util.ArrayList;
 
-import aryasoft.company.arachoob.Adapters.ProductCollectionAdapter;
+import aryasoft.company.arachoob.Adapters.ProductAdapter;
 import aryasoft.company.arachoob.ApiConnection.ApiInterfaceListeners.OnGetSectionedCollectionDataListener;
 import aryasoft.company.arachoob.ApiConnection.ApiModels.ProductDataModel;
 import aryasoft.company.arachoob.ApiConnection.ApiModules.CollectionModule;
@@ -22,7 +20,6 @@ import aryasoft.company.arachoob.R;
 import aryasoft.company.arachoob.Utils.CuteToast;
 import aryasoft.company.arachoob.Utils.ItemDecorationRecycler;
 import aryasoft.company.arachoob.Utils.Listeners.OnDataReceiveStateListener;
-import aryasoft.company.arachoob.Utils.RecyclerInstaller;
 import aryasoft.company.arachoob.Utils.SweetLoading;
 import aryasoft.company.arachoob.Utils.VectorDrawablePreLollipopHelper;
 import aryasoft.company.arachoob.Utils.VectorView;
@@ -38,8 +35,9 @@ public class AllCollectionProductActivity extends AppCompatActivity implements O
     private CollectionModule collectionModule;
     private SweetLoading Loading;
     private GridLayoutManager recyclerGridLayoutManager;
-    private ProductCollectionAdapter recyclerProductCollectionAdapter;
+    private ProductAdapter recyclerProductAdapter;
     private boolean IsLoading = false;
+    private boolean isLoadMoreEnd = false;
 
     @Override
     public void OnDataReceiveState(Throwable ex)
@@ -64,7 +62,7 @@ public class AllCollectionProductActivity extends AppCompatActivity implements O
         initializeViews();
         setupToolbar();
         initializeEvents();
-        getProductBySection(sectionId, collectionId, recyclerProductCollectionAdapter.getItemCount(), 20);
+        getProductBySection(sectionId, collectionId, recyclerProductAdapter.getItemCount(), 20);
     }
 
 
@@ -80,7 +78,7 @@ public class AllCollectionProductActivity extends AppCompatActivity implements O
     private void setupToolbar()
     {
         Toolbar toolbar = findViewById(R.id.toolbarMore);
-        TextView txtToolbarTitle =toolbar.findViewById(R.id.txtToolbarTitleAllCollectionProduct);
+        TextView txtToolbarTitle = toolbar.findViewById(R.id.txtToolbarTitleAllCollectionProduct);
         VectorDrawablePreLollipopHelper.SetVectors(getResources(), new VectorView(R.drawable.ic_more, txtToolbarTitle, VectorDrawablePreLollipopHelper.MyDirType.end));
         setSupportActionBar(toolbar);
         txtToolbarTitle.setText(collectionTitle);
@@ -92,10 +90,10 @@ public class AllCollectionProductActivity extends AppCompatActivity implements O
         Loading = new SweetLoading.Builder().build(this);
         RecyclerMore = findViewById(R.id.recyclerMore);
         recyclerGridLayoutManager = new GridLayoutManager(this, 2);
-        recyclerProductCollectionAdapter = new ProductCollectionAdapter(this);
+        recyclerProductAdapter = new ProductAdapter(this);
         RecyclerMore.setLayoutManager(recyclerGridLayoutManager);
         RecyclerMore.addItemDecoration(new ItemDecorationRecycler(2, 8, true));
-        RecyclerMore.setAdapter(recyclerProductCollectionAdapter);
+        RecyclerMore.setAdapter(recyclerProductAdapter);
     }
 
 
@@ -106,7 +104,14 @@ public class AllCollectionProductActivity extends AppCompatActivity implements O
             @Override
             public void OnGetSectionedCollectionData(ArrayList<ProductDataModel> sectionedCollectionList)
             {
-                recyclerProductCollectionAdapter.addToProductsList(sectionedCollectionList);
+                if (sectionedCollectionList.size() == 0)
+                {
+                    isLoadMoreEnd = true;
+                }
+                else
+                {
+                    recyclerProductAdapter.addToProductsList(sectionedCollectionList);
+                }
                 IsLoading = false;
                 Loading.hide();
             }
@@ -117,7 +122,11 @@ public class AllCollectionProductActivity extends AppCompatActivity implements O
             @Override
             public void onScrolled(@NonNull RecyclerView recyclerView, int dx, int dy)
             {
-                if (recyclerProductCollectionAdapter.getItemCount() >= 10)
+                if (isLoadMoreEnd)
+                {
+                    return;
+                }
+                if (recyclerProductAdapter.getItemCount() >= 10)
                 {
                     if (IsLoading)
                     {
@@ -129,7 +138,7 @@ public class AllCollectionProductActivity extends AppCompatActivity implements O
                     if ((VisibleItemCount + PastVisibleItem) >= TotalItemCount)
                     {
                         IsLoading = true;
-                        getProductBySection(sectionId, collectionId, recyclerProductCollectionAdapter.getItemCount(), 20);
+                        getProductBySection(sectionId, collectionId, recyclerProductAdapter.getItemCount(), 20);
                     }
                 }
                 super.onScrolled(recyclerView, dx, dy);

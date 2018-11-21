@@ -10,6 +10,7 @@ import aryasoft.company.arachoob.ApiConnection.ApiInterfaceListeners.OnGetOrderB
 import aryasoft.company.arachoob.ApiConnection.ApiInterfaceListeners.OnGetProductByGroupIdListener;
 import aryasoft.company.arachoob.ApiConnection.ApiInterfaceListeners.OnGetProductGroupsListener;
 import aryasoft.company.arachoob.ApiConnection.ApiInterfaceListeners.OnGetSliderListener;
+import aryasoft.company.arachoob.ApiConnection.ApiInterfaceListeners.OnSearchProductListener;
 import aryasoft.company.arachoob.ApiConnection.ApiModels.CollectionDataModel;
 import aryasoft.company.arachoob.ApiConnection.ApiModels.ProductDataModel;
 import aryasoft.company.arachoob.ApiConnection.ApiModels.ProductGroupsApiModel;
@@ -30,14 +31,19 @@ public class ProductModule
     private OnFetchCollectionListener onFetchCollectionListener;
     private OnGetSliderListener onGetSliderListener;
     private OnGetProductGroupsListener onGetProductGroupsListener;
+    private OnSearchProductListener onSearchProductListener;
 
     public void setOnDataReceiveStateListener(OnDataReceiveStateListener onDataReceiveStateListener)
     {
         this.onDataReceiveStateListener = onDataReceiveStateListener;
     }
 
+    public void setOnSearchProductListener(OnSearchProductListener onSearchProductListener)
+    {
+        this.onSearchProductListener = onSearchProductListener;
+    }
 
-    //region Interface Setters
+//region Interface Setters
 
     public void setOnGetProductByGroupIdListener(OnGetProductByGroupIdListener onGetProductByGroupIdListener)
     {
@@ -149,4 +155,25 @@ public class ProductModule
             }
         });
     }
+
+    public void searchProducts(String searchText, int skipItem, int takeItem)
+    {
+        Call<ArrayList<ProductDataModel>> callSearchProducts = araApi.Search(searchText, skipItem, takeItem);
+        callSearchProducts.enqueue(new Callback<ArrayList<ProductDataModel>>()
+        {
+            @Override
+            public void onResponse(Call<ArrayList<ProductDataModel>> call, Response<ArrayList<ProductDataModel>> response)
+            {
+                onSearchProductListener.OnSearchProduct(response.body() == null ? new ArrayList<ProductDataModel>() : response.body());
+            }
+
+            @Override
+            public void onFailure(Call<ArrayList<ProductDataModel>> call, Throwable t)
+            {
+                onDataReceiveStateListener.OnDataReceiveState(t);
+                Log.i("getProductByGroupId", t.getMessage());
+            }
+        });
+    }
+
 }

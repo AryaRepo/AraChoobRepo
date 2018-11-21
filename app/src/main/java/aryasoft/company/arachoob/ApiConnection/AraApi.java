@@ -88,6 +88,10 @@ public interface AraApi
     @GET("api/GeneralApi/getSliders/")
     Call<ArrayList<SliderApiModel>> GetSliders();
 
+    @Headers({"User-Agent: <AraChoob>", "Connection:close"})
+    @GET("api/ProductApi/Search/")
+    Call<ArrayList<ProductDataModel>> Search(@Query("searchText") String searchText,@Query("skipItem") int skipItem,@Query("takeItem") int takeItem);
+
 
     @Headers({"User-Agent: <AraChoob>", "Connection:close"})
     @GET("api/ProductApi/GetProductInfoById/")
