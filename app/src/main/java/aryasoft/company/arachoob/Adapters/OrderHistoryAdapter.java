@@ -101,7 +101,7 @@ public class OrderHistoryAdapter extends RecyclerView.Adapter<OrderHistoryAdapte
             @Override
             public void onClick(View v)
             {
-                int orderId = orderHistoryList.get(holder.getAdapterPosition()).OrderId;
+                int orderId = orderHistoryList.get(holder.getAdapterPosition()).OrderID;
                 Intent intent = new Intent(context, OrderDetailActivity.class);
                 intent.putExtra("orderId",orderId);
                 intent.putExtra("totalPrice", orderHistoryList.get(holder.getAdapterPosition()).TotalPrice);

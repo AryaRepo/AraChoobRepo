@@ -1,14 +1,13 @@
 package aryasoft.company.arachoob.ApiConnection.ApiModules;
 
 import android.support.annotation.NonNull;
-import android.util.Log;
 
 import java.util.ArrayList;
 
 import aryasoft.company.arachoob.ApiConnection.ApiInterfaceListeners.OnGetSectionedCollectionDataListener;
 import aryasoft.company.arachoob.ApiConnection.ApiModels.ProductDataModel;
 import aryasoft.company.arachoob.ApiConnection.ApiServiceGenerator;
-import aryasoft.company.arachoob.ApiConnection.AraApi;
+import aryasoft.company.arachoob.ApiConnection.ApiServiceRequest;
 import aryasoft.company.arachoob.Utils.Listeners.OnDataReceiveStateListener;
 import retrofit2.Call;
 import retrofit2.Callback;
@@ -16,7 +15,7 @@ import retrofit2.Response;
 
 public class CollectionModule
 {
-    private AraApi araApi;
+    private ApiServiceRequest apiServiceRequest;
     private OnDataReceiveStateListener onDataReceiveStateListener;
     private OnGetSectionedCollectionDataListener onGetSectionedCollectionDataListener;
 
@@ -32,12 +31,12 @@ public class CollectionModule
 
     public CollectionModule()
     {
-        araApi = ApiServiceGenerator.getApiService();
+        apiServiceRequest = ApiServiceGenerator.getApiService();
     }
 
     public void getTopSeals(int skipItem, int takeItem)
     {
-        Call<ArrayList<ProductDataModel>> CallGetTopSeals = araApi.GetTopSeals(skipItem, takeItem);
+        Call<ArrayList<ProductDataModel>> CallGetTopSeals = apiServiceRequest.GetTopSeals(skipItem, takeItem);
         CallGetTopSeals.enqueue(new Callback<ArrayList<ProductDataModel>>()
         {
             @Override
@@ -55,7 +54,7 @@ public class CollectionModule
     }
     public void getCollectionById(int collectionId,int skipItem, int takeItem)
     {
-        Call<ArrayList<ProductDataModel>> CallGetCollectionById = araApi.GetCollectionById(collectionId,skipItem, takeItem);
+        Call<ArrayList<ProductDataModel>> CallGetCollectionById = apiServiceRequest.GetCollectionById(collectionId,skipItem, takeItem);
         CallGetCollectionById.enqueue(new Callback<ArrayList<ProductDataModel>>()
         {
             @Override
@@ -74,7 +73,7 @@ public class CollectionModule
 
     public void getDiscountBasketById(int collectionId,int skipItem, int takeItem)
     {
-        Call<ArrayList<ProductDataModel>> CallGetDiscountBasketById = araApi.GetDiscountBasketById(collectionId,skipItem, takeItem);
+        Call<ArrayList<ProductDataModel>> CallGetDiscountBasketById = apiServiceRequest.GetDiscountBasketById(collectionId,skipItem, takeItem);
         CallGetDiscountBasketById.enqueue(new Callback<ArrayList<ProductDataModel>>()
         {
             @Override

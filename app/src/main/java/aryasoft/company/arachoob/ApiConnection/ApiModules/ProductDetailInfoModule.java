@@ -5,7 +5,7 @@ import android.support.annotation.NonNull;
 import aryasoft.company.arachoob.ApiConnection.ApiInterfaceListeners.OnFetchProductDetailInfoListener;
 import aryasoft.company.arachoob.ApiConnection.ApiModels.ProductDetailInfoApiModel;
 import aryasoft.company.arachoob.ApiConnection.ApiServiceGenerator;
-import aryasoft.company.arachoob.ApiConnection.AraApi;
+import aryasoft.company.arachoob.ApiConnection.ApiServiceRequest;
 import aryasoft.company.arachoob.Utils.Listeners.OnDataReceiveStateListener;
 import retrofit2.Call;
 import retrofit2.Callback;
@@ -13,7 +13,7 @@ import retrofit2.Response;
 
 public class ProductDetailInfoModule
 {
-    private AraApi araApi;
+    private ApiServiceRequest apiServiceRequest;
     private OnFetchProductDetailInfoListener onFetchProductDetailInfoListener;
     private OnDataReceiveStateListener onDataReceiveStateListener;
 
@@ -24,7 +24,7 @@ public class ProductDetailInfoModule
 
     public ProductDetailInfoModule()
     {
-        araApi = ApiServiceGenerator.getApiService();
+        apiServiceRequest = ApiServiceGenerator.getApiService();
     }
 
     public void setOnFetchProductDetailInfoListener(OnFetchProductDetailInfoListener onFetchProductDetailInfoListener)
@@ -35,7 +35,7 @@ public class ProductDetailInfoModule
 
     public void getProductInfoById(int productId)
     {
-        Call<ProductDetailInfoApiModel> callGetProductInfoById = araApi.GetProductInfoById(productId);
+        Call<ProductDetailInfoApiModel> callGetProductInfoById = apiServiceRequest.GetProductInfoById(productId);
         callGetProductInfoById.enqueue(new Callback<ProductDetailInfoApiModel>()
         {
             @Override

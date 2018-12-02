@@ -1,7 +1,6 @@
 package aryasoft.company.arachoob.Activities;
 
 import android.content.Context;
-import android.content.Intent;
 import android.graphics.Color;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
@@ -23,7 +22,7 @@ import java.util.ArrayList;
 import java.util.Date;
 
 import aryasoft.company.arachoob.ApiConnection.ApiServiceGenerator;
-import aryasoft.company.arachoob.ApiConnection.AraApi;
+import aryasoft.company.arachoob.ApiConnection.ApiServiceRequest;
 import aryasoft.company.arachoob.Implementations.EditProfileImpl;
 import aryasoft.company.arachoob.Models.StateCityModel;
 import aryasoft.company.arachoob.Models.UserInfoModel;
@@ -291,9 +290,9 @@ public class EditProfileActivity extends AppCompatActivity implements View.OnCli
     private void editProfile()
     {
         Loading.show();
-        AraApi araApi = ApiServiceGenerator.getApiService();
+        ApiServiceRequest apiServiceRequest = ApiServiceGenerator.getApiService();
         int userId = UserPreference.getUserId();
-        Call<Boolean> editProfileCall = araApi.editUserProfile(userId, getUpdatedUserInfoModel());
+        Call<Boolean> editProfileCall = apiServiceRequest.editUserProfile(userId, getUpdatedUserInfoModel());
         editProfileCall.enqueue(new EditProfileImpl(this));
     }
 

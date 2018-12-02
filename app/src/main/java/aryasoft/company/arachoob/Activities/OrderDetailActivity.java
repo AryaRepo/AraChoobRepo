@@ -72,6 +72,7 @@ public class OrderDetailActivity extends AppCompatActivity
             @Override
             public void OnGetUserDetail(ArrayList<GetUserOrderDetail> userOrderDetailList)
             {
+
                 listOrderDetailAdapter.addOrderDetailList(userOrderDetailList);
                 txtOrderDetailTotalPrice.setText("جمع سفارشات : "+totalPrice+" تومان ");
                 Loading.hide();

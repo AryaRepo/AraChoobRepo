@@ -3,14 +3,9 @@ package aryasoft.company.arachoob.ApiConnection;
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 
-import java.io.IOException;
 import java.util.concurrent.TimeUnit;
 
-import aryasoft.company.arachoob.ApiConnection.AraApi;
-import okhttp3.Interceptor;
 import okhttp3.OkHttpClient;
-import okhttp3.Request;
-import okhttp3.Response;
 import retrofit2.Retrofit;
 import retrofit2.converter.gson.GsonConverterFactory;
 
@@ -20,12 +15,12 @@ public class ApiServiceGenerator {
     private static Gson GsonInstance;
     private static OkHttpClient Client;
     private static OkHttpClient.Builder HttpClient;
-    private final static String BASE_URL = "http://ara.aryasoft.org/";
+    private final static String BASE_URL = "http://arachoobnovinmehr.ir/";
 
-    public static AraApi getApiService()
+    public static ApiServiceRequest getApiService()
     {
         initializeComponents();
-        return RetrofitInstance.create(AraApi.class);
+        return RetrofitInstance.create(ApiServiceRequest.class);
     }
 
     private static void initializeComponents()

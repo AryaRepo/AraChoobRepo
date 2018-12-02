@@ -6,7 +6,6 @@ import android.util.Log;
 import java.util.ArrayList;
 
 import aryasoft.company.arachoob.ApiConnection.ApiInterfaceListeners.OnFetchCollectionListener;
-import aryasoft.company.arachoob.ApiConnection.ApiInterfaceListeners.OnGetOrderBasketInfoListener;
 import aryasoft.company.arachoob.ApiConnection.ApiInterfaceListeners.OnGetProductByGroupIdListener;
 import aryasoft.company.arachoob.ApiConnection.ApiInterfaceListeners.OnGetProductGroupsListener;
 import aryasoft.company.arachoob.ApiConnection.ApiInterfaceListeners.OnGetSliderListener;
@@ -16,16 +15,15 @@ import aryasoft.company.arachoob.ApiConnection.ApiModels.ProductDataModel;
 import aryasoft.company.arachoob.ApiConnection.ApiModels.ProductGroupsApiModel;
 import aryasoft.company.arachoob.ApiConnection.ApiModels.SliderApiModel;
 import aryasoft.company.arachoob.ApiConnection.ApiServiceGenerator;
-import aryasoft.company.arachoob.ApiConnection.AraApi;
+import aryasoft.company.arachoob.ApiConnection.ApiServiceRequest;
 import aryasoft.company.arachoob.Utils.Listeners.OnDataReceiveStateListener;
-import aryasoft.company.arachoob.Utils.Networking;
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
 
 public class ProductModule
 {
-    private AraApi araApi;
+    private ApiServiceRequest apiServiceRequest;
     private OnDataReceiveStateListener onDataReceiveStateListener;
     private OnGetProductByGroupIdListener onGetProductByGroupIdListener;
     private OnFetchCollectionListener onFetchCollectionListener;
@@ -71,12 +69,12 @@ public class ProductModule
 
     public ProductModule()
     {
-        araApi = ApiServiceGenerator.getApiService();
+        apiServiceRequest = ApiServiceGenerator.getApiService();
     }
 
     public void getSliders()
     {
-        Call<ArrayList<SliderApiModel>> callGetSlider = araApi.GetSliders();
+        Call<ArrayList<SliderApiModel>> callGetSlider = apiServiceRequest.GetSliders();
         callGetSlider.enqueue(new Callback<ArrayList<SliderApiModel>>()
         {
             @Override
@@ -98,7 +96,7 @@ public class ProductModule
 
     public void getCollections()
     {
-        Call<ArrayList<CollectionDataModel>> GetCollections = araApi.GetCollections();
+        Call<ArrayList<CollectionDataModel>> GetCollections = apiServiceRequest.GetCollections();
         GetCollections.enqueue(new Callback<ArrayList<CollectionDataModel>>()
         {
             @Override
@@ -118,7 +116,7 @@ public class ProductModule
 
     public void getProductGroups(int productGroupId)
     {
-        Call<ArrayList<ProductGroupsApiModel>> GetCollections = araApi.GetProductGroups(productGroupId);
+        Call<ArrayList<ProductGroupsApiModel>> GetCollections = apiServiceRequest.GetProductGroups(productGroupId);
         GetCollections.enqueue(new Callback<ArrayList<ProductGroupsApiModel>>()
         {
             @Override
@@ -138,7 +136,7 @@ public class ProductModule
 
     public void getProductByGroupId(int productGroupId, int offsetNumber, int takeNumber)
     {
-        Call<ArrayList<ProductDataModel>> getProductByGroupId = araApi.GetProductByGroupId(productGroupId, takeNumber, offsetNumber);
+        Call<ArrayList<ProductDataModel>> getProductByGroupId = apiServiceRequest.GetProductByGroupId(productGroupId, takeNumber, offsetNumber);
         getProductByGroupId.enqueue(new Callback<ArrayList<ProductDataModel>>()
         {
             @Override
@@ -158,7 +156,7 @@ public class ProductModule
 
     public void searchProducts(String searchText, int skipItem, int takeItem)
     {
-        Call<ArrayList<ProductDataModel>> callSearchProducts = araApi.Search(searchText, skipItem, takeItem);
+        Call<ArrayList<ProductDataModel>> callSearchProducts = apiServiceRequest.Search(searchText, skipItem, takeItem);
         callSearchProducts.enqueue(new Callback<ArrayList<ProductDataModel>>()
         {
             @Override

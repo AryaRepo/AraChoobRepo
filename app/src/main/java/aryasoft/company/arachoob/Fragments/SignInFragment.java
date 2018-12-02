@@ -1,7 +1,6 @@
 package aryasoft.company.arachoob.Fragments;
 
 import android.content.Context;
-import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
@@ -13,16 +12,13 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.EditText;
-import android.widget.Toast;
 
-import aryasoft.company.arachoob.Activities.LandActivity;
 import aryasoft.company.arachoob.ApiConnection.ApiServiceGenerator;
-import aryasoft.company.arachoob.ApiConnection.AraApi;
+import aryasoft.company.arachoob.ApiConnection.ApiServiceRequest;
 import aryasoft.company.arachoob.Implementations.UserInfoImpl;
 import aryasoft.company.arachoob.Implementations.UserLoginImpl;
 import aryasoft.company.arachoob.Models.UserInfoModel;
 import aryasoft.company.arachoob.R;
-import aryasoft.company.arachoob.Utils.CuteToast;
 import aryasoft.company.arachoob.Utils.Networking;
 import aryasoft.company.arachoob.Utils.SweetDialog;
 import aryasoft.company.arachoob.Utils.UserPreference;
@@ -165,16 +161,16 @@ public class SignInFragment extends Fragment implements UserLoginImpl.OnLoginLis
         Loading.show();
         String mobileNumber = edtUsernameSignIn.getText().toString();
         String password = edtPasswordSignIn.getText().toString();
-        AraApi araApi = ApiServiceGenerator.getApiService();
-        Call<Integer> loginCall = araApi.loginUser(mobileNumber, password);
+        ApiServiceRequest apiServiceRequest = ApiServiceGenerator.getApiService();
+        Call<Integer> loginCall = apiServiceRequest.loginUser(mobileNumber, password);
         loginCall.enqueue(new UserLoginImpl(this));
     }
 
     private void getUserInfo()
     {
-        AraApi araApi = ApiServiceGenerator.getApiService();
+        ApiServiceRequest apiServiceRequest = ApiServiceGenerator.getApiService();
         int userId = UserPreference.getUserId();
-        Call<UserInfoModel> userInfoCall = araApi.getUserInfo(userId);
+        Call<UserInfoModel> userInfoCall = apiServiceRequest.getUserInfo(userId);
         userInfoCall.enqueue(new UserInfoImpl(this));
     }
 

@@ -15,7 +15,7 @@ import java.util.ArrayList;
 
 import aryasoft.company.arachoob.Adapters.TicketChatsAdapter;
 import aryasoft.company.arachoob.ApiConnection.ApiServiceGenerator;
-import aryasoft.company.arachoob.ApiConnection.AraApi;
+import aryasoft.company.arachoob.ApiConnection.ApiServiceRequest;
 import aryasoft.company.arachoob.Implementations.LoadMoreChatsImpl;
 import aryasoft.company.arachoob.Implementations.SendMessageImpl;
 import aryasoft.company.arachoob.Implementations.ShowChatsImpl;
@@ -198,24 +198,24 @@ public class TicketChatActivity extends AppCompatActivity implements ShowChatsIm
     private void getChats(int messageId)
     {
         Loading.show();
-        AraApi araApi = ApiServiceGenerator.getApiService();
+        ApiServiceRequest apiServiceRequest = ApiServiceGenerator.getApiService();
         SkipNumber = recyclerChatTicket.getAdapter().getItemCount();
-        Call<ArrayList<TicketChatsModel>> showChatsCall = araApi.showChats(messageId, SkipNumber, TakeNumber);
+        Call<ArrayList<TicketChatsModel>> showChatsCall = apiServiceRequest.showChats(messageId, SkipNumber, TakeNumber);
         showChatsCall.enqueue(new ShowChatsImpl(this));
     }
 
     private void getMoreChats(int messageId)
     {
-        AraApi araApi = ApiServiceGenerator.getApiService();
-        Call<ArrayList<TicketChatsModel>> showChatsCall = araApi.showChats(messageId, SkipNumber, TakeNumber);
+        ApiServiceRequest apiServiceRequest = ApiServiceGenerator.getApiService();
+        Call<ArrayList<TicketChatsModel>> showChatsCall = apiServiceRequest.showChats(messageId, SkipNumber, TakeNumber);
         showChatsCall.enqueue(new ShowChatsImpl(this));
     }
 
     private void sendMessage(Message message)
     {
         Loading.show();
-        AraApi araApi = ApiServiceGenerator.getApiService();
-        Call<Boolean> sendMessageCall = araApi.sendMessage(message);
+        ApiServiceRequest apiServiceRequest = ApiServiceGenerator.getApiService();
+        Call<Boolean> sendMessageCall = apiServiceRequest.sendMessage(message);
         sendMessageCall.enqueue(new SendMessageImpl(this));
     }
 

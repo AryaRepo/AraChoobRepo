@@ -18,7 +18,7 @@ import java.util.ArrayList;
 
 import aryasoft.company.arachoob.Activities.TicketChatActivity;
 import aryasoft.company.arachoob.ApiConnection.ApiServiceGenerator;
-import aryasoft.company.arachoob.ApiConnection.AraApi;
+import aryasoft.company.arachoob.ApiConnection.ApiServiceRequest;
 import aryasoft.company.arachoob.Implementations.CloseTicketImpl;
 import aryasoft.company.arachoob.Models.TicketsModel;
 import aryasoft.company.arachoob.R;
@@ -147,8 +147,8 @@ public class TicketsAdapter extends RecyclerView.Adapter<TicketsAdapter.TicketsV
     private void closeTicket(int messageId)
     {
         Loading.setContentText(context.getString(R.string.waitingText)).show();
-        AraApi araApi = ApiServiceGenerator.getApiService();
-        Call<Boolean> closeTicketCall = araApi.closeTicket(messageId);
+        ApiServiceRequest apiServiceRequest = ApiServiceGenerator.getApiService();
+        Call<Boolean> closeTicketCall = apiServiceRequest.closeTicket(messageId);
         closeTicketCall.enqueue(new CloseTicketImpl(this));
     }
 

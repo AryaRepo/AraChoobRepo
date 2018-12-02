@@ -9,9 +9,8 @@ import android.widget.EditText;
 import android.widget.Toast;
 
 import aryasoft.company.arachoob.ApiConnection.ApiServiceGenerator;
-import aryasoft.company.arachoob.ApiConnection.AraApi;
+import aryasoft.company.arachoob.ApiConnection.ApiServiceRequest;
 import aryasoft.company.arachoob.Implementations.ChangePasswordImpl;
-import aryasoft.company.arachoob.Implementations.EditProfileImpl;
 import aryasoft.company.arachoob.R;
 import aryasoft.company.arachoob.Utils.CuteToast;
 import aryasoft.company.arachoob.Utils.Networking;
@@ -112,8 +111,8 @@ public class ChangeUserPasswordActivity extends AppCompatActivity implements Cha
         else
         {
             Loading.show();
-            AraApi araApi = ApiServiceGenerator.getApiService();
-            Call<Boolean> changePasswordCall = araApi.changeUserPassword(mobileNumber, oldPasswordUserInput, newPassword);
+            ApiServiceRequest apiServiceRequest = ApiServiceGenerator.getApiService();
+            Call<Boolean> changePasswordCall = apiServiceRequest.changeUserPassword(mobileNumber, oldPasswordUserInput, newPassword);
             changePasswordCall.enqueue(new ChangePasswordImpl(this));
         }
     }

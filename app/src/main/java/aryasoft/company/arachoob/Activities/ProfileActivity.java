@@ -12,7 +12,7 @@ import android.widget.TextView;
 import com.bumptech.glide.Glide;
 
 import aryasoft.company.arachoob.ApiConnection.ApiServiceGenerator;
-import aryasoft.company.arachoob.ApiConnection.AraApi;
+import aryasoft.company.arachoob.ApiConnection.ApiServiceRequest;
 import aryasoft.company.arachoob.Implementations.UserInfoImpl;
 import aryasoft.company.arachoob.Models.UserInfoModel;
 import aryasoft.company.arachoob.R;
@@ -132,9 +132,9 @@ public class ProfileActivity extends AppCompatActivity implements View.OnClickLi
     private void getUserInfo()
     {
         Loading.setContentText(getString(R.string.waitingText)).show();
-        AraApi araApi = ApiServiceGenerator.getApiService();
+        ApiServiceRequest apiServiceRequest = ApiServiceGenerator.getApiService();
         int userId = UserPreference.getUserId();
-        Call<UserInfoModel> userInfoCall = araApi.getUserInfo(userId);
+        Call<UserInfoModel> userInfoCall = apiServiceRequest.getUserInfo(userId);
         userInfoCall.enqueue(new UserInfoImpl(this));
     }
 

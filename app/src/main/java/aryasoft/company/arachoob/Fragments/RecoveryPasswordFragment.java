@@ -14,12 +14,10 @@ import android.widget.EditText;
 import android.widget.Toast;
 
 import aryasoft.company.arachoob.ApiConnection.ApiServiceGenerator;
-import aryasoft.company.arachoob.ApiConnection.AraApi;
+import aryasoft.company.arachoob.ApiConnection.ApiServiceRequest;
 import aryasoft.company.arachoob.Implementations.RecoveryPasswordImpl;
-import aryasoft.company.arachoob.Implementations.UserRegistrationImpl;
 import aryasoft.company.arachoob.Models.RecoveryPasswordModel;
 import aryasoft.company.arachoob.R;
-import aryasoft.company.arachoob.Utils.CuteToast;
 import aryasoft.company.arachoob.Utils.Networking;
 import aryasoft.company.arachoob.Utils.SweetDialog;
 import aryasoft.company.arachoob.Utils.UserPreference;
@@ -100,10 +98,10 @@ public class RecoveryPasswordFragment extends Fragment implements RecoveryPasswo
 
     private void recoveryPassword() {
         Loading.show();
-        AraApi araApi = ApiServiceGenerator.getApiService();
+        ApiServiceRequest apiServiceRequest = ApiServiceGenerator.getApiService();
         String mobileNumber = EdtMobileNumber.getText().toString();
         RecoveryPasswordModel model = new RecoveryPasswordModel(mobileNumber);
-        Call<Integer> recoveryCall = araApi.recoverPassword(model);
+        Call<Integer> recoveryCall = apiServiceRequest.recoverPassword(model);
         recoveryCall.enqueue(new RecoveryPasswordImpl(this));
     }
 

@@ -26,7 +26,7 @@ import retrofit2.http.Headers;
 import retrofit2.http.POST;
 import retrofit2.http.Query;
 
-public interface AraApi
+public interface ApiServiceRequest
 {
 
     @Headers("User-Agent: <AraChoob>")

@@ -6,7 +6,6 @@ import android.util.Log;
 import java.util.ArrayList;
 
 import aryasoft.company.arachoob.ApiConnection.ApiInterfaceListeners.OnGetOrderBasketInfoListener;
-import aryasoft.company.arachoob.ApiConnection.ApiInterfaceListeners.OnGetProductByGroupIdListener;
 import aryasoft.company.arachoob.ApiConnection.ApiInterfaceListeners.OnGetUserDetailListener;
 import aryasoft.company.arachoob.ApiConnection.ApiInterfaceListeners.OnGetUserOrderListener;
 import aryasoft.company.arachoob.ApiConnection.ApiInterfaceListeners.OnSubmitOrderListener;
@@ -15,7 +14,7 @@ import aryasoft.company.arachoob.ApiConnection.ApiModels.GetUserOrderDetail;
 import aryasoft.company.arachoob.ApiConnection.ApiModels.ProductDataModel;
 import aryasoft.company.arachoob.ApiConnection.ApiModels.SubmitOrderApiModel;
 import aryasoft.company.arachoob.ApiConnection.ApiServiceGenerator;
-import aryasoft.company.arachoob.ApiConnection.AraApi;
+import aryasoft.company.arachoob.ApiConnection.ApiServiceRequest;
 import aryasoft.company.arachoob.Utils.Listeners.OnDataReceiveStateListener;
 import retrofit2.Call;
 import retrofit2.Callback;
@@ -23,7 +22,7 @@ import retrofit2.Response;
 
 public class OrderModule
 {
-    private AraApi araApi;
+    private ApiServiceRequest apiServiceRequest;
     private OnSubmitOrderListener onSubmitOrderListener;
     private OnGetOrderBasketInfoListener onGetOrderBasketInfoListener;
     private OnDataReceiveStateListener onDataReceiveStateListener;
@@ -57,13 +56,13 @@ public class OrderModule
 
     public OrderModule()
     {
-        araApi = ApiServiceGenerator.getApiService();
+        apiServiceRequest = ApiServiceGenerator.getApiService();
     }
 
 
     public void SubmitOrder(SubmitOrderApiModel submitOrderModel)
     {
-        Call<Boolean> SubmitOrder = araApi.SubmitOrder(submitOrderModel);
+        Call<Boolean> SubmitOrder = apiServiceRequest.SubmitOrder(submitOrderModel);
         SubmitOrder.enqueue(new Callback<Boolean>()
         {
             @Override
@@ -82,7 +81,7 @@ public class OrderModule
 
     public void getOrderBasketInfo(ArrayList<Integer> products)
     {
-        Call<ArrayList<ProductDataModel>> GetOrderBasketInfo = araApi.GetOrderBasketInfo(products);
+        Call<ArrayList<ProductDataModel>> GetOrderBasketInfo = apiServiceRequest.GetOrderBasketInfo(products);
         GetOrderBasketInfo.enqueue(new Callback<ArrayList<ProductDataModel>>()
         {
             @Override
@@ -102,7 +101,7 @@ public class OrderModule
 
     public void getUserOrder(int userId, int skipItem, int takeItem)
     {
-        Call<ArrayList<GetUserOrderApiModel>> callGetUserOrder = araApi.GetUserOrder(userId, skipItem, takeItem);
+        Call<ArrayList<GetUserOrderApiModel>> callGetUserOrder = apiServiceRequest.GetUserOrder(userId, skipItem, takeItem);
         callGetUserOrder.enqueue(new Callback<ArrayList<GetUserOrderApiModel>>()
         {
             @Override
@@ -121,7 +120,7 @@ public class OrderModule
 
     public void getUserOrderDetail(int orderId)
     {
-        Call<ArrayList<GetUserOrderDetail>> callGetUserOrderDetail = araApi.GetUserOrderDetail(orderId);
+        Call<ArrayList<GetUserOrderDetail>> callGetUserOrderDetail = apiServiceRequest.GetUserOrderDetail(orderId);
         callGetUserOrderDetail.enqueue(new Callback<ArrayList<GetUserOrderDetail>>()
         {
             @Override

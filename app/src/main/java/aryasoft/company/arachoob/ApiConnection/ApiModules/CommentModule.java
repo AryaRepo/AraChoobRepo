@@ -8,7 +8,7 @@ import aryasoft.company.arachoob.ApiConnection.ApiInterfaceListeners.OnLoadMoreC
 import aryasoft.company.arachoob.ApiConnection.ApiInterfaceListeners.OnSubmitCommentListener;
 import aryasoft.company.arachoob.ApiConnection.ApiModels.ProductCommentApiModel;
 import aryasoft.company.arachoob.ApiConnection.ApiServiceGenerator;
-import aryasoft.company.arachoob.ApiConnection.AraApi;
+import aryasoft.company.arachoob.ApiConnection.ApiServiceRequest;
 import aryasoft.company.arachoob.Models.CommentDataModel;
 import aryasoft.company.arachoob.Utils.Listeners.OnDataReceiveStateListener;
 import retrofit2.Call;
@@ -17,7 +17,7 @@ import retrofit2.Response;
 
 public class CommentModule
 {
-    private AraApi araApi;
+    private ApiServiceRequest apiServiceRequest;
     private OnSubmitCommentListener onSubmitCommentListener;
     private OnDataReceiveStateListener onDataReceiveStateListener;
     private OnLoadMoreCommentsListener onLoadMoreCommentsListener;
@@ -34,7 +34,7 @@ public class CommentModule
 
     public CommentModule()
     {
-        araApi = ApiServiceGenerator.getApiService();
+        apiServiceRequest = ApiServiceGenerator.getApiService();
     }
 
     public void setOnSubmitCommentListener(OnSubmitCommentListener onSubmitCommentListener)
@@ -44,7 +44,7 @@ public class CommentModule
 
     public void SubmitComment(CommentDataModel commentDataModel)
     {
-        Call<Boolean> SubmitComment = araApi.SubmitComment(commentDataModel.userId, commentDataModel.commentTitle, commentDataModel.commentText, commentDataModel.pointValue, commentDataModel.productId);
+        Call<Boolean> SubmitComment = apiServiceRequest.SubmitComment(commentDataModel.userId, commentDataModel.commentTitle, commentDataModel.commentText, commentDataModel.pointValue, commentDataModel.productId);
         SubmitComment.enqueue(new Callback<Boolean>()
         {
             @Override
@@ -68,7 +68,7 @@ public class CommentModule
 
     public void getProductComments(int productId, int offsetItem, int takeItem)
     {
-        Call<ArrayList<ProductCommentApiModel>> callGetProductComments = araApi.GetProductComments(productId, offsetItem, takeItem);
+        Call<ArrayList<ProductCommentApiModel>> callGetProductComments = apiServiceRequest.GetProductComments(productId, offsetItem, takeItem);
         callGetProductComments.enqueue(new Callback<ArrayList<ProductCommentApiModel>>()
         {
             @Override

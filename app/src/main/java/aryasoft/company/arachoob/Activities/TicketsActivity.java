@@ -18,7 +18,7 @@ import java.util.ArrayList;
 
 import aryasoft.company.arachoob.Adapters.TicketsAdapter;
 import aryasoft.company.arachoob.ApiConnection.ApiServiceGenerator;
-import aryasoft.company.arachoob.ApiConnection.AraApi;
+import aryasoft.company.arachoob.ApiConnection.ApiServiceRequest;
 import aryasoft.company.arachoob.Implementations.GetTicketsImpl;
 import aryasoft.company.arachoob.Implementations.NewTicketImpl;
 import aryasoft.company.arachoob.Models.Ticket;
@@ -225,8 +225,8 @@ public class TicketsActivity extends AppCompatActivity implements NewTicketImpl.
     private void createNewTicket()
     {
         Loading.show();
-        AraApi araApi = ApiServiceGenerator.getApiService();
-        Call<Boolean> newTicketCall = araApi.newTicket(getTicketData());
+        ApiServiceRequest apiServiceRequest = ApiServiceGenerator.getApiService();
+        Call<Boolean> newTicketCall = apiServiceRequest.newTicket(getTicketData());
         newTicketCall.enqueue(new NewTicketImpl(this));
     }
 
@@ -243,9 +243,9 @@ public class TicketsActivity extends AppCompatActivity implements NewTicketImpl.
     private void getAllTickets()
     {
         Loading.show();
-        AraApi araApi = ApiServiceGenerator.getApiService();
+        ApiServiceRequest apiServiceRequest = ApiServiceGenerator.getApiService();
         int userId = UserPreference.getUserId();
-        Call<ArrayList<TicketsModel>> getAllTicketsCall = araApi.getAllTickets(userId, SkipNumber, TakeNumber);
+        Call<ArrayList<TicketsModel>> getAllTicketsCall = apiServiceRequest.getAllTickets(userId, SkipNumber, TakeNumber);
         getAllTicketsCall.enqueue(new GetTicketsImpl(this));
     }
 

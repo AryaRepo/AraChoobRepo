@@ -16,7 +16,7 @@ import android.widget.EditText;
 import android.widget.Toast;
 
 import aryasoft.company.arachoob.ApiConnection.ApiServiceGenerator;
-import aryasoft.company.arachoob.ApiConnection.AraApi;
+import aryasoft.company.arachoob.ApiConnection.ApiServiceRequest;
 import aryasoft.company.arachoob.Implementations.UserRegistrationImpl;
 import aryasoft.company.arachoob.Models.UserRegistration;
 import aryasoft.company.arachoob.R;
@@ -173,8 +173,8 @@ public class SignUpFragment extends Fragment implements UserRegistrationImpl.OnR
         if (getUserRegistrationModel() != null)
         {
             Loading.show();
-            AraApi araApi = ApiServiceGenerator.getApiService();
-            Call<Integer> registerCall = araApi.registerUser(getUserRegistrationModel());
+            ApiServiceRequest apiServiceRequest = ApiServiceGenerator.getApiService();
+            Call<Integer> registerCall = apiServiceRequest.registerUser(getUserRegistrationModel());
             registerCall.enqueue(new UserRegistrationImpl(this));
         }
     }

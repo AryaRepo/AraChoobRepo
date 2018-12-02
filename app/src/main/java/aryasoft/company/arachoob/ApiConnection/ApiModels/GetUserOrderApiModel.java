@@ -2,7 +2,7 @@ package aryasoft.company.arachoob.ApiConnection.ApiModels;
 
 public class GetUserOrderApiModel
 {
-    public int OrderId;
+    public int OrderID;
     public String ImageName;
     public String PaymentTypeTitle;
     public int OrderStateId;

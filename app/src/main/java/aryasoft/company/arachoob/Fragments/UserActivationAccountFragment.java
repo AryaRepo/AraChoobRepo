@@ -1,7 +1,6 @@
 package aryasoft.company.arachoob.Fragments;
 
 import android.os.Bundle;
-import android.os.Handler;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
@@ -17,7 +16,7 @@ import java.util.Timer;
 import java.util.TimerTask;
 
 import aryasoft.company.arachoob.ApiConnection.ApiServiceGenerator;
-import aryasoft.company.arachoob.ApiConnection.AraApi;
+import aryasoft.company.arachoob.ApiConnection.ApiServiceRequest;
 import aryasoft.company.arachoob.Implementations.ReSendActivationCodeImpl;
 import aryasoft.company.arachoob.Implementations.UserActivationImpl;
 import aryasoft.company.arachoob.Implementations.UserLoginImpl;
@@ -213,8 +212,8 @@ public class UserActivationAccountFragment extends Fragment
         if (account.getActiveCode().equals(EdtActivationCode.getText().toString()))
         {
             Loading.show();
-            AraApi araApi = ApiServiceGenerator.getApiService();
-            Call<Boolean> userActivationCall = araApi.activeUserAccount(getActivationAccountModel());
+            ApiServiceRequest apiServiceRequest = ApiServiceGenerator.getApiService();
+            Call<Boolean> userActivationCall = apiServiceRequest.activeUserAccount(getActivationAccountModel());
             userActivationCall.enqueue(new UserActivationImpl(this));
         }
         else
@@ -235,9 +234,9 @@ public class UserActivationAccountFragment extends Fragment
     private void resendActivationCode()
     {
         Loading.show();
-        AraApi araApi = ApiServiceGenerator.getApiService();
+        ApiServiceRequest apiServiceRequest = ApiServiceGenerator.getApiService();
         String mobileNumber = UserPreference.getUserMobileNumber();
-        Call<Integer> resendCall = araApi.reSendActivationCode(mobileNumber);
+        Call<Integer> resendCall = apiServiceRequest.reSendActivationCode(mobileNumber);
         resendCall.enqueue(new ReSendActivationCodeImpl(this));
     }
 
@@ -246,8 +245,8 @@ public class UserActivationAccountFragment extends Fragment
         Loading.setContentText(getString(R.string.waitingText)).show();
         String mobileNumber = UserPreference.getUserMobileNumber();
         String password = UserPreference.getUserPassword();
-        AraApi araApi = ApiServiceGenerator.getApiService();
-        Call<Integer> loginCall = araApi.loginUser(mobileNumber, password);
+        ApiServiceRequest apiServiceRequest = ApiServiceGenerator.getApiService();
+        Call<Integer> loginCall = apiServiceRequest.loginUser(mobileNumber, password);
         loginCall.enqueue(new UserLoginImpl(this));
     }
 
